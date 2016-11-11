@@ -1,0 +1,1 @@
+gcc -I"/usr/lib/jvm/java-7-openjdk-amd64/include" -I"/usr/lib/jvm/java-7-openjdk-amd64/include/linux" -I"{HANDLE_INCLUDE_PATH}" -o "{LIB_FILE}" -shared -fPIC "{HANDLE_SRC_FILE}" "{LIB_SRC_FILE}"

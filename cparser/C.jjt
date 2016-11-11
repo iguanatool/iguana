@@ -1,0 +1,622 @@
+/*
+ *  Based on the C grammar definiton file c.jj
+ *  by Doug South (dsouth@squirrel.com.au) 21/3/97
+ *  modified by Tom Copeland 3/2/06
+ *  modified for IGUANA by Phil McMinn (PSM) 2006-present
+ *
+ *  Changes for IGUANA: 
+ *  - changed SKIPs to special types to ensure all code is written back out
+ *  - TranslationUnit returns its AST node
+ *  - broke up statement types into their constituent nodes, 
+ *        i.e. SelectionStatement -> IfStatement and SelectStatement
+ *
+ *  See https://javacc.dev.java.net/doc/JJTree.html for JJTree documentation
+ */
+
+options {
+  STATIC=false;     	 	  // When this is true, all generated methods in the parser are declared static
+  MULTI=true;       	 	  // Generate a class for each AST node type 
+  VISITOR=true;		     	  // Generate a visitor class 
+  TRACK_TOKENS=true;     	  // Insert additional methods so that parsed content can be retrieved
+  VISITOR_RETURN_TYPE="void"; // unfortunately VISITOR_DATA_TYPE cannot be "void" or ""
+}
+PARSER_BEGIN(CParser)
+
+package iguana.testobject.cparser;
+
+import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.Set;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class CParser {
+    
+    // Set for storing typedef types
+    private static Set<String> types = new HashSet<String>();
+
+    // hack to add special types
+    static {
+        types.add("__signed__");
+        types.add("__const");
+        types.add("__inline__");
+        types.add("__signed");  
+        types.add("FILE");
+    }
+
+    // Stack for determining when the parser
+    // is parsing a typdef definition.
+    private Deque<Boolean> typedefParsingStack = new ArrayDeque<Boolean>();
+
+    // Returns true if the given string is
+    // a typedef type.
+    private boolean isType(String type) {       
+        return types.contains(type);
+    }
+
+    // Add a typedef type to those already defined
+    private void addType(String type) {
+        types.add(type);
+    }
+
+    // Returns the types used in parsing the c source
+    public static Set<String> getTypes() {
+        return Collections.unmodifiableSet(types);
+    }
+    
+    public CParser(String fileName) throws IOException {
+    	this(new File(fileName));
+    }
+    
+    public CParser(File file) throws IOException {
+    	this(new FileInputStream(file), null);
+    }    
+}
+
+PARSER_END(CParser)
+
+SPECIAL_TOKEN : /* WHITE SPACE */ /* PSM: changed from skip (to ensure its written out) */
+{
+ " "
+|  "\t"
+|  "\n"
+|  "\r"
+|  <"//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
+|  <"/*" (~["*"])* "*" ("*" | ~["*","/"] (~["*"])* "*")* "/">
+| "#" : PREPROCESSOR_OUTPUT
+}
+
+<PREPROCESSOR_OUTPUT> SPECIAL_TOKEN : /* PSM: changed from skip (to ensure its written out) */
+{
+     "\n" : DEFAULT
+}
+
+<PREPROCESSOR_OUTPUT> SPECIAL_TOKEN : /* PSM: changed from skip (to ensure its written out) */
+{
+ "\\\n"
+ |
+ "\\\r\n"
+ |
+ < ~[] >
+}
+
+
+TOKEN : {
+ <INTEGER_LITERAL: <DECIMAL_LITERAL> (["l","L"])? | <HEX_LITERAL> (["l","L"])? | <OCTAL_LITERAL> (["l","L"])?>
+|  <#DECIMAL_LITERAL: ["1"-"9"] (["0"-"9"])*>
+|  <#HEX_LITERAL: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+>
+|  <#OCTAL_LITERAL: "0" (["0"-"7"])*>
+|  <FLOATING_POINT_LITERAL: (["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)? (["f","F","d","D"])? | "." (["0"-"9"])+ (<EXPONENT>)? (["f","F","d","D"])? | (["0"-"9"])+ <EXPONENT> (["f","F","d","D"])? | (["0"-"9"])+ (<EXPONENT>)? ["f","F","d","D"]>
+|  <#EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+>
+|  <CHARACTER_LITERAL: "\'" (~["\'","\\","\n","\r"] | "\\" (["n","t","b","r","f","\\","\'","\""] | ["0"-"7"] (["0"-"7"])? | ["0"-"3"] ["0"-"7"] ["0"-"7"])) "\'">
+|  <STRING_LITERAL: "\"" ( ~["\"","\\","\n","\r"] | "\\" ( ["n","t","b","r","f","\\","\'","\""] | ["0"-"7"] (["0"-"7"])?  | ["0"-"3"] ["0"-"7"] ["0"-"7"] | ( ["\n","\r"] | "\r\n")))* "\"">
+}
+
+TOKEN : {
+    <CONTINUE: "continue"> |
+    <VOLATILE: "volatile"> |
+    <REGISTER: "register"> |
+    <UNSIGNED: "unsigned"> |
+    <TYPEDEF: "typedef"> |
+    <DFLT: "default"> |
+    <DOUBLE: "double"> |
+    <SIZEOF: "sizeof"> |
+    <SWITCH: "switch"> |
+    <RETURN: "return"> |
+    <EXTERN: "extern"> |
+    <STRUCT: "struct"> |
+    <STATIC: "static"> |
+    <SIGNED: "signed"> |
+    <WHILE: "while"> |
+    <BREAK: "break"> |
+    <UNION: "union"> |
+    <CONST: "const"> |
+    <FLOAT: "float"> |
+    <SHORT: "short"> |
+    <ELSE: "else"> |
+    <CASE: "case"> |
+    <LONG: "long"> |
+    <ENUM: "enum"> |
+    <AUTO: "auto"> |
+    <VOID: "void"> |
+    <CHAR: "char"> |
+    <GOTO: "goto"> |
+    <FOR: "for"> |
+    <INT: "int"> |
+    <IF: "if"> |
+    <DO: "do">
+}
+
+TOKEN : {
+ <IDENTIFIER: <LETTER> (<LETTER> | <DIGIT>)*>
+|  <#LETTER: ["$","A"-"Z","_","a"-"z"]>
+|  <#DIGIT: ["0"-"9"]>
+}
+
+ASTParseUnit ParseUnit() : {}
+{
+    (ExternalDeclaration())+
+    { 
+        return jjtThis;
+    }
+}
+
+void ExternalDeclaration() : {}
+{
+    ( LOOKAHEAD( FunctionDefinition() ) FunctionDefinition() | Declaration())
+}
+
+void FunctionDefinition() : {}
+{
+    [LOOKAHEAD(DeclarationSpecifiers()) DeclarationSpecifiers()] Declarator() [ DeclarationList() ]
+    CompoundStatement()
+}
+
+void Declaration() : {}
+{
+    DeclarationSpecifiers() [ InitDeclaratorList() ] ";"
+}
+
+void DeclarationList() : {}
+{
+    ( LOOKAHEAD(Declaration()) Declaration() )+
+}
+
+void DeclarationSpecifiers() : {}
+{
+      StorageClassSpecifier() [ LOOKAHEAD(DeclarationSpecifiers())
+            DeclarationSpecifiers() ] |
+      TypeSpecifier()  [ LOOKAHEAD(DeclarationSpecifiers())
+            DeclarationSpecifiers() ] |
+      TypeQualifier() [ LOOKAHEAD(DeclarationSpecifiers())
+            DeclarationSpecifiers() ]
+}
+
+void StorageClassSpecifier() : {}
+{
+    ( <AUTO> | <REGISTER> | <STATIC> | <EXTERN> | <TYPEDEF>
+    {
+        typedefParsingStack.addFirst(Boolean.TRUE);
+    } )
+}
+
+void TypeSpecifier() : {}
+{
+    ( <VOID> | <CHAR> | <SHORT> | <INT> | <LONG> | <FLOAT> | <DOUBLE> | <SIGNED> |
+      <UNSIGNED> | StructOrUnionSpecifier() | EnumSpecifier() | LOOKAHEAD( { isType(getToken(1).image) } )TypedefName() )
+}
+
+void TypeQualifier() : {}
+{
+    ( <CONST> | <VOLATILE> )
+}
+
+void StructOrUnionSpecifier() : {}
+{
+    {
+            typedefParsingStack.addFirst(Boolean.FALSE);
+    }
+
+    StructOrUnion() ( LOOKAHEAD(3) [ <IDENTIFIER> ] "{" StructDeclarationList() "}" | <IDENTIFIER> )
+
+    {
+        typedefParsingStack.removeFirst();
+    }
+}
+
+void StructOrUnion() : {}
+{
+    ( <STRUCT> | <UNION> )
+}
+
+void StructDeclarationList() : {}
+{
+    (StructDeclaration())+
+}
+
+void InitDeclaratorList() : {}
+{
+    InitDeclarator() ("," InitDeclarator())*
+    {
+        // Finished with a typedefDeclaration??
+        if(!(typedefParsingStack.size() == 0) && ((Boolean) typedefParsingStack.peekFirst()).booleanValue()){
+            typedefParsingStack.removeFirst();
+      }
+    }
+}
+
+void InitDeclarator() : {}
+{
+    Declarator() [ "=" Initializer() ]
+}
+
+void StructDeclaration() : {}
+{
+    SpecifierQualifierList() StructDeclaratorList() ";"
+}
+
+void SpecifierQualifierList() : {}
+{
+      TypeSpecifier() [ LOOKAHEAD(SpecifierQualifierList())
+            SpecifierQualifierList() ]|
+      TypeQualifier() [ LOOKAHEAD(SpecifierQualifierList())
+            SpecifierQualifierList() ]
+}
+
+void StructDeclaratorList() : {}
+{
+    StructDeclarator() ( "," StructDeclarator() )*
+}
+
+void StructDeclarator() : {}
+{
+    ( LOOKAHEAD(3) Declarator() | [ Declarator() ] ":" ConstantExpression() )
+}
+
+void EnumSpecifier() : {}
+{
+    <ENUM> ( LOOKAHEAD(3) [ <IDENTIFIER> ] "{" EnumeratorList() "}" | <IDENTIFIER> )
+}
+
+void EnumeratorList() : {}
+{
+    Enumerator() ("," Enumerator())*
+}
+
+void Enumerator() : {}
+{
+    <IDENTIFIER> [ "=" ConstantExpression() ]
+}
+
+void Declarator() : {}
+{
+    [ Pointer() ] DirectDeclarator()
+}
+
+void DirectDeclarator() : { Token t;}
+{
+    ( t = <IDENTIFIER>
+
+    { if(!(typedefParsingStack.size() == 0) && ((Boolean) typedefParsingStack.peekFirst()).booleanValue()){
+                addType(t.image);
+      }
+    }
+     | "(" Declarator() ")" )
+
+    ( "[" [ ConstantExpression() ] "]" |
+        LOOKAHEAD(3) "(" ParameterTypeList() ")" |
+        "(" [ IdentifierList() ] ")" )*
+}
+
+void Pointer() : {}
+{
+    "*" [ TypeQualifierList() ] [ Pointer() ]
+}
+
+void TypeQualifierList() : {}
+{
+    (TypeQualifier())+
+}
+
+void ParameterTypeList() : {}
+{
+    ParameterList() ["," "..." ]
+}
+
+void ParameterList() : {}
+{
+    ParameterDeclaration() (LOOKAHEAD(2) "," ParameterDeclaration())*
+}
+
+void ParameterDeclaration() : {}
+{
+    DeclarationSpecifiers() ( LOOKAHEAD(Declarator()) Declarator() | [ AbstractDeclarator() ] )
+}
+
+void IdentifierList() : {}
+{
+    <IDENTIFIER> ("," <IDENTIFIER>)*
+}
+
+void Initializer() : {}
+{
+    ( AssignmentExpression() |
+      "{" InitializerList() [","] "}" )
+}
+
+void InitializerList() : {}
+{
+    Initializer() (LOOKAHEAD(2) "," Initializer())*
+}
+
+void TypeName() : {}
+{
+    SpecifierQualifierList() [ AbstractDeclarator() ]
+
+}
+
+void AbstractDeclarator() : {}
+{
+    ( LOOKAHEAD(3) Pointer() |
+      [Pointer()] DirectAbstractDeclarator() )
+}
+
+void DirectAbstractDeclarator() : {}
+{
+    ( LOOKAHEAD(2) "(" AbstractDeclarator() ")" |
+                   "[" [ConstantExpression()] "]" |
+                   "(" [ParameterTypeList()] ")" )
+
+      ( "[" [ ConstantExpression() ] "]" | "(" [ ParameterTypeList() ] ")" )*
+}
+
+void TypedefName() : {}
+{
+    <IDENTIFIER>
+}
+
+void Statement() : {}
+{
+    ( LOOKAHEAD(2) IdentifierStatement() |
+      CaseStatement() |
+      DefaultStatement() |
+      ExpressionStatement() |
+      CompoundStatement() |
+      IfStatement() |
+      SwitchStatement() |
+      WhileStatement() |
+      DoStatement() |
+      ForStatement() |
+      GotoStatement() |
+      ContinueStatement() |
+      BreakStatement() |
+      ReturnStatement())
+}
+
+
+void IdentifierStatement() : {}
+{
+    <IDENTIFIER> ":" Statement()
+}
+
+void CaseStatement() : {}
+{
+    <CASE> CaseExpression() ":" Statement()
+}
+
+void CaseExpression() : {}
+{
+	ConstantExpression()
+}
+
+void DefaultStatement() : {}
+{
+    <DFLT> ":" Statement()
+}
+
+void ExpressionStatement() : {}
+{
+    [ Expression() ] ";"
+}
+
+void CompoundStatement() : {}
+{
+    "{" [ LOOKAHEAD(DeclarationList()) DeclarationList() ]
+        [ StatementList() ]
+    "}"
+}
+
+void StatementList() : {}
+{
+    (Statement())+
+}
+
+void IfStatement(): {}
+{
+    <IF> "(" BranchingExpression() ")" Statement() [ LOOKAHEAD(2) <ELSE> Statement() ]
+}
+
+void SwitchStatement() : {}
+{
+    <SWITCH> "(" SwitchExpression() ")" Statement()
+}
+
+void SwitchExpression() : {}
+{
+	Expression()
+}
+
+void WhileStatement() : {}
+{
+    <WHILE> "(" BranchingExpression() ")" Statement()
+}
+
+void DoStatement() : {}
+{
+    <DO> Statement() <WHILE> "(" BranchingExpression() ")" ";"
+}
+
+void ForStatement() : {}
+{
+    <FOR> "(" [ Expression() ] ";" 
+              [ BranchingExpression() ] ";" 
+              [ Expression() ] ")" Statement()
+}
+
+void GotoStatement() : {}
+{
+    <GOTO> <IDENTIFIER> ";"
+}
+
+void ContinueStatement() : {}
+{
+    <CONTINUE> ";"
+}
+
+void BreakStatement() : {}
+{
+    <BREAK> ";"
+}
+
+void ReturnStatement() : {}
+{
+    <RETURN> [ Expression() ] ";"
+}
+
+void BranchingExpression() : {}
+{
+	Expression()
+}
+
+void Expression() : {}
+{
+    AssignmentExpression() ( "," AssignmentExpression() )*
+}
+
+void AssignmentExpression() : {}
+{
+      LOOKAHEAD(UnaryExpression() AssignmentOperator()) UnaryExpression() AssignmentOperator() AssignmentExpression() |
+      LOOKAHEAD(3) ConditionalExpression()
+}
+
+void AssignmentOperator() : {}
+{
+    ( "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | "&=" | "^=" | "|=" )
+}
+
+void ConditionalExpression() : {}
+{
+    LogicalORExpression() [ "?" Expression() ":" ConditionalExpression() ]
+}
+
+void ConstantExpression() : {}
+{
+    ConditionalExpression()
+}
+
+void LogicalORExpression() : {}
+{
+    LogicalANDExpression() ( "||" LogicalANDExpression() ) *
+}
+
+void LogicalANDExpression() : {}
+{
+    InclusiveORExpression() ( "&&" InclusiveORExpression() ) *
+}
+
+void InclusiveORExpression() : {}
+{
+    ExclusiveORExpression() [ "|" ExclusiveORExpression() ]
+}
+
+void ExclusiveORExpression() : {}
+{
+    ANDExpression() [ "^" ANDExpression() ]
+}
+
+void ANDExpression() : {}
+{
+    RelationalExpression() [ "&" RelationalExpression() ]
+}
+
+void RelationalExpression() : {}
+{
+    ShiftExpression() [  RelationalOperator() ShiftExpression() ]
+}
+
+void RelationalOperator() : {}
+{
+	( "==" | "!=" | "<" | ">" | "<=" | ">=" )
+}
+
+void ShiftExpression() : {}
+{
+    AdditiveExpression() [ ( "<<" | ">>" ) ShiftExpression() ]
+}
+
+void AdditiveExpression() : {}
+{
+    MultiplicativeExpression() [ ( "+" | "-" ) AdditiveExpression() ]
+}
+
+void MultiplicativeExpression() : {}
+{
+    CastExpression() [ ( "*" | "/" | "%" ) MultiplicativeExpression() ]
+}
+
+void CastExpression() : {}
+{
+    ( LOOKAHEAD("(" TypeName() ")" CastExpression() ) "(" TypeName() ")" CastExpression() |
+      UnaryExpression() )
+}
+
+void UnaryExpression() : {}
+{
+	( LOOKAHEAD(3) PostfixExpression() |
+	  "++" UnaryExpression() |
+	  "--" UnaryExpression() |
+	  UnaryOperator() CastExpression() |
+	  LogicalNOTExpression() |
+	  <SIZEOF> ( LOOKAHEAD(UnaryExpression() ) UnaryExpression() | "(" TypeName() ")" ) )
+}
+
+void UnaryOperator() : {}
+{
+	( "&" | "*" | "+" | "-" | "~" )
+}
+
+void LogicalNOTExpression() : {}
+{
+	"!" CastExpression()
+}
+
+void PostfixExpression() : {}
+{
+    PrimaryExpression() ( "[" Expression() "]" |
+                          "(" [ LOOKAHEAD(ArgumentExpressionList() ) ArgumentExpressionList() ] ")" |
+                          "." <IDENTIFIER> |
+                          "->" <IDENTIFIER> |
+                          "++" |
+                          "--" )*
+}
+
+void PrimaryExpression() : {}
+{
+    ( <IDENTIFIER> |
+      Constant() |
+      "(" Expression() ")" )
+}
+
+void ArgumentExpressionList() : {}
+{
+    AssignmentExpression() ( "," AssignmentExpression() )*
+}
+
+void Constant() : {}
+{
+ <INTEGER_LITERAL> | <FLOATING_POINT_LITERAL> | <CHARACTER_LITERAL> | <STRING_LITERAL>
+}
+
