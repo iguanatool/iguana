@@ -8,6 +8,7 @@ import org.iguanatool.search.Search;
 import org.iguanatool.search.SearchFactory;
 import org.iguanatool.search.randomnumbergenerator.MersenneTwister;
 import org.iguanatool.search.randomnumbergenerator.RandomNumberGenerator;
+import org.iguanatool.search.randomnumbergenerator.SimpleRandomNumberGenerator;
 import org.iguanatool.testobject.TestObject;
 import org.iguanatool.testobject.TestObjectFactory;
 
@@ -33,7 +34,7 @@ public class Run {
 		long seed 			  = Long.parseLong(config.getRequiredProperty("seed"));
 		
 		// initiate random number generator
-		RandomNumberGenerator r = new MersenneTwister();
+		RandomNumberGenerator r = new SimpleRandomNumberGenerator();
 		r.setSeed(seed);
 		
 		// instantiate test object loader

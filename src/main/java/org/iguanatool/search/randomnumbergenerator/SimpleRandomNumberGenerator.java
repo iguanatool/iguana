@@ -5,9 +5,7 @@ import java.util.Random;
 public class SimpleRandomNumberGenerator extends RandomNumberGenerator {
     private Random random;
     private long initialSeed;
-    
-    static int created = 0;
-    
+
     public SimpleRandomNumberGenerator() {
         double rnd = Math.random();
 		initialSeed = (long) (rnd * Math.pow(10, 16));
