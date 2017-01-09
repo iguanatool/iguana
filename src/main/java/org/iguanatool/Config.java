@@ -20,7 +20,7 @@ public class Config {
 	 */
 	public static final String CONFIG_FILENAME  	 = "iguana.config";
 	public static final String IGUANA_CLASSES_DIR 	 = "target/classes";
-	public static final String IGUANA_SOURCE_DIR 	 = "src";
+	public static final String IGUANA_SOURCE_DIR 	 = "src/main/java";
 	public static final String TEMPLATES_DIR 	 	 = "templates";
 	/*
 	 *  properties
