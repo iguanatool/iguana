@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class JavaWrapper {	
 	
-	private static final String PACKAGE_DIR 					  =	"iguana/casestudies";
+	private static final String PACKAGE_DIR 					  =	"org/iguanatool/casestudies";
 	
 	private static final String TEST_OBJECTS_PACKAGE			  = "testobjects";
 	private static final String INPUT_SPECIFICATIONS_PACKAGE	  = "inputspecifications";	
