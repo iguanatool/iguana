@@ -41,7 +41,7 @@ public abstract class TestObject {
     public List<TraceNode> invocate(double[] args) {
     	t = new Trace();  
     	t.setCfg(cfg);
-        call(args);
+		call(args);
     	return t.getTraceNodes();
     }
     

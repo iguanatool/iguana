@@ -107,7 +107,7 @@ void initialize_and_call(JNIEnv * env, jobject jobj, jdoubleArray args)
 	}
 	
 	if (trace_field_id == NULL) {
-		trace_field_id = (*env)->GetFieldID(env, test_object_handle_class, "t",  "Liguana/testobject/trace/Trace;");
+		trace_field_id = (*env)->GetFieldID(env, test_object_handle_class, "t",  "Lorg/iguanatool/testobject/trace/Trace;");
 		if (trace_field_id == NULL) {
 			native_error("could not get trace field ID of TestObject");
 		}	
