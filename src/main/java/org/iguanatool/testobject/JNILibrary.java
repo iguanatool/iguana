@@ -155,15 +155,12 @@ public class JNILibrary {
 		
 		// creating file objects and invoking getPath will convert paths so that they have OS-specific separators 
 		locations.put("{JAVA_HOME}", 		   Config.getInstance().getJavaPath().toString());
-		locations.put("{HANDLE_INCLUDE_PATH}", getHandleIncludePath().getPath());		
 		locations.put("{LIB_FILE}", 		   libraryFile.getPath());
+		locations.put("{HANDLE_INCLUDE_PATH}", getHandleIncludePath().getPath());
 		locations.put("{HANDLE_SRC_FILE}",     getHandleSourceFile().getPath());
 		locations.put("{LIB_PATH}", 		   getLibraryPath().getPath());
 		locations.put("{LIB_SRC_FILE}",        librarySourceFile.getPath());
-		
-		// Added by Abdullah for the R project
-		locations.put("{HANDLE_INCLUDE_PATH}", getLibrarySourcePath().getPath() + "/include");	
-		
+
 		CCompiler compiler = new CCompiler();
 		List<String> compilationCommands = compiler.getCommands(locations);
 		

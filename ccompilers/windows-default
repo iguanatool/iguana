@@ -1,1 +1,1 @@
-gcc -Wall -D_JNI_IMPLEMENTATION_ -Wl,--kill-at -I"{HANDLE_INCLUDE_PATH}" -I"C:\Program Files\Java\jdk1.7.0_21\include" -I"C:\Program Files\Java\jdk1.7.0_21\include\win32" -shared -o "{LIB_FILE}" "{HANDLE_SRC_FILE}" "{LIB_SRC_FILE}"
+gcc -Wall -D_JNI_IMPLEMENTATION_ -Wl,--kill-at -I"{HANDLE_INCLUDE_PATH}" -I"{JAVA_HOME}\include" -I"{JAVA_HOME}\include\win32" -shared -o "{LIB_FILE}" "{HANDLE_SRC_FILE}" "{LIB_SRC_FILE}"
