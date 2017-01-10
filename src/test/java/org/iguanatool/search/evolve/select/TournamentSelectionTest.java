@@ -1,5 +1,8 @@
 package org.iguanatool.search.evolve.select;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 import org.iguanatool.search.objective.NumericalMaximizingObjectiveValue;
 import org.iguanatool.search.randomnumbergenerator.NonRandomNumberGenerator;
 import org.iguanatool.search.randomnumbergenerator.RandomNumberGenerator;
@@ -8,10 +11,6 @@ import org.iguanatool.search.solution.NumericalSolutionType;
 import org.iguanatool.search.solution.Solution;
 
 import java.util.Vector;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * User: phil

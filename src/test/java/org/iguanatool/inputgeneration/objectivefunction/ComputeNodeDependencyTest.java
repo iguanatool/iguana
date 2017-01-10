@@ -1,11 +1,11 @@
 package org.iguanatool.inputgeneration.objectivefunction;
 
-import org.iguanatool.testobject.structure.CFG;
-import org.iguanatool.testobject.structure.CFGNode;
-import org.iguanatool.testobject.structure.ControlDependency;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.iguanatool.testobject.structure.CFG;
+import org.iguanatool.testobject.structure.CFGNode;
+import org.iguanatool.testobject.structure.ControlDependency;
 
 /**
  * User: phil

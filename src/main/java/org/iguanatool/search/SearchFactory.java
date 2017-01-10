@@ -27,7 +27,6 @@ import org.iguanatool.search.local.restarter.MutationRestarter;
 import org.iguanatool.search.local.restarter.RandomRestarter;
 import org.iguanatool.search.local.restarter.Restarter;
 import org.iguanatool.search.pso.Swarm;
-import org.iguanatool.search.randomnumbergenerator.MersenneTwisterRandomNumberGenerator;
 import org.iguanatool.search.randomnumbergenerator.RandomNumberGenerator;
 
 import java.lang.reflect.Method;

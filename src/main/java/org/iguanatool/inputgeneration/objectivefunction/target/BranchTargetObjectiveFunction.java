@@ -5,9 +5,9 @@ import org.iguanatool.inputgeneration.objectivefunction.InputGenerationObjective
 import org.iguanatool.inputgeneration.objectivefunction.InputGenerationObjectiveValue;
 import org.iguanatool.inputgeneration.objectivefunction.condition.ConditionObjectiveFunction;
 import org.iguanatool.inputgeneration.objectivefunction.condition.StdConditionObjectiveFunction;
-import org.iguanatool.testobject.trace.TraceNode;
-import org.iguanatool.testobject.structure.CFGNode;
 import org.iguanatool.testobject.TestObject;
+import org.iguanatool.testobject.structure.CFGNode;
+import org.iguanatool.testobject.trace.TraceNode;
 
 import java.util.List;
 

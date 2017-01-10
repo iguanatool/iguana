@@ -1,13 +1,13 @@
 package org.iguanatool.inputgeneration.objectivefunction.target;
 
-import java.util.List;
-
 import org.iguanatool.inputgeneration.objectivefunction.ComputeNodeDependency;
 import org.iguanatool.inputgeneration.objectivefunction.InputGenerationObjectiveValue;
 import org.iguanatool.inputgeneration.objectivefunction.condition.ConditionObjectiveFunction;
 import org.iguanatool.inputgeneration.objectivefunction.condition.StdConditionObjectiveFunction;
-import org.iguanatool.testobject.trace.TraceNode;
 import org.iguanatool.testobject.TestObject;
+import org.iguanatool.testobject.trace.TraceNode;
+
+import java.util.List;
 
 public class NestingBranchTargetObjectiveFunction extends BranchTargetObjectiveFunction {
 	

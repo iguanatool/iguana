@@ -2,8 +2,6 @@ package org.iguanatool.testobject;
 
 import org.iguanatool.Config;
 import org.iguanatool.library.SimpleIO;
-import org.iguanatool.library.SystemCommand;
-import org.iguanatool.library.SystemCommandException;
 import org.iguanatool.library.TextFile;
 
 import java.io.File;
