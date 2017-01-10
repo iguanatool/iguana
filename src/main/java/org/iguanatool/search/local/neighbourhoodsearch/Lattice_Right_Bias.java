@@ -4,7 +4,7 @@ package org.iguanatool.search.local.neighbourhoodsearch;
 import org.iguanatool.search.SearchException;
 import org.iguanatool.search.SearchMonitor;
 import org.iguanatool.search.objective.ObjectiveFunction;
-import org.iguanatool.search.randomnumbergenerator.MersenneTwister;
+import org.iguanatool.search.randomnumbergenerator.MersenneTwisterRandomNumberGenerator;
 import org.iguanatool.search.solution.NumericalSolution;
 import org.iguanatool.search.solution.Solution;
 
@@ -21,7 +21,7 @@ public class Lattice_Right_Bias extends CachedNeighbourhoodSearch {
 		}
 	}
 
-	public Lattice_Right_Bias(MersenneTwister rng) {
+	public Lattice_Right_Bias(MersenneTwisterRandomNumberGenerator rng) {
 		super(rng);
 	}
 

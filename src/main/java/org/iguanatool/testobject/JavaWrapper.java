@@ -96,7 +96,7 @@ public class JavaWrapper {
 	private File getInputSpecificationTemplateFile() {
 		return new File(Config.getInstance().getTemplatesPath() + "/" + INPUT_SPECIFICATION_TEMPLATE_FILE);
 	}	
-	
+
 	private String getJavaCompilerCommand(File toCompile) {
 		return "javac -d \"" + Config.getInstance().getIguanaClassesPath() + "\" \"" + toCompile + "\"";
 	}
@@ -160,15 +160,15 @@ public class JavaWrapper {
 		TextFile.searchAndReplace(templateFile, targetFile, searchAndReplace);
 		return true;
 	}
-	
+
 	public boolean compileTestObject() throws IOException, SystemCommandException {
 		File testObjectSourceFile = getTestObjectSourceFile();
 		File testObjectClassFile = getTestObjectClassFile();
-		
+
 		if (SimpleIO.lastModified(testObjectSourceFile, testObjectClassFile).equals(testObjectClassFile)) {
 			return false;
 		}
-		
+
         String command = getJavaCompilerCommand(testObjectSourceFile);
         SystemCommand.execute(command);
         return true;
@@ -177,11 +177,11 @@ public class JavaWrapper {
 	public boolean compileInputSpecification() throws IOException, SystemCommandException {
 		File inputSpecificationSourceFile = getInputSpecificationSourceFile();
 		File inputSpecificationClassFile = getInputSpecificationClassFile();
-		
+
 		if (SimpleIO.lastModified(inputSpecificationSourceFile, inputSpecificationClassFile).equals(inputSpecificationClassFile)) {
 			return false;
 		}
-		
+
         String command = getJavaCompilerCommand(inputSpecificationSourceFile);
         SystemCommand.execute(command);
         return true;

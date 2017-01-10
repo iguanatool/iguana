@@ -2,12 +2,12 @@ package org.iguanatool.search.evolve.mutation;
 
 import org.iguanatool.search.randomnumbergenerator.NonRandomNumberGenerator;
 import org.iguanatool.search.randomnumbergenerator.RandomNumberGenerator;
-import junit.framework.Assert;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.iguanatool.search.solution.NumericalSolution;
 import org.iguanatool.search.solution.NumericalSolutionType;
+import org.junit.Assert;
 
 /**
  * User: phil

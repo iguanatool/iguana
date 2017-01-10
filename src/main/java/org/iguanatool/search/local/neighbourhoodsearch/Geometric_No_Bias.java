@@ -4,13 +4,13 @@ package org.iguanatool.search.local.neighbourhoodsearch;
 import org.iguanatool.search.SearchException;
 import org.iguanatool.search.SearchMonitor;
 import org.iguanatool.search.objective.ObjectiveFunction;
-import org.iguanatool.search.randomnumbergenerator.MersenneTwister;
+import org.iguanatool.search.randomnumbergenerator.MersenneTwisterRandomNumberGenerator;
 import org.iguanatool.search.solution.NumericalSolution;
 import org.iguanatool.search.solution.Solution;
 
 public class Geometric_No_Bias extends CachedNeighbourhoodSearch {
 	
-	public Geometric_No_Bias(MersenneTwister rng) {
+	public Geometric_No_Bias(MersenneTwisterRandomNumberGenerator rng) {
 		super(rng);
 	}
 

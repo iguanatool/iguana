@@ -6,9 +6,8 @@ import org.iguanatool.inputgeneration.aim.log.AimLog;
 import org.iguanatool.inputgeneration.variableinclusion.IncludeAllVariables;
 import org.iguanatool.search.Search;
 import org.iguanatool.search.SearchFactory;
-import org.iguanatool.search.randomnumbergenerator.MersenneTwister;
 import org.iguanatool.search.randomnumbergenerator.RandomNumberGenerator;
-import org.iguanatool.search.randomnumbergenerator.SimpleRandomNumberGenerator;
+import org.iguanatool.search.randomnumbergenerator.RandomNumberGeneratorFactory;
 import org.iguanatool.testobject.TestObject;
 import org.iguanatool.testobject.TestObjectFactory;
 
@@ -32,9 +31,10 @@ public class Run {
 		String aimDescription = config.getRequiredProperty("aim");
 		int maxEvaluations    = Integer.parseInt(config.getRequiredProperty("max_evaluations"));
 		long seed 			  = Long.parseLong(config.getRequiredProperty("seed"));
-		
+
 		// initiate random number generator
-		RandomNumberGenerator r = new SimpleRandomNumberGenerator();
+		String randomNumberGenerator = config.getRequiredProperty("random_number_generator");
+		RandomNumberGenerator r = RandomNumberGeneratorFactory.instantiateGenerator(randomNumberGenerator);
 		r.setSeed(seed);
 		
 		// instantiate test object loader
