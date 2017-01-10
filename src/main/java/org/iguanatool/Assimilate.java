@@ -28,21 +28,16 @@ public class Assimilate {
 			printAction("creating input specification stub");
 			boolean createdInputSpecification = javaWrapper.createInputSpecification();
 			printStatus(createdInputSpecification);
-			
+
+			printAction("creating test object");
+			boolean createdTestObject = javaWrapper.createTestObject();
+			printStatus(createdTestObject);
+
 			printAction("creating JNI perform_call stub");
 			boolean createdPerformCallFile = jniLibrary.makePerformCallFile(); 
 			printStatus(createdPerformCallFile);				
 			
-			if (!createdInputSpecification && !createdPerformCallFile) {
-				printAction("compiling input specification");
-				printStatus(javaWrapper.compileInputSpecification());
-				
-				printAction("creating test object");
-				printStatus(javaWrapper.createTestObject());
-				
-				printAction("compiling test object");
-				printStatus(javaWrapper.compileTestObject());
-				
+			if (!createdInputSpecification && !createdTestObject && !createdPerformCallFile) {
 				printAction("instrumenting");
 				printStatus(caseStudy.instrument(testObjectName));
 								

@@ -19,7 +19,6 @@ public class Config {
 	 *  locations
 	 */
 	public static final String CONFIG_FILENAME  	 = "iguana.config";
-	public static final String IGUANA_CLASSES_DIR 	 = "target/classes";
 	public static final String IGUANA_SOURCE_DIR 	 = "src/main/java";
 	public static final String TEMPLATES_DIR 	 	 = "templates";
 	/*
@@ -182,10 +181,6 @@ public class Config {
 	public File getIguanaSourcePath() {
 		return new File(getIguanaPath() + "/" + IGUANA_SOURCE_DIR);
 	}
-	
-	public File getIguanaClassesPath() {
-		return new File(getIguanaPath() + "/" + IGUANA_CLASSES_DIR);
-	}	
 	
 	public File getTemplatesPath() {
 		return new File(getIguanaPath() + "/" + TEMPLATES_DIR);

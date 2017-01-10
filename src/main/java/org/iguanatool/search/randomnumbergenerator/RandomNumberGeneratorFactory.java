@@ -12,8 +12,6 @@ public class RandomNumberGeneratorFactory {
 
         name = "org.iguanatool.search.randomnumbergenerator."+ name;
 
-        System.out.println(name);
-
         try {
             return (RandomNumberGenerator) Class.forName(name).newInstance();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
