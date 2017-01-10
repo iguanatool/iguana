@@ -1,9 +1,9 @@
 package {PACKAGE_NAME}; 
 
-import iguana.testobject.CaseStudy;
-import iguana.testobject.InputSpecification;
-import iguana.testobject.JNILibrary;
-import iguana.testobject.TestObject;
+import org.iguanatool.testobject.CaseStudy;
+import org.iguanatool.testobject.InputSpecification;
+import org.iguanatool.testobject.JNILibrary;
+import org.iguanatool.testobject.TestObject;
 
 public class {TEST_OBJECT_NAME} extends TestObject { 
 

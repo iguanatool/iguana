@@ -2,5 +2,5 @@
 iguanatool.iml
 .idea/
 target/
-casestudies/
-src/main/java/org/iguana/casestudies/
+casestudies
+src/main/java/org/iguana/casestudies

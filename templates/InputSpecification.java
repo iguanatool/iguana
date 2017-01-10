@@ -1,6 +1,6 @@
 package {PACKAGE_NAME}; 
 
-import iguana.testobject.InputSpecification;
+import org.iguanatool.testobject.InputSpecification;
 
 public class {INPUT_SPECIFICATION_NAME} extends InputSpecification {
 	

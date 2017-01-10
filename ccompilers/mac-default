@@ -2,4 +2,4 @@
 
 #cc -dynamiclib -o "{LIB_FILE}" -I"/System/Library/Frameworks/JavaVM.framework/Headers/" -I"{HANDLE_INCLUDE_PATH}" "{HANDLE_SRC_FILE}" "{LIB_SRC_FILE}" -framework JavaVM
 
-gcc -dynamiclib -o "{LIB_FILE}" -I"/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/include/" -I"/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/include/darwin" -I"{HANDLE_INCLUDE_PATH}" -I"/Users/phil/Repos/IguanaTool/iguana/include/" "{HANDLE_SRC_FILE}" "{LIB_SRC_FILE}" -framework JavaVM
+gcc -dynamiclib -o "{LIB_FILE}" -I"/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/include/" -I"/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/include/darwin" -I"{HANDLE_INCLUDE_PATH}" -I"/Users/phil/Repos/IguanaTool/iguana/include/"  "{HANDLE_SRC_FILE}" "{LIB_SRC_FILE}" -framework JavaVM
