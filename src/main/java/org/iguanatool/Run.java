@@ -24,7 +24,7 @@ public class Run {
 		if (configProperties.length > 1 && !configProperties[1].startsWith("-")) {
 			configProperties[1] = "-search="+configProperties[1];
 		}
-		
+
 		Config config = new Config(configProperties);
 
 		String testObjectName = config.getRequiredProperty("test_object");
@@ -45,7 +45,7 @@ public class Run {
 		aimLog.attachSysOut();
 
 		// assign filename for results and attach a file log
-		String fileName = testObjectName.replace(".", "_")+"--"+searchName+"--"+seed;
+		String fileName = testObjectName.replace(".", "_")+"--"+searchName+"--"+seed+"--results.tsv";
 		aimLog.attachFile(fileName);
 
 
