@@ -573,55 +573,55 @@ public class SearchFactory {
     
     public static Search randomSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new Random((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new Random(r));
     	return h;
     }
     
     public static Search ips_no_biasSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new IPS_No_Bias((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new IPS_No_Bias(r));
     	return h;
     }
     
     public static Search geometric_no_biasSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new Geometric_No_Bias((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new Geometric_No_Bias(r));
     	return h;
     }
     
     public static Search lattice_no_biasSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new Lattice_No_Bias((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new Lattice_No_Bias(r));
     	return h;
     }
     
     public static Search geometric_opposite_direction_biasSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new Geometric_Opposite_Direction_Bias((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new Geometric_Opposite_Direction_Bias(r));
     	return h;
     }
     
     public static Search lattice_opposite_direction_biasSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new Lattice_Opposite_Direction_Bias((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new Lattice_Opposite_Direction_Bias(r));
     	return h;
     }
     
     public static Search ips_right_biasSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new IPS_Right_Bias((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new IPS_Right_Bias(r));
     	return h;
     }
     
     public static Search geometric_right_biasSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new Geometric_Right_Bias((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new Geometric_Right_Bias(r));
     	return h;
     }
     
     public static Search lattice_right_biasSearch(RandomNumberGenerator r, int maxEvaluations) {
     	HillClimb h = new HillClimb(r, maxEvaluations);
-    	h.setNeighbourhoodSearch(new Lattice_Right_Bias((MersenneTwisterRandomNumberGenerator) r));
+    	h.setNeighbourhoodSearch(new Lattice_Right_Bias(r));
     	return h;
     }
     

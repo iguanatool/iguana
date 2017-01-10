@@ -7,6 +7,7 @@ import org.iguanatool.search.SearchException;
 import org.iguanatool.search.objective.ObjectiveFunction;
 import org.iguanatool.search.objective.ObjectiveValue;
 import org.iguanatool.search.randomnumbergenerator.MersenneTwisterRandomNumberGenerator;
+import org.iguanatool.search.randomnumbergenerator.RandomNumberGenerator;
 import org.iguanatool.search.solution.NumericalSolution;
 import org.iguanatool.search.solution.Solution;
 
@@ -17,7 +18,7 @@ import java.util.Map;
 
 public abstract class CachedNeighbourhoodSearch extends NeighbourhoodSearch {
 	
-	protected MersenneTwisterRandomNumberGenerator rng; // random number generator
+	protected RandomNumberGenerator rng; // random number generator
 
 	protected int nVariables;
 
@@ -25,7 +26,7 @@ public abstract class CachedNeighbourhoodSearch extends NeighbourhoodSearch {
 
 	protected Map<NumericalSolution, ObjectiveValue> cache = new HashMap<NumericalSolution, ObjectiveValue>();
 
-	protected CachedNeighbourhoodSearch(MersenneTwisterRandomNumberGenerator rng) {
+	protected CachedNeighbourhoodSearch(RandomNumberGenerator rng) {
 		this.rng = rng;
 	}
 	

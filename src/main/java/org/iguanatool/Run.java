@@ -51,7 +51,7 @@ public class Run {
 
 		for (TestObject testObject: testObjects) {			
 			// instantiate search
-			Search search = SearchFactory.instantiateSearch(searchName+"Search", r, maxEvaluations);
+			Search search = SearchFactory.instantiateSearch(searchName, r, maxEvaluations);
 			
 			// instantiate aim and attempt
 			aimLog.logStart(testObject);			

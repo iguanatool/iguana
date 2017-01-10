@@ -5,12 +5,13 @@ import org.iguanatool.search.SearchException;
 import org.iguanatool.search.SearchMonitor;
 import org.iguanatool.search.objective.ObjectiveFunction;
 import org.iguanatool.search.randomnumbergenerator.MersenneTwisterRandomNumberGenerator;
+import org.iguanatool.search.randomnumbergenerator.RandomNumberGenerator;
 import org.iguanatool.search.solution.NumericalSolution;
 import org.iguanatool.search.solution.Solution;
 
 public class IPS_Right_Bias extends CachedNeighbourhoodSearch {
 
-	public IPS_Right_Bias(MersenneTwisterRandomNumberGenerator rng) {
+	public IPS_Right_Bias(RandomNumberGenerator rng) {
 		super(rng);
 	}
 	
