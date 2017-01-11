@@ -3,24 +3,24 @@
 package org.iguanatool.testobject.cparser;
 
 
-public
-class ASTGotoStatement extends SimpleNode {
-	public String getLabel() {
-		return jjtGetFirstToken().next.image;
-	}
+public class ASTGotoStatement extends SimpleNode {
+    public ASTGotoStatement(int id) {
+        super(id);
+    }
 
-  public ASTGotoStatement(int id) {
-    super(id);
-  }
+    public ASTGotoStatement(CParser p, int id) {
+        super(p, id);
+    }
 
-  public ASTGotoStatement(CParser p, int id) {
-    super(p, id);
-  }
+    public String getLabel() {
+        return jjtGetFirstToken().next.image;
+    }
 
-
-  /** Accept the visitor. **/
-  public void jjtAccept(CParserVisitor visitor) {
-    visitor.visit(this);
-  }
+    /**
+     * Accept the visitor.
+     **/
+    public void jjtAccept(CParserVisitor visitor) {
+        visitor.visit(this);
+    }
 }
 /* JavaCC - OriginalChecksum=61b917ec39403dd28769705e8cb9c6c7 (do not edit this line) */

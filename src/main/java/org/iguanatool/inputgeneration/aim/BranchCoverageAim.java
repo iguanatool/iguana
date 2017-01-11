@@ -15,24 +15,24 @@ import java.util.SortedSet;
  */
 
 public class BranchCoverageAim extends Aim {
-   
-	public BranchCoverageAim(TestObject testObject,
-							 VariableIncluder variableIncluder,
-							 Search search,
-							 AimLog aimLog) {
-		
-		super(testObject, variableIncluder, search, aimLog);
-	}
-	
+
+    public BranchCoverageAim(TestObject testObject,
+                             VariableIncluder variableIncluder,
+                             Search search,
+                             AimLog aimLog) {
+
+        super(testObject, variableIncluder, search, aimLog);
+    }
+
     public void attemptAim() {
-    	SortedSet<CFGNode> branchingNodes = testObject.getCFG().getBranchingNodes();
-    	
-        for (CFGNode branchingNode: branchingNodes) {
+        SortedSet<CFGNode> branchingNodes = testObject.getCFG().getBranchingNodes();
+
+        for (CFGNode branchingNode : branchingNodes) {
             BranchAim b1 = new BranchAim(testObject, variableIncluder, search, aimLog, branchingNode, true);
             b1.attemptAim();
 
             BranchAim b2 = new BranchAim(testObject, variableIncluder, search, aimLog, branchingNode, false);
-            b2.attemptAim();            
+            b2.attemptAim();
         }
-    }    
+    }
 }

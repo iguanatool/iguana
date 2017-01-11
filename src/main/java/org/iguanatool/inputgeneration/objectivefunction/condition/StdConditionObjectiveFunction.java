@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public class StdConditionObjectiveFunction extends ConditionObjectiveFunction
-                                           implements ConditionVisitor {
+        implements ConditionVisitor {
 
     private List<TraceCondition> traceConditions;
 
@@ -31,7 +31,7 @@ public class StdConditionObjectiveFunction extends ConditionObjectiveFunction
                 return;
             }
         }
-        trueOutcome  = new InputGenerationObjectiveValue(0, 1, 1, 0);
+        trueOutcome = new InputGenerationObjectiveValue(0, 1, 1, 0);
         falseOutcome = new InputGenerationObjectiveValue(0, 1, 1, 0);
     }
 
@@ -58,7 +58,7 @@ public class StdConditionObjectiveFunction extends ConditionObjectiveFunction
         double trueDistance = 0;
         double falseDistance = 0;
 
-        for (Condition c: subConditions) {
+        for (Condition c : subConditions) {
             StdConditionObjectiveFunction fun = new StdConditionObjectiveFunction();
             fun.compute(c, traceConditions);
 
@@ -82,7 +82,7 @@ public class StdConditionObjectiveFunction extends ConditionObjectiveFunction
             total += t.getTotalConditions();
         }
 
-        trueOutcome  = new InputGenerationObjectiveValue(0, unencountered, total, trueDistance);
+        trueOutcome = new InputGenerationObjectiveValue(0, unencountered, total, trueDistance);
         falseOutcome = new InputGenerationObjectiveValue(0, unencountered, total, falseDistance);
     }
 
@@ -97,14 +97,14 @@ public class StdConditionObjectiveFunction extends ConditionObjectiveFunction
         if (total == 0 || v.getDistance() < distance) {
             distance = v.getDistance();
         }
-    	
-    	// the following code removes the OR plateaux problem
-    	//if (v.getDistance() == 0) {
-    	//	distance = 0;
-    	//} else { 
+
+        // the following code removes the OR plateaux problem
+        //if (v.getDistance() == 0) {
+        //	distance = 0;
+        //} else {
         //    distance += v.getDistance();
         //}
-        
+
         return distance;
     }
 }

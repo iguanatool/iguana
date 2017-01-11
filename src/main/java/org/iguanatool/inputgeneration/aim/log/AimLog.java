@@ -12,28 +12,28 @@ import org.iguanatool.testobject.TestObject;
  */
 public class AimLog extends Log {
 
-	private TestObject testObject;
-	
+    private TestObject testObject;
+
     public void logStart(TestObject testObject) {
-    	this.testObject = testObject;
-        println("Test object: "+testObject.getClass().getName());
+        this.testObject = testObject;
+        println("Test object: " + testObject.getClass().getName());
         flush();
     }
-    
-    public void logAim(String name, SearchResult searchResult) { 
-    	boolean success = searchResult.wasSuccess();
-    	int numEvaluations = searchResult.getNumEvaluations();
-    	
-        print(name+"\t");
-        print((success?"OK  ":"FAIL")+"\t");
-        print(numEvaluations+"\t");
-        
+
+    public void logAim(String name, SearchResult searchResult) {
+        boolean success = searchResult.wasSuccess();
+        int numEvaluations = searchResult.getNumEvaluations();
+
+        print(name + "\t");
+        print((success ? "OK  " : "FAIL") + "\t");
+        print(numEvaluations + "\t");
+
         if (success) {
-        	double[] testData = ((InputVector) searchResult.getBestSolution()).getInputValues();
-        	String formattedTestData = testObject.getInputSpecification().formatInput(testData);
-        	print(formattedTestData);
+            double[] testData = ((InputVector) searchResult.getBestSolution()).getInputValues();
+            String formattedTestData = testObject.getInputSpecification().formatInput(testData);
+            print(formattedTestData);
         }
-        
+
         println();
         flush();
     }

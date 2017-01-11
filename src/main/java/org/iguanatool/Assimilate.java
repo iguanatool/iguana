@@ -10,81 +10,81 @@ import java.io.IOException;
 import java.util.List;
 
 public class Assimilate {
-		
-	public void assimilate(CaseStudy caseStudy) throws IOException, ParseException, SystemCommandException {
-		
-		printCaseStudy(caseStudy);
-		caseStudy.parse();
-		caseStudy.createCFGs();
-		
-		List<String> testObjectNames = caseStudy.getTestObjectNames();
-		
-		for (String testObjectName: testObjectNames) {
-			JavaWrapper javaWrapper = new JavaWrapper(caseStudy, testObjectName);
-			JNILibrary  jniLibrary  = new JNILibrary(caseStudy, testObjectName);
-			
-			printTestObject(testObjectName);
 
-			printAction("creating input specification stub");
-			boolean createdInputSpecification = javaWrapper.createInputSpecification();
-			printStatus(createdInputSpecification);
+    public static void main(String[] args) throws Exception {
+        if (args.length != 1) {
+            System.out.println("Usage: java " + Assimilate.class + " case_study_name");
+            System.exit(1);
+        }
 
-			printAction("creating test object");
-			boolean createdTestObject = javaWrapper.createTestObject();
-			printStatus(createdTestObject);
+        String caseStudyName = args[0];
 
-			printAction("creating JNI perform_call stub");
-			boolean createdPerformCallFile = jniLibrary.makePerformCallFile(); 
-			printStatus(createdPerformCallFile);				
-			
-			if (!createdInputSpecification && !createdTestObject && !createdPerformCallFile) {
-				printAction("instrumenting");
-				printStatus(caseStudy.instrument(testObjectName));
-								
-				printAction("creating JNI header file");
-				printStatus(jniLibrary.makeLibraryHeaderFile());
-				
-				printAction("creating JNI source file"); 	      
-				printStatus(jniLibrary.makeLibrarySourceFile());
-				
-				printAction("compiling shared library");
-				printStatus(jniLibrary.compile());
-				
-				printAction("serializing control graph");
-				printStatus(caseStudy.serializeCFG(testObjectName));
-				
-				printAction("creating control graph images");
-				printStatus(caseStudy.createControlGraphImages(testObjectName));
-			}
-		}
-	}
-	
-	private void printCaseStudy(CaseStudy caseStudy) {
-		System.out.println("Case study: " + caseStudy.getName());
-	}
-	
-	private void printTestObject(String name) {
-		System.out.println("Test object: " + name);
-	}
+        new Config(args);
+        new Assimilate().assimilate(new CaseStudy(caseStudyName));
+    }
 
-	private void printAction(String action) {
-		System.out.print("... " + action + "... ");
-	}
-	
-	private void printStatus(boolean success) { 
-		if (success) System.out.println("SUCCESS");  
-		else System.out.println("ALREADY UP TO DATE");				
-	}	
-	
-	public static void main(String[] args) throws Exception {
-		if (args.length != 1) {
-			System.out.println("Usage: java "+Assimilate.class+" case_study_name");
-			System.exit(1);
-		}
+    public void assimilate(CaseStudy caseStudy) throws IOException, ParseException, SystemCommandException {
 
-		String caseStudyName = args[0];
-		
-		new Config(args);
-		new Assimilate().assimilate(new CaseStudy(caseStudyName));
-	}
+        printCaseStudy(caseStudy);
+        caseStudy.parse();
+        caseStudy.createCFGs();
+
+        List<String> testObjectNames = caseStudy.getTestObjectNames();
+
+        for (String testObjectName : testObjectNames) {
+            JavaWrapper javaWrapper = new JavaWrapper(caseStudy, testObjectName);
+            JNILibrary jniLibrary = new JNILibrary(caseStudy, testObjectName);
+
+            printTestObject(testObjectName);
+
+            printAction("creating input specification stub");
+            boolean createdInputSpecification = javaWrapper.createInputSpecification();
+            printStatus(createdInputSpecification);
+
+            printAction("creating test object");
+            boolean createdTestObject = javaWrapper.createTestObject();
+            printStatus(createdTestObject);
+
+            printAction("creating JNI perform_call stub");
+            boolean createdPerformCallFile = jniLibrary.makePerformCallFile();
+            printStatus(createdPerformCallFile);
+
+            if (!createdInputSpecification && !createdTestObject && !createdPerformCallFile) {
+                printAction("instrumenting");
+                printStatus(caseStudy.instrument(testObjectName));
+
+                printAction("creating JNI header file");
+                printStatus(jniLibrary.makeLibraryHeaderFile());
+
+                printAction("creating JNI source file");
+                printStatus(jniLibrary.makeLibrarySourceFile());
+
+                printAction("compiling shared library");
+                printStatus(jniLibrary.compile());
+
+                printAction("serializing control graph");
+                printStatus(caseStudy.serializeCFG(testObjectName));
+
+                printAction("creating control graph images");
+                printStatus(caseStudy.createControlGraphImages(testObjectName));
+            }
+        }
+    }
+
+    private void printCaseStudy(CaseStudy caseStudy) {
+        System.out.println("Case study: " + caseStudy.getName());
+    }
+
+    private void printTestObject(String name) {
+        System.out.println("Test object: " + name);
+    }
+
+    private void printAction(String action) {
+        System.out.print("... " + action + "... ");
+    }
+
+    private void printStatus(boolean success) {
+        if (success) System.out.println("SUCCESS");
+        else System.out.println("ALREADY UP TO DATE");
+    }
 }

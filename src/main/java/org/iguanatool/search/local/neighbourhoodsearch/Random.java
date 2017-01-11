@@ -9,22 +9,22 @@ import org.iguanatool.search.solution.Solution;
 
 public class Random extends CachedNeighbourhoodSearch {
 
-	public Random(RandomNumberGenerator rng) {
-		super(rng);
-	}
+    public Random(RandomNumberGenerator rng) {
+        super(rng);
+    }
 
-	@Override
-	public Solution neighbourhoodSearch(Solution solution,
+    @Override
+    public Solution neighbourhoodSearch(Solution solution,
                                         ObjectiveFunction objectiveFunction,
                                         SearchMonitor monitor) {
-		try {
-			while (true) {
-				evaluateObjectiveValue((NumericalSolution) solution, objectiveFunction);
-				solution = solution.getType().generateRandomSolution(rng);
-			}
-		} catch (SearchException ex) {
-			cache.clear();
-		}
-		return solution;
-	}
+        try {
+            while (true) {
+                evaluateObjectiveValue((NumericalSolution) solution, objectiveFunction);
+                solution = solution.getType().generateRandomSolution(rng);
+            }
+        } catch (SearchException ex) {
+            cache.clear();
+        }
+        return solution;
+    }
 }

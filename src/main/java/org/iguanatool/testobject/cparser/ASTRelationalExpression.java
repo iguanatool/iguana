@@ -3,31 +3,31 @@
 package org.iguanatool.testobject.cparser;
 
 
-public
-class ASTRelationalExpression extends SimpleNode {
-	private static final int RELATION_EXPRESSION_LHS_INDEX = 0;
-	private static final int RELATION_EXPRESSION_RHS_INDEX = 2;
-	
-	public SimpleNode getLHS() {
-		return getChild(RELATION_EXPRESSION_LHS_INDEX);
-	}
-	
-	public SimpleNode getRHS() {
-		return getChild(RELATION_EXPRESSION_RHS_INDEX);
-	}
+public class ASTRelationalExpression extends SimpleNode {
+    private static final int RELATION_EXPRESSION_LHS_INDEX = 0;
+    private static final int RELATION_EXPRESSION_RHS_INDEX = 2;
 
-  public ASTRelationalExpression(int id) {
-    super(id);
-  }
+    public ASTRelationalExpression(int id) {
+        super(id);
+    }
 
-  public ASTRelationalExpression(CParser p, int id) {
-    super(p, id);
-  }
+    public ASTRelationalExpression(CParser p, int id) {
+        super(p, id);
+    }
 
+    public SimpleNode getLHS() {
+        return getChild(RELATION_EXPRESSION_LHS_INDEX);
+    }
 
-  /** Accept the visitor. **/
-  public void jjtAccept(CParserVisitor visitor) {
-    visitor.visit(this);
-  }
+    public SimpleNode getRHS() {
+        return getChild(RELATION_EXPRESSION_RHS_INDEX);
+    }
+
+    /**
+     * Accept the visitor.
+     **/
+    public void jjtAccept(CParserVisitor visitor) {
+        visitor.visit(this);
+    }
 }
 /* JavaCC - OriginalChecksum=937e67442f455bcb27ef2f15ade6980c (do not edit this line) */

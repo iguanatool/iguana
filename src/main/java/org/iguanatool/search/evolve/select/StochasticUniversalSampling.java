@@ -24,8 +24,8 @@ public class StochasticUniversalSampling implements SelectionMethod {
     }
 
     public Vector<Solution> select(Vector<Solution> pool,
-                                            int numParents) {
-        
+                                   int numParents) {
+
         Vector<Solution> parents = new Vector<Solution>();
 
         // get ranking
@@ -39,14 +39,14 @@ public class StochasticUniversalSampling implements SelectionMethod {
         int fitnessIndex = 0;
         double fitnessTotal = 0;
 
-        for (int i=0; i < numParents; i++) {
+        for (int i = 0; i < numParents; i++) {
             while (fitnessIndex < fitness.length) {
                 if (pointerVal < fitnessTotal + fitness[fitnessIndex]) {
                     parents.add(pool.elementAt(fitnessIndex));
                     break;
                 }
                 fitnessTotal += fitness[fitnessIndex];
-                fitnessIndex ++;
+                fitnessIndex++;
             }
             pointerVal += pointerSpace;
         }

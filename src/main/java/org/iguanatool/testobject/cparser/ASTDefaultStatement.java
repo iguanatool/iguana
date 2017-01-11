@@ -2,20 +2,21 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=true,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.iguanatool.testobject.cparser;
 
-public
-class ASTDefaultStatement extends SimpleNode {
-  public ASTDefaultStatement(int id) {
-    super(id);
-  }
+public class ASTDefaultStatement extends SimpleNode {
+    public ASTDefaultStatement(int id) {
+        super(id);
+    }
 
-  public ASTDefaultStatement(CParser p, int id) {
-    super(p, id);
-  }
+    public ASTDefaultStatement(CParser p, int id) {
+        super(p, id);
+    }
 
 
-  /** Accept the visitor. **/
-  public void jjtAccept(CParserVisitor visitor) {
-    visitor.visit(this);
-  }
+    /**
+     * Accept the visitor.
+     **/
+    public void jjtAccept(CParserVisitor visitor) {
+        visitor.visit(this);
+    }
 }
 /* JavaCC - OriginalChecksum=a52ad1ac8b2cb699e7a36507ca78df6a (do not edit this line) */

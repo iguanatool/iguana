@@ -34,7 +34,7 @@ public class BreedingPopulation extends SubPopulation {
     protected ReinsertionMethod reinserter;
     protected ObjectiveFunction objectiveFunction;
     protected SearchMonitor monitor;
-    
+
     protected RandomNumberGenerator randomNumberGenerator;
 
     public BreedingPopulation(String id,
@@ -49,27 +49,27 @@ public class BreedingPopulation extends SubPopulation {
         this.selector = selector;
         this.recombinator = recombinator;
         this.mutator = mutator;
-        this.reinserter = reinserter; 
+        this.reinserter = reinserter;
         this.initialSize = initialSize;
         this.generationGap = generationGap;
         this.randomNumberGenerator = randomNumberGenerator;
     }
 
     public void initialize(SolutionType solutionType,
-    					   ObjectiveFunction objectiveFunction,
-    					   SearchMonitor monitor) {
-    	
-    	this.candidateSolutionType = solutionType;
+                           ObjectiveFunction objectiveFunction,
+                           SearchMonitor monitor) {
+
+        this.candidateSolutionType = solutionType;
         this.objectiveFunction = objectiveFunction;
         this.monitor = monitor;
-        
+
         createInitialGeneration(solutionType, initialSize);
         evaluateObjectiveValues(currentGeneration);
     }
 
     private void createInitialGeneration(SolutionType candidateSolutionType, int size) {
         currentGeneration = new Vector<Solution>();
-        for (int i=0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             Solution ind = candidateSolutionType.generateRandomSolution(randomNumberGenerator);
             currentGeneration.add(ind);
         }
@@ -79,7 +79,7 @@ public class BreedingPopulation extends SubPopulation {
         // ensure even number of parents to mate
         int numToMate = calcNoOfNewIndiviudals();
         if (numToMate % 2 != 0) {
-            numToMate ++;
+            numToMate++;
         }
 
         Vector<Solution> parents = selector.select(currentGeneration, numToMate);
@@ -89,15 +89,15 @@ public class BreedingPopulation extends SubPopulation {
         evaluateObjectiveValues(mutatedOffspring);
 
         if (!monitor.terminate()) {
-        	currentGeneration = reinserter.reinsert(currentGeneration, mutatedOffspring);
+            currentGeneration = reinserter.reinsert(currentGeneration, mutatedOffspring);
         }
     }
 
     private void evaluateObjectiveValues(Vector<Solution> individuals) {
-        for (Solution ind: individuals) {
+        for (Solution ind : individuals) {
             if (ind.getObjectiveValue() == null) {
-            	if (!monitor.terminate()) {
-            		ind.evaluateObjectiveValue(objectiveFunction);                
+                if (!monitor.terminate()) {
+                    ind.evaluateObjectiveValue(objectiveFunction);
                 }
             }
         }
@@ -105,7 +105,7 @@ public class BreedingPopulation extends SubPopulation {
 
     private Vector<Solution> recombine(Vector<Solution> parents) {
         if (parents.size() % 2 != 0) {
-            throw new SearchException(parents.size()+" is an uneven number of parents");
+            throw new SearchException(parents.size() + " is an uneven number of parents");
         }
 
         int numChildren = calcNoOfNewIndiviudals();
@@ -139,7 +139,7 @@ public class BreedingPopulation extends SubPopulation {
     private Vector<Solution> mutate(Vector<Solution> individuals) {
         Vector<Solution> mutatedOffspring = new Vector<Solution>();
 
-        for (Solution ind: individuals) {
+        for (Solution ind : individuals) {
             mutatedOffspring.add(mutator.mutate(ind));
         }
 

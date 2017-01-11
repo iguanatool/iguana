@@ -9,147 +9,147 @@ import java.util.List;
 
 public class SystemCommand {
 
-	private static final String DISPLAY_SYSTEM_COMMANDS_PROPERTY = "display_system_commands";
+    private static final String DISPLAY_SYSTEM_COMMANDS_PROPERTY = "display_system_commands";
 
-	private static final boolean DISPLAY_SYSTEM_COMMANDS = Config.getInstance()
-			.getBooleanProperty(DISPLAY_SYSTEM_COMMANDS_PROPERTY);
+    private static final boolean DISPLAY_SYSTEM_COMMANDS = Config.getInstance()
+            .getBooleanProperty(DISPLAY_SYSTEM_COMMANDS_PROPERTY);
 
-	private String command;
-	private String[] commandTokens;
-	private File directory;
-	private int exitCode;
-	private String outputStreamOutput;
-	private String errorStreamOutput;
-	private boolean executed;
+    private String command;
+    private String[] commandTokens;
+    private File directory;
+    private int exitCode;
+    private String outputStreamOutput;
+    private String errorStreamOutput;
+    private boolean executed;
 
-	public SystemCommand(String command) {
-		this(command, new File("."));
-	}
+    public SystemCommand(String command) {
+        this(command, new File("."));
+    }
 
-	public SystemCommand(String command, File directory) {
-		this.command = command;
-		this.directory = directory;
-		this.exitCode = 0;
-		this.outputStreamOutput = "";
-		this.errorStreamOutput = "";
-		this.executed = false;
-		parseCommand();
-	}
+    public SystemCommand(String command, File directory) {
+        this.command = command;
+        this.directory = directory;
+        this.exitCode = 0;
+        this.outputStreamOutput = "";
+        this.errorStreamOutput = "";
+        this.executed = false;
+        parseCommand();
+    }
 
-	public int getExitCode() {
-		return exitCode;
-	}
+    public static SystemCommand execute(String command) throws IOException, SystemCommandException {
+        SystemCommand sc = new SystemCommand(command);
+        sc.execute();
+        return sc;
+    }
 
-	public String getCommand() {
-		return command;
-	}
+    public static SystemCommand execute(String command, File directory)
+            throws IOException, SystemCommandException {
+        SystemCommand sc = new SystemCommand(command, directory);
+        sc.execute();
+        return sc;
+    }
 
-	public String[] getCommandTokens() {
-		return commandTokens;
-	}
+    public int getExitCode() {
+        return exitCode;
+    }
 
-	public File getDirectory() {
-		return directory;
-	}
+    public String getCommand() {
+        return command;
+    }
 
-	public String getOutputStreamOutput() {
-		return outputStreamOutput;
-	}
+    public String[] getCommandTokens() {
+        return commandTokens;
+    }
 
-	public String getErrorStreamOutput() {
-		return errorStreamOutput;
-	}
+    public File getDirectory() {
+        return directory;
+    }
 
-	public boolean hasBeenExecuted() {
-		return executed;
-	}
+    public String getOutputStreamOutput() {
+        return outputStreamOutput;
+    }
 
-	private void parseCommand() {
-		List<String> tokens = tokenizeCommand();
-		retrieveCommandTokens(tokens);
-	}
+    public String getErrorStreamOutput() {
+        return errorStreamOutput;
+    }
 
-	private List<String> tokenizeCommand() {
-		List<String> tokens = new ArrayList<String>();
+    public boolean hasBeenExecuted() {
+        return executed;
+    }
 
-		boolean lookingForSpace = true;
-		int lastSpace = 0;
+    private void parseCommand() {
+        List<String> tokens = tokenizeCommand();
+        retrieveCommandTokens(tokens);
+    }
 
-		for (int i = 0; i < command.length(); i++) {
-			char currentChar = command.charAt(i);
+    private List<String> tokenizeCommand() {
+        List<String> tokens = new ArrayList<String>();
 
-			if (currentChar == ' ') {
-				if (lookingForSpace) {
-					String substring = command.substring(lastSpace, i).trim();
-					if (!substring.equals("")) {
-						tokens.add(command.substring(lastSpace, i));
-					}
-					lastSpace = i + 1;
-				}
-			} else if (currentChar == '"') {
-				if (!(i > 0 && command.charAt(i - 1) == '\\')) {
-					lookingForSpace = !lookingForSpace;
-				}
-			}
-		}
-		tokens.add(command.substring(lastSpace, command.length()));
-		return tokens;
-	}
+        boolean lookingForSpace = true;
+        int lastSpace = 0;
 
-	private void retrieveCommandTokens(List<String> tokens) {
-		commandTokens = new String[tokens.size()];
-		for (int i = 0; i < tokens.size(); i++) {
-			String token = tokens.get(i);
+        for (int i = 0; i < command.length(); i++) {
+            char currentChar = command.charAt(i);
 
-			// replace all quotes that are not slashed out with an empty string
-			// (uses negative lookbehind)
-			token = token.replaceAll("(?<!\\\\)\"", "");
+            if (currentChar == ' ') {
+                if (lookingForSpace) {
+                    String substring = command.substring(lastSpace, i).trim();
+                    if (!substring.equals("")) {
+                        tokens.add(command.substring(lastSpace, i));
+                    }
+                    lastSpace = i + 1;
+                }
+            } else if (currentChar == '"') {
+                if (!(i > 0 && command.charAt(i - 1) == '\\')) {
+                    lookingForSpace = !lookingForSpace;
+                }
+            }
+        }
+        tokens.add(command.substring(lastSpace, command.length()));
+        return tokens;
+    }
 
-			// replace all slashed out quotes with a quote
-			token = token.replace("\\\"", "\"");
+    private void retrieveCommandTokens(List<String> tokens) {
+        commandTokens = new String[tokens.size()];
+        for (int i = 0; i < tokens.size(); i++) {
+            String token = tokens.get(i);
 
-			commandTokens[i] = token;
-		}
-	}
+            // replace all quotes that are not slashed out with an empty string
+            // (uses negative lookbehind)
+            token = token.replaceAll("(?<!\\\\)\"", "");
 
-	public void execute() throws IOException, SystemCommandException {
+            // replace all slashed out quotes with a quote
+            token = token.replace("\\\"", "\"");
 
-		if (DISPLAY_SYSTEM_COMMANDS) {
-			System.out.println("Executing system command... \"" + command
-					+ "\" in directory \"" + directory + "\"");
-		}
+            commandTokens[i] = token;
+        }
+    }
 
-		Runtime runtime = Runtime.getRuntime();
-		Process process = runtime.exec(commandTokens, null, directory);
+    public void execute() throws IOException, SystemCommandException {
 
-		StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream());            
+        if (DISPLAY_SYSTEM_COMMANDS) {
+            System.out.println("Executing system command... \"" + command
+                    + "\" in directory \"" + directory + "\"");
+        }
+
+        Runtime runtime = Runtime.getRuntime();
+        Process process = runtime.exec(commandTokens, null, directory);
+
+        StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream());
         StreamGobbler outputGobbler = new StreamGobbler(process.getInputStream());
         errorGobbler.start();
         outputGobbler.start();
-        
-		try {
-			process.waitFor();
-		} catch (InterruptedException e) {
-		}
-		
-		int exitCode = process.exitValue();
-		executed = true;		
 
-		if (exitCode != 0) {
-			throw new SystemCommandException(this);
-		}
-	}
+        try {
+            process.waitFor();
+        } catch (InterruptedException e) {
+        }
 
-	public static SystemCommand execute(String command) throws IOException, SystemCommandException {
-		SystemCommand sc = new SystemCommand(command);
-		sc.execute();
-		return sc;
-	}
+        int exitCode = process.exitValue();
+        executed = true;
 
-	public static SystemCommand execute(String command, File directory)
-			throws IOException, SystemCommandException {
-		SystemCommand sc = new SystemCommand(command, directory);
-		sc.execute();
-		return sc;
-	}
+        if (exitCode != 0) {
+            throw new SystemCommandException(this);
+        }
+    }
 }

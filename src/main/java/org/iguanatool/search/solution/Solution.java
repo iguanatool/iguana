@@ -9,11 +9,11 @@ import org.iguanatool.search.objective.ObjectiveValue;
  * Time: 08:37:32
  */
 public abstract class Solution implements Comparable<Solution>,
-                                          Cloneable {
+        Cloneable {
 
     protected ObjectiveValue objectiveValue;
 
-    public Solution() {        
+    public Solution() {
     }
 
     public ObjectiveValue getObjectiveValue() {
@@ -26,7 +26,7 @@ public abstract class Solution implements Comparable<Solution>,
 
     public void evaluateObjectiveValue(ObjectiveFunction objectiveFunction) {
         if (objectiveValue == null) {
-        	objectiveValue = objectiveFunction.evaluate(this);
+            objectiveValue = objectiveFunction.evaluate(this);
         }
     }
 
@@ -34,15 +34,15 @@ public abstract class Solution implements Comparable<Solution>,
         ObjectiveValue objectiveValue2 = soln2.getObjectiveValue();
         return objectiveValue.compareTo(objectiveValue2);
     }
-    
+
     public boolean betterThan(Solution soln2) {
-    	return compareTo(soln2) > 0;    	
+        return compareTo(soln2) > 0;
     }
-    
+
     public boolean worseThan(Solution soln2) {
-    	return compareTo(soln2) < 0;
+        return compareTo(soln2) < 0;
     }
-    
+
     public boolean isIdeal() {
         return objectiveValue.isIdeal();
     }
@@ -52,6 +52,6 @@ public abstract class Solution implements Comparable<Solution>,
     public abstract void copyElement(Solution soln2, int location);
 
     public abstract int getNumElements();
-    
+
     public abstract Object clone();
 }

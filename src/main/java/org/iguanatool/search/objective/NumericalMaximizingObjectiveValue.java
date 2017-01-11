@@ -38,13 +38,13 @@ public class NumericalMaximizingObjectiveValue extends ObjectiveValue {
             if (getNumericalValue() > fitness2.getNumericalValue()) return 1;
             if (getNumericalValue() < fitness2.getNumericalValue()) return -1;
             return 0;
-            
+
         } else {
-            throw new RuntimeException("Object passed to compare method of "+this.getClass()+" not instances of that class");
+            throw new RuntimeException("Object passed to compare method of " + this.getClass() + " not instances of that class");
         }
     }
 
     public String toString() {
-        return "NumericalMaximizingObjectiveValue, value:"+getNumericalValue()+" optimum: "+optimum;
+        return "NumericalMaximizingObjectiveValue, value:" + getNumericalValue() + " optimum: " + optimum;
     }
 }

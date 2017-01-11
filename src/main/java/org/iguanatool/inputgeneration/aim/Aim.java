@@ -9,28 +9,28 @@ import org.iguanatool.search.SearchResult;
 import org.iguanatool.testobject.TestObject;
 
 public abstract class Aim {
-	
-	protected TestObject testObject;
-	protected VariableIncluder variableIncluder;
-	protected Search search;
-	protected AimLog aimLog;
-	
-	public Aim(TestObject testObject, 
-			   VariableIncluder variableIncluder, 
-			   Search search, 
-			   AimLog log) {
-		
-		this.testObject = testObject;
-		this.variableIncluder = variableIncluder;
-		this.search = search;
-		this.aimLog = log;
-	}
-	
-	public abstract void attemptAim();
-	
-	protected SearchResult generateTestData(InputVectorType i,
+
+    protected TestObject testObject;
+    protected VariableIncluder variableIncluder;
+    protected Search search;
+    protected AimLog aimLog;
+
+    public Aim(TestObject testObject,
+               VariableIncluder variableIncluder,
+               Search search,
+               AimLog log) {
+
+        this.testObject = testObject;
+        this.variableIncluder = variableIncluder;
+        this.search = search;
+        this.aimLog = log;
+    }
+
+    public abstract void attemptAim();
+
+    protected SearchResult generateTestData(InputVectorType i,
                                             InputGenerationObjectiveFunction f) {
-		search.getRandomNumberGenerator().reset();    
-		return search.search(i, f);    	 
-	}
+        search.getRandomNumberGenerator().reset();
+        return search.search(i, f);
+    }
 }

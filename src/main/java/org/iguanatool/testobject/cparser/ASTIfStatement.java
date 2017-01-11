@@ -3,34 +3,34 @@
 package org.iguanatool.testobject.cparser;
 
 
-public
-class ASTIfStatement extends SimpleNode {
-	private static final int IF_TRUE_CHILD_INDEX  = 1;
-	private static final int IF_FALSE_CHILD_INDEX = 2;
-	
-	public SimpleNode getTrueChild() {
-		return getChild(IF_TRUE_CHILD_INDEX);
-	}
-	
-	public SimpleNode getFalseChild() {
-		if (jjtGetNumChildren() > IF_FALSE_CHILD_INDEX) {
-			return getChild(IF_FALSE_CHILD_INDEX);
-		}
-		return null;
-	}
+public class ASTIfStatement extends SimpleNode {
+    private static final int IF_TRUE_CHILD_INDEX = 1;
+    private static final int IF_FALSE_CHILD_INDEX = 2;
 
-  public ASTIfStatement(int id) {
-    super(id);
-  }
+    public ASTIfStatement(int id) {
+        super(id);
+    }
 
-  public ASTIfStatement(CParser p, int id) {
-    super(p, id);
-  }
+    public ASTIfStatement(CParser p, int id) {
+        super(p, id);
+    }
 
+    public SimpleNode getTrueChild() {
+        return getChild(IF_TRUE_CHILD_INDEX);
+    }
 
-  /** Accept the visitor. **/
-  public void jjtAccept(CParserVisitor visitor) {
-    visitor.visit(this);
-  }
+    public SimpleNode getFalseChild() {
+        if (jjtGetNumChildren() > IF_FALSE_CHILD_INDEX) {
+            return getChild(IF_FALSE_CHILD_INDEX);
+        }
+        return null;
+    }
+
+    /**
+     * Accept the visitor.
+     **/
+    public void jjtAccept(CParserVisitor visitor) {
+        visitor.visit(this);
+    }
 }
 /* JavaCC - OriginalChecksum=52ff947c68a55dda93fe57576f1d5720 (do not edit this line) */

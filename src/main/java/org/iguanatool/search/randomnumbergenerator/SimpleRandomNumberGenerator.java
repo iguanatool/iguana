@@ -8,12 +8,12 @@ public class SimpleRandomNumberGenerator extends RandomNumberGenerator {
 
     public SimpleRandomNumberGenerator() {
         double rnd = Math.random();
-		initialSeed = (long) (rnd * Math.pow(10, 16));
+        initialSeed = (long) (rnd * Math.pow(10, 16));
         random = new Random(initialSeed);
     }
 
     public void setSeed(long seed) {
-    	initialSeed = seed;
+        initialSeed = seed;
         random.setSeed(seed);
     }
 
@@ -22,9 +22,9 @@ public class SimpleRandomNumberGenerator extends RandomNumberGenerator {
     }
 
     public void reset() {
-    	setSeed(initialSeed);
+        setSeed(initialSeed);
     }
-    
+
     public boolean nextBoolean() {
         return random.nextBoolean();
     }
@@ -51,7 +51,7 @@ public class SimpleRandomNumberGenerator extends RandomNumberGenerator {
     }
 
     public double nextDouble(double min, double max) {
-        return (nextDouble() * (max-min)) + min;
+        return (nextDouble() * (max - min)) + min;
     }
 
     public double nextGaussian() {

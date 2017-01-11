@@ -19,8 +19,8 @@ public class RefNotEqualsTraceCondition extends TraceCondition {
     }
 
     public String toString() {
-        return "RefNotEqualsDistance ("+id+") equals="+refEqualsIsTrue+
-               " T:"+distance(true)+
-               " F:"+distance(false);
+        return "RefNotEqualsDistance (" + id + ") equals=" + refEqualsIsTrue +
+                " T:" + distance(true) +
+                " F:" + distance(false);
     }
 }

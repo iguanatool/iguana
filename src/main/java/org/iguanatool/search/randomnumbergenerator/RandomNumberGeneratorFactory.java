@@ -10,7 +10,7 @@ public class RandomNumberGeneratorFactory {
             name += "RandomNumberGenerator";
         }
 
-        name = "org.iguanatool.search.randomnumbergenerator."+ name;
+        name = "org.iguanatool.search.randomnumbergenerator." + name;
 
         try {
             return (RandomNumberGenerator) Class.forName(name).newInstance();

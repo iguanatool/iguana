@@ -24,7 +24,7 @@ public class RandomRecombination implements RecombinationOperator {
 
         int vectorSize = parent1.getNumElements();
 
-        for (int i=0; i < vectorSize; i++) {
+        for (int i = 0; i < vectorSize; i++) {
             if (r.nextBoolean()) {
                 child1.copyElement(parent1, i);
             } else {
@@ -32,7 +32,7 @@ public class RandomRecombination implements RecombinationOperator {
             }
         }
 
-        for (int i=0; i < vectorSize; i++) {
+        for (int i = 0; i < vectorSize; i++) {
             if (r.nextBoolean()) {
                 child2.copyElement(parent2, i);
             } else {

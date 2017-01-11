@@ -32,8 +32,8 @@ public abstract class Population {
     }
 
     public abstract void initialize(SolutionType candidateSolutionType,
-			   						ObjectiveFunction objectiveFunction,
-			   						SearchMonitor monitor);
+                                    ObjectiveFunction objectiveFunction,
+                                    SearchMonitor monitor);
 
     public abstract void evolve();
 

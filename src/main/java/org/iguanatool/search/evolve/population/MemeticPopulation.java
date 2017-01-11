@@ -10,35 +10,34 @@ import org.iguanatool.search.solution.Solution;
 
 public class MemeticPopulation extends BreedingPopulation {
 
-	private NeighbourhoodSearch neighbourhoodSearch;
-	
-    public MemeticPopulation(String id,
-				             int initialSize,
-				             double generationGap,
-				             SelectionMethod selector,
-				             RecombinationOperator recombinator,
-				             MutationOperator mutator,
-				             ReinsertionMethod reinserter,
-				             RandomNumberGenerator randomNumberGenerator,
-				             NeighbourhoodSearch neighbourhoodSearch) {
-    	
-    	super(id, initialSize, generationGap, selector, recombinator,
-    	      mutator, reinserter, randomNumberGenerator);
+    private NeighbourhoodSearch neighbourhoodSearch;
 
-    	this.neighbourhoodSearch = neighbourhoodSearch;
+    public MemeticPopulation(String id,
+                             int initialSize,
+                             double generationGap,
+                             SelectionMethod selector,
+                             RecombinationOperator recombinator,
+                             MutationOperator mutator,
+                             ReinsertionMethod reinserter,
+                             RandomNumberGenerator randomNumberGenerator,
+                             NeighbourhoodSearch neighbourhoodSearch) {
+
+        super(id, initialSize, generationGap, selector, recombinator,
+                mutator, reinserter, randomNumberGenerator);
+
+        this.neighbourhoodSearch = neighbourhoodSearch;
     }
-	
-    public void evolve()
-    {
-    	super.evolve();
-    	
-    	for (int i=0; i < currentGeneration.size(); i++) {
-            Solution locallyOptimalSolution = 
-            		neighbourhoodSearch.neighbourhoodSearch(
-            				currentGeneration.get(i),
-            				objectiveFunction,
-            				monitor);
-            
+
+    public void evolve() {
+        super.evolve();
+
+        for (int i = 0; i < currentGeneration.size(); i++) {
+            Solution locallyOptimalSolution =
+                    neighbourhoodSearch.neighbourhoodSearch(
+                            currentGeneration.get(i),
+                            objectiveFunction,
+                            monitor);
+
             currentGeneration.set(i, locallyOptimalSolution);
         }
     }

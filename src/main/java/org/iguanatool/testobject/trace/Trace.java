@@ -15,29 +15,29 @@ import java.util.List;
  */
 public class Trace {
 
-	protected List<TraceNode> path = new ArrayList<TraceNode>();
+    protected List<TraceNode> path = new ArrayList<TraceNode>();
     protected TraceNode currentNode;
     protected CFG cfg;
-    
+
     public Trace() {
-    	currentNode = new TraceNode();
+        currentNode = new TraceNode();
     }
 
     public void setCfg(CFG cfg) {
-    	this.cfg = cfg;
+        this.cfg = cfg;
     }
 
     public List<TraceNode> getTraceNodes() {
         return Collections.unmodifiableList(path);
     }
-        
+
     public boolean node(int nodeID, boolean outcome) {
-    	// add the cfgNode to the trace
-    	CFGNode cfgNode = cfg.getNode(nodeID);
+        // add the cfgNode to the trace
+        CFGNode cfgNode = cfg.getNode(nodeID);
         currentNode.setCFGNode(cfgNode);
         currentNode.setConditionOutcome(outcome);
-        path.add(currentNode);                  
-        
+        path.add(currentNode);
+
         // initialize for next condition
         currentNode = new TraceNode();
 

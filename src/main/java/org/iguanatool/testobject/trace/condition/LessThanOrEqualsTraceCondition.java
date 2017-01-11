@@ -20,8 +20,8 @@ public class LessThanOrEqualsTraceCondition extends TraceCondition {
     }
 
     public String toString() {
-        return "LessThanOrEqual ("+id+") a="+a+" b="+b+
-               " T:"+distance(true)+
-               " F:"+distance(false);
+        return "LessThanOrEqual (" + id + ") a=" + a + " b=" + b +
+                " T:" + distance(true) +
+                " F:" + distance(false);
     }
 }

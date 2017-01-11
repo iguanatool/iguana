@@ -7,8 +7,8 @@ package org.iguanatool.search;
  */
 public class SearchException extends RuntimeException {
 
-	static final long serialVersionUID = -4544769666886838818L;
-	
+    static final long serialVersionUID = -4544769666886838818L;
+
     public SearchException(String message) {
         super(message);
     }

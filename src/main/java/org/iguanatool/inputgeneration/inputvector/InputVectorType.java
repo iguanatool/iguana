@@ -17,15 +17,15 @@ public class InputVectorType extends NumericalSolutionType {
     protected boolean[] variableInclusion;
 
     public InputVectorType(TestObject testObject) {
-    	InputSpecification in = testObject.getInputSpecification();
-    	
+        InputSpecification in = testObject.getInputSpecification();
+
         setAttributes(in.getNumArgs(),
-        		      in.getArgsMin(),
-        		      in.getArgsMax(),
-        		      in.getArgsAccuracy());
+                in.getArgsMin(),
+                in.getArgsMax(),
+                in.getArgsAccuracy());
 
         variableInclusion = new boolean[in.getNumArgs()];
-        for (int i=0; i < variableInclusion.length; i++) {
+        for (int i = 0; i < variableInclusion.length; i++) {
             variableInclusion[i] = true;
         }
 
@@ -34,38 +34,38 @@ public class InputVectorType extends NumericalSolutionType {
 
     public InputVectorType(TestObject testObject,
                            boolean[] variableInclusion) {
-    	InputSpecification in = testObject.getInputSpecification();
+        InputSpecification in = testObject.getInputSpecification();
         int included = 0;
 
-        for (int i=0; i < variableInclusion.length; i++) {
+        for (int i = 0; i < variableInclusion.length; i++) {
             if (variableInclusion[i]) {
-                included ++;
+                included++;
             }
         }
         double[] excludedInputValues = new double[in.getNumArgs() - included];
 
-        double[] argsMin    = in.getArgsMin();
-        double[] argsMax    = in.getArgsMax();
+        double[] argsMin = in.getArgsMin();
+        double[] argsMax = in.getArgsMax();
         int[] argsPrecision = in.getArgsAccuracy();
 
-        double[] min        = new double[included];
-        double[] max        = new double[included];
-        int[] precision     = new int[included];
+        double[] min = new double[included];
+        double[] max = new double[included];
+        int[] precision = new int[included];
 
         int includedPos = 0;
         int excludedPos = 0;
 
-        for (int i=0; i < variableInclusion.length; i++) {
+        for (int i = 0; i < variableInclusion.length; i++) {
             if (variableInclusion[i]) {
-                min[includedPos]       = argsMin[i];
-                max[includedPos]       = argsMax[i];
+                min[includedPos] = argsMin[i];
+                max[includedPos] = argsMax[i];
                 precision[includedPos] = argsPrecision[i];
-                includedPos ++;
+                includedPos++;
             } else {
                 excludedInputValues[excludedPos] =
-                                argsMin[i] +
-                                (argsMax[i] - argsMin[i])/2;
-                excludedPos ++;
+                        argsMin[i] +
+                                (argsMax[i] - argsMin[i]) / 2;
+                excludedPos++;
             }
         }
 
@@ -82,7 +82,7 @@ public class InputVectorType extends NumericalSolutionType {
         return variableInclusion;
     }
 
-    public Solution solutionInstanceOfThisType()    {
+    public Solution solutionInstanceOfThisType() {
         return new InputVector(this);
     }
 

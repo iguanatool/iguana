@@ -24,8 +24,8 @@ public class MuhlenbeinMutation extends NumericalMutation {
 
     protected void mutateGene(NumericalSolution ind, int locus) {
         double delta = 0;
-        double alphaThreshold = 1.0 / (mutationPrecision+1);
-        for (int i=0; i <= mutationPrecision; i++) {
+        double alphaThreshold = 1.0 / (mutationPrecision + 1);
+        for (int i = 0; i <= mutationPrecision; i++) {
             if (r.nextDouble() < alphaThreshold) {
                 delta += Math.pow(2, -i);
             }
@@ -35,6 +35,6 @@ public class MuhlenbeinMutation extends NumericalMutation {
         if (r.nextBoolean()) {
             range = -range;
         }
-        ind.setElement(locus, ind.getRawElement(locus)+range*delta);
+        ind.setElement(locus, ind.getRawElement(locus) + range * delta);
     }
 }

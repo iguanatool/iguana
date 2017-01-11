@@ -25,7 +25,7 @@ public class TournamentSelection implements SelectionMethod {
                                    int numParents) {
         Vector<Solution> selected = new Vector<Solution>();
 
-        for (int i=0; i < numParents; i++) {
+        for (int i = 0; i < numParents; i++) {
             selected.add(doTournament(pool));
         }
 
@@ -35,7 +35,7 @@ public class TournamentSelection implements SelectionMethod {
     Solution doTournament(Vector<Solution> pool) {
         Vector<Solution> competitors = new Vector<Solution>();
 
-        for (int i=0; i < tournamentSize; i++) {
+        for (int i = 0; i < tournamentSize; i++) {
             Solution ind = pool.elementAt(r.nextInt(pool.size()));
             competitors.add(ind);
         }

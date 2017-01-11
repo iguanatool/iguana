@@ -22,50 +22,50 @@ public class SeededHillClimb extends Search {
     private Restarter restarter;
 
     public SeededHillClimb(RandomNumberGenerator randomNumberGenerator, int maxEvaluations) {
-    	super(randomNumberGenerator, maxEvaluations);
-    	neighbourhoodSearch = null;
-    	restarter = null;
+        super(randomNumberGenerator, maxEvaluations);
+        neighbourhoodSearch = null;
+        restarter = null;
     }
-    
-    public void setNeighbourhoodSearch(NeighbourhoodSearch neighbourhoodSearch) {
-    	this.neighbourhoodSearch = neighbourhoodSearch;
-    }
-       
-    public void setRestarter(Restarter restarter) {
-    	this.restarter = restarter;
-    }
-    
-    public SearchResult search(SolutionType candidateSolutionType,
-    						   ObjectiveFunction objectiveFunction) {
-    	
-    	SearchMonitor monitor = new SearchMonitor(objectiveFunction, maxEvaluations);
-       	Solution currentSolution = candidateSolutionType.generateRandomSolution(randomNumberGenerator);
-    	
-       	NumericalSolution numericalSolution = (NumericalSolution) currentSolution;
-    	numericalSolution.setElement(0, 1);
-    	numericalSolution.setElement(1, 1);
-    	numericalSolution.setElement(2, 2010);
-    	numericalSolution.setElement(3, 1);
-    	numericalSolution.setElement(4, 1);
-    	numericalSolution.setElement(5, 2010);
-    	
-    	currentSolution.evaluateObjectiveValue(objectiveFunction);
 
-		do {
-        	// hillclimb as far as possible
-        	if (neighbourhoodSearch != null) {
-        		currentSolution = neighbourhoodSearch.neighbourhoodSearch(
-        					currentSolution, objectiveFunction, monitor);
-        	}
-        	
-        	// invoke restart strategy 
-        	if (restarter != null) {
-        		currentSolution = restarter.restart(
-        					currentSolution, objectiveFunction, monitor);
-        	} 
+    public void setNeighbourhoodSearch(NeighbourhoodSearch neighbourhoodSearch) {
+        this.neighbourhoodSearch = neighbourhoodSearch;
+    }
+
+    public void setRestarter(Restarter restarter) {
+        this.restarter = restarter;
+    }
+
+    public SearchResult search(SolutionType candidateSolutionType,
+                               ObjectiveFunction objectiveFunction) {
+
+        SearchMonitor monitor = new SearchMonitor(objectiveFunction, maxEvaluations);
+        Solution currentSolution = candidateSolutionType.generateRandomSolution(randomNumberGenerator);
+
+        NumericalSolution numericalSolution = (NumericalSolution) currentSolution;
+        numericalSolution.setElement(0, 1);
+        numericalSolution.setElement(1, 1);
+        numericalSolution.setElement(2, 2010);
+        numericalSolution.setElement(3, 1);
+        numericalSolution.setElement(4, 1);
+        numericalSolution.setElement(5, 2010);
+
+        currentSolution.evaluateObjectiveValue(objectiveFunction);
+
+        do {
+            // hillclimb as far as possible
+            if (neighbourhoodSearch != null) {
+                currentSolution = neighbourhoodSearch.neighbourhoodSearch(
+                        currentSolution, objectiveFunction, monitor);
+            }
+
+            // invoke restart strategy
+            if (restarter != null) {
+                currentSolution = restarter.restart(
+                        currentSolution, objectiveFunction, monitor);
+            }
 
         } while (restarter != null && !monitor.terminate());
-             
+
         return monitor.getSearchResult();
     }
 }

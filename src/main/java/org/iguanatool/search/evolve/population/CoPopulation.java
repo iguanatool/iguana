@@ -21,7 +21,7 @@ import java.util.Vector;
 
 public class CoPopulation extends SubPopulation {
 
-    private Vector<SubPopulation>  subPopulations  = new Vector<SubPopulation>();
+    private Vector<SubPopulation> subPopulations = new Vector<SubPopulation>();
 
     private MigrationManager migrationManager;
     private CompetitionManager competitionManager;
@@ -65,25 +65,25 @@ public class CoPopulation extends SubPopulation {
     }
 
     public void initialize(SolutionType candidateSolutionType,
-			   			  ObjectiveFunction objectiveFunction,
-			   			  SearchMonitor monitor) {
-    	
-        for (SubPopulation p:subPopulations) {
+                           ObjectiveFunction objectiveFunction,
+                           SearchMonitor monitor) {
+
+        for (SubPopulation p : subPopulations) {
             p.initialize(candidateSolutionType, objectiveFunction, monitor);
             p.setProgress(0);
         }
-        
+
         if (competitionManager != null) {
-        	competitionManager.reset();
+            competitionManager.reset();
         }
-        
+
         if (migrationManager != null) {
-        	migrationManager.reset();
+            migrationManager.reset();
         }
     }
 
     public void evolve() {
-        for (SubPopulation p: subPopulations) {
+        for (SubPopulation p : subPopulations) {
             p.evolve();
         }
 
@@ -98,7 +98,7 @@ public class CoPopulation extends SubPopulation {
 
     public int getNumIndividuals() {
         int sum = 0;
-        for (SubPopulation p:subPopulations) {
+        for (SubPopulation p : subPopulations) {
             sum += p.getNumIndividuals();
         }
         return sum;
@@ -110,8 +110,8 @@ public class CoPopulation extends SubPopulation {
         }
 
         subPopulations.elementAt(popIndexToAddNextIndividual).addIndividual(solution);
-        popIndexToAddNextIndividual ++;
-        if (popIndexToAddNextIndividual > subPopulations.size()-1) {
+        popIndexToAddNextIndividual++;
+        if (popIndexToAddNextIndividual > subPopulations.size() - 1) {
             popIndexToAddNextIndividual = 0;
         }
     }
@@ -124,8 +124,8 @@ public class CoPopulation extends SubPopulation {
 
     public Solution removeIndividual(int index) {
         int sumIndex = 0;
-        for (SubPopulation p: subPopulations) {
-            if (sumIndex + p.getNumIndividuals() > index ) {
+        for (SubPopulation p : subPopulations) {
+            if (sumIndex + p.getNumIndividuals() > index) {
                 return p.removeIndividual(index - sumIndex);
             }
             sumIndex += p.getNumIndividuals();
@@ -136,7 +136,7 @@ public class CoPopulation extends SubPopulation {
     public List<Solution> getIndividuals() {
         Vector<Solution> individuals = new Vector<Solution>();
 
-        for (SubPopulation p: subPopulations) {
+        for (SubPopulation p : subPopulations) {
             individuals.addAll(p.getIndividuals());
         }
 

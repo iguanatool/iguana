@@ -11,7 +11,7 @@ public class RankingUtil {
 
     public static double sum(double[] fitness) {
         double sum = 0;
-        for (double d: fitness) {
+        for (double d : fitness) {
             sum += d;
         }
         return sum;
@@ -21,8 +21,8 @@ public class RankingUtil {
         double sum = sum(fitness);
 
         double[] proportion = new double[fitness.length];
-        for (int i=0; i < proportion.length; i++) {
-            proportion[i] = fitness[i]/sum;
+        for (int i = 0; i < proportion.length; i++) {
+            proportion[i] = fitness[i] / sum;
         }
 
         return proportion;
@@ -40,11 +40,11 @@ public class RankingUtil {
         double a = (2 - pressure);
         double b = (2 * (pressure - 1));
 
-        for (int i=1; i <= numElements; i++) {
+        for (int i = 1; i <= numElements; i++) {
             double c = i - 1;
             double d = numElements - 1;
 
-            fitness[i-1] = a + b * c / d;
+            fitness[i - 1] = a + b * c / d;
         }
     }
 

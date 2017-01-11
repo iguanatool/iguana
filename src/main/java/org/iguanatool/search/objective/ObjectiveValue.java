@@ -8,5 +8,5 @@ package org.iguanatool.search.objective;
 public abstract class ObjectiveValue implements Comparable<ObjectiveValue> {
     public abstract boolean isIdeal();
 
-    public abstract double getNumericalValue();    
+    public abstract double getNumericalValue();
 }

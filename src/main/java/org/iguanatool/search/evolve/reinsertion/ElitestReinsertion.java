@@ -21,11 +21,11 @@ public class ElitestReinsertion implements ReinsertionMethod {
         // copy best children over worst parents
         int parentListPos = 0;
 
-        for (int childListPos=children.size()-1;
-                childListPos >= 0;
-                childListPos --, parentListPos++) {
+        for (int childListPos = children.size() - 1;
+             childListPos >= 0;
+             childListPos--, parentListPos++) {
             parents.setElementAt(children.elementAt(childListPos),
-                                 parentListPos);
+                    parentListPos);
         }
 
         return parents;

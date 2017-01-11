@@ -34,7 +34,7 @@ public class CompleteNetMigrationManager extends MigrationManager {
         Vector<Vector<Solution>> selected = getIndividuals(coPopulation);
         int numPopulations = coPopulation.getNumPopulations();
 
-        for (int i=0; i < numPopulations; i++) {
+        for (int i = 0; i < numPopulations; i++) {
             putIndividuals(selected, i, coPopulation.getPopulation(i));
         }
     }
@@ -43,10 +43,10 @@ public class CompleteNetMigrationManager extends MigrationManager {
         List<SubPopulation> subPopulations = coPopulation.getSubPopulations();
         numToMigrate = new int[subPopulations.size()];
         int i = 0;
-        for (SubPopulation subPopulation: subPopulations) {
+        for (SubPopulation subPopulation : subPopulations) {
             numToMigrate[i] = (int) Math.round(percentageToMigrate *
-                                     subPopulation.getNumIndividuals());
-            i ++;
+                    subPopulation.getNumIndividuals());
+            i++;
         }
     }
 
@@ -62,10 +62,10 @@ public class CompleteNetMigrationManager extends MigrationManager {
         // if none left in other populations - get own individuals back
         if (numToPut > 0) {
             Vector<Solution> ownIndividuals = selected.elementAt(popIndex);
-            for (int i=0; i < numToPut; i++) {
+            for (int i = 0; i < numToPut; i++) {
                 int choice = r.nextInt(ownIndividuals.size());
                 population.addIndividual(ownIndividuals.elementAt(choice));
-            }            
+            }
         }
     }
 
@@ -79,7 +79,7 @@ public class CompleteNetMigrationManager extends MigrationManager {
             } else {
                 break;
             }
-            numToPut --;
+            numToPut--;
         }
 
         return numToPut;
@@ -89,23 +89,23 @@ public class CompleteNetMigrationManager extends MigrationManager {
                               int popIndex) {
         int size = 0;
         int i = 0;
-        for (Vector<Solution> popSelection: selection) {
+        for (Vector<Solution> popSelection : selection) {
             if (i != popIndex) {
                 size += popSelection.size();
             }
-            i ++;
+            i++;
         }
         return size;
     }
 
     private Solution getRandomIndividual(Vector<Vector<Solution>> selection,
-                                                  int popIndex) {
+                                         int popIndex) {
 
         int selectionSize = selectionSize(selection, popIndex);
         int index = r.nextInt(selectionSize);
         int i = 0;
 
-        for (Vector<Solution> popSelection: selection) {
+        for (Vector<Solution> popSelection : selection) {
             if (i != popIndex) {
                 if (index < popSelection.size()) {
                     Solution ind = popSelection.elementAt(index);
@@ -114,18 +114,18 @@ public class CompleteNetMigrationManager extends MigrationManager {
                 }
                 index -= popSelection.size();
             }
-            i ++;
+            i++;
         }
 
         throw new RuntimeException("Could not get random individual");
     }
 
     private Vector<Vector<Solution>> getIndividuals(CoPopulation coPopulation) {
-        Vector<Vector<Solution>> selected = new Vector<Vector <Solution>>();
+        Vector<Vector<Solution>> selected = new Vector<Vector<Solution>>();
 
         List<SubPopulation> populations = coPopulation.getSubPopulations();
         int i = 0;
-        for (SubPopulation p: populations) {
+        for (SubPopulation p : populations) {
             int numToGet = numToMigrate[i];
             Vector<Solution> populationIndividuals =
                     migrantSelector.select(p, numToGet);

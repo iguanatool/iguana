@@ -8,22 +8,22 @@ import java.util.List;
 
 public class InputSpecification {
 
-    protected List<Double>  min;
-    protected List<Double>  max;
+    protected List<Double> min;
+    protected List<Double> max;
     protected List<Integer> accuracy;
 
     public InputSpecification() {
-    	clear();
+        clear();
     }
 
     public void clear() {
-        min  	 = new ArrayList<Double>();
-        max  	 = new ArrayList<Double>();
-        accuracy = new ArrayList<Integer>();   	
+        min = new ArrayList<Double>();
+        max = new ArrayList<Double>();
+        accuracy = new ArrayList<Integer>();
     }
-    
+
     public void addDouble(int quantity, double minVal, double maxVal, int precVal) {
-        for (int i=0; i < quantity; i++) {
+        for (int i = 0; i < quantity; i++) {
             min.add(minVal);
             max.add(maxVal);
             accuracy.add(precVal);
@@ -35,16 +35,16 @@ public class InputSpecification {
     }
 
     public void addInt(int quantity, int minVal, int maxVal) {
-        for (int i=0; i < quantity; i++) {
+        for (int i = 0; i < quantity; i++) {
             min.add(new Double(minVal));
             max.add(new Double(maxVal));
             accuracy.add(0);
-       }
+        }
     }
 
     public void addInt(int minVal, int maxVal) {
         addInt(1, minVal, maxVal);
-    }    
+    }
 
     public double[] getArgsMin() {
         return Array.doubleListToArray(min);
@@ -68,13 +68,13 @@ public class InputSpecification {
     public BigDecimal getDomainSize() {
         BigDecimal domainSize = null;
 
-        for (int i=0; i < getNumArgs(); i++) {
+        for (int i = 0; i < getNumArgs(); i++) {
             double varAccuracy = Math.pow(10, accuracy.get(i));
             double maxMinusMin = Math.abs(max.get(i) - min.get(i));
-            
+
             BigDecimal varSize = new BigDecimal(maxMinusMin);
             varSize = varSize.multiply(new BigDecimal(varAccuracy));
-                        
+
             if (domainSize == null) {
                 domainSize = varSize;
             } else {
@@ -83,26 +83,26 @@ public class InputSpecification {
         }
 
         return domainSize;
-    }    
-    
-    public int getDomainSize10Power() {
-    	BigDecimal d = getDomainSize();
-    	return d.precision() - 1;
     }
-    
+
+    public int getDomainSize10Power() {
+        BigDecimal d = getDomainSize();
+        return d.precision() - 1;
+    }
+
     public String formatInput(double[] input) {
-		String formattedInput = "";
-    	boolean first = true;
-		formattedInput += "[";
-		for (double d: input) {
-			if (!first) {
-				formattedInput += ", "; 
-			} else {
-				first = false;
-			}
-			formattedInput += d;
-		}
-		formattedInput += "]";
-		return formattedInput;
+        String formattedInput = "";
+        boolean first = true;
+        formattedInput += "[";
+        for (double d : input) {
+            if (!first) {
+                formattedInput += ", ";
+            } else {
+                first = false;
+            }
+            formattedInput += d;
+        }
+        formattedInput += "]";
+        return formattedInput;
     }
 }

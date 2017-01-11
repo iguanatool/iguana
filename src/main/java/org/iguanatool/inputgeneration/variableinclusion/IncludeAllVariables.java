@@ -13,7 +13,7 @@ public class IncludeAllVariables implements VariableIncluder {
                                      TestObject testObject) {
         int numVars = testObject.getInputSpecification().getNumArgs();
         boolean[] vars = new boolean[numVars];
-        for (int i=0; i < numVars; i++) {
+        for (int i = 0; i < numVars; i++) {
             vars[i] = true;
         }
         return vars;

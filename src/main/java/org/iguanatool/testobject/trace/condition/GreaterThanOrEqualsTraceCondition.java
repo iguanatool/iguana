@@ -20,8 +20,8 @@ public class GreaterThanOrEqualsTraceCondition extends TraceCondition {
     }
 
     public String toString() {
-        return "GreaterThanOrEqual ("+id+") a="+a+" b="+b+
-               " T:"+distance(true)+
-               " F:"+distance(false);
+        return "GreaterThanOrEqual (" + id + ") a=" + a + " b=" + b +
+                " T:" + distance(true) +
+                " F:" + distance(false);
     }
 }

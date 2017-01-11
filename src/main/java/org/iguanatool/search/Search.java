@@ -10,24 +10,24 @@ import org.iguanatool.search.solution.SolutionType;
  * Time: 12:58:25
  */
 public abstract class Search {
-	
-	public static final int INFINITE_EVALUATIONS = -1;
+
+    public static final int INFINITE_EVALUATIONS = -1;
     protected int maxEvaluations;
     protected RandomNumberGenerator randomNumberGenerator;
-    
+
     public Search(RandomNumberGenerator randomNumberGenerator, int maxEvaluations) {
-    	this.maxEvaluations = maxEvaluations;
-    	this.randomNumberGenerator = randomNumberGenerator;
-    }	
-    
+        this.maxEvaluations = maxEvaluations;
+        this.randomNumberGenerator = randomNumberGenerator;
+    }
+
     public int getMaxEvaluations() {
-    	return maxEvaluations;
+        return maxEvaluations;
     }
-    
+
     public RandomNumberGenerator getRandomNumberGenerator() {
-    	return randomNumberGenerator;
+        return randomNumberGenerator;
     }
-    
-	public abstract SearchResult search(SolutionType candidateSolutionType,
-    									ObjectiveFunction objectiveFunction);
+
+    public abstract SearchResult search(SolutionType candidateSolutionType,
+                                        ObjectiveFunction objectiveFunction);
 }

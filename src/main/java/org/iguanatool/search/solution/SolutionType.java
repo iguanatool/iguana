@@ -12,11 +12,11 @@ public abstract class SolutionType {
     protected int vectorSize;
 
     // provided so that child classes can use a default constructor
-    protected SolutionType() {        
+    protected SolutionType() {
     }
 
     public SolutionType(int vectorSize) {
-         this.vectorSize = vectorSize;
+        this.vectorSize = vectorSize;
     }
 
     public int getVectorSize() {

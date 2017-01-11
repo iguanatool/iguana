@@ -23,20 +23,20 @@ public class NonRandomNumberGenerator extends RandomNumberGenerator {
                                     int[] integers,
                                     double[] doubles,
                                     double[] gaussians) {
-        this.booleans  = booleans;
-        this.integers  = integers;
-        this.doubles   = doubles;
+        this.booleans = booleans;
+        this.integers = integers;
+        this.doubles = doubles;
         this.gaussians = gaussians;
     }
 
     public NonRandomNumberGenerator(boolean[] booleans) {
-        this.booleans  = booleans;
+        this.booleans = booleans;
     }
 
     public NonRandomNumberGenerator(boolean[] booleans,
                                     double[] doubles) {
-        this.booleans  = booleans;
-        this.doubles   = doubles;
+        this.booleans = booleans;
+        this.doubles = doubles;
     }
 
     public NonRandomNumberGenerator(boolean[] booleans,
@@ -52,16 +52,16 @@ public class NonRandomNumberGenerator extends RandomNumberGenerator {
     public NonRandomNumberGenerator(int[] integers,
                                     double[] doubles) {
         this.integers = integers;
-        this.doubles  = doubles;
+        this.doubles = doubles;
     }
 
     public NonRandomNumberGenerator(double[] doubles) {
-        this.doubles  = doubles;
+        this.doubles = doubles;
     }
 
     public NonRandomNumberGenerator(double[] doubles,
                                     double[] gaussians) {
-        this.doubles   = doubles;
+        this.doubles = doubles;
         this.gaussians = gaussians;
     }
 
@@ -71,19 +71,19 @@ public class NonRandomNumberGenerator extends RandomNumberGenerator {
     public long getInitialSeed() {
         return -1;
     }
-    
+
     public void reset() {
     }
 
     public boolean nextBoolean() {
         boolean nextBoolean = booleans[booleanCounter];
-        booleanCounter ++;
+        booleanCounter++;
         return nextBoolean;
     }
 
     public double nextDouble() {
         double nextDouble = doubles[doubleCounter];
-        doubleCounter ++;
+        doubleCounter++;
         return nextDouble;
     }
 
@@ -97,7 +97,7 @@ public class NonRandomNumberGenerator extends RandomNumberGenerator {
 
     public int nextInt() {
         int nextInt = integers[integerCounter];
-        integerCounter ++;
+        integerCounter++;
         return nextInt;
     }
 
@@ -111,7 +111,7 @@ public class NonRandomNumberGenerator extends RandomNumberGenerator {
 
     public double nextGaussian() {
         double nextGaussian = gaussians[gaussianCounter];
-        gaussianCounter ++;
+        gaussianCounter++;
         return nextGaussian;
     }
 

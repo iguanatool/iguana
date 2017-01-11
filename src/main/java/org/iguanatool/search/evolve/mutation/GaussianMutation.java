@@ -42,10 +42,10 @@ public class GaussianMutation extends NumericalMutation {
     }
 
     protected void mutateGene(NumericalSolution ind, int locus) {
-        if (haveDomainPercentage)  {
+        if (haveDomainPercentage) {
             NumericalSolutionType species = (NumericalSolutionType) ind.getType();
             double standardDeviation = (species.getMax(locus) - species.getMin(locus))
-                                            * Math.pow(10, species.getAccuracy(locus));
+                    * Math.pow(10, species.getAccuracy(locus));
             standardDeviation *= domainPercentage;
             mutateGene(ind, locus, standardDeviation);
         } else if (haveDomainUnits) {

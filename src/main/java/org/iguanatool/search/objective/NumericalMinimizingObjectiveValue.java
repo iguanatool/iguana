@@ -28,11 +28,11 @@ public class NumericalMinimizingObjectiveValue extends NumericalMaximizingObject
             return 0;
 
         } else {
-            throw new RuntimeException("Object passed to compare method of "+this.getClass()+" not instances of that class");
+            throw new RuntimeException("Object passed to compare method of " + this.getClass() + " not instances of that class");
         }
     }
 
     public String toString() {
-        return "NumericalMinimizingObjectiveValue, value:"+getNumericalValue()+" optimum: "+optimum;
-    }   
+        return "NumericalMinimizingObjectiveValue, value:" + getNumericalValue() + " optimum: " + optimum;
+    }
 }

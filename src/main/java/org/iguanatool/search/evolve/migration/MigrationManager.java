@@ -15,12 +15,12 @@ public abstract class MigrationManager {
 
     public MigrationManager(int migrateEvery,
                             MigrantSelector migrantSelector) {
-        this.migrateEvery    = migrateEvery;
+        this.migrateEvery = migrateEvery;
         this.migrantSelector = migrantSelector;
     }
 
     public void migration(CoPopulation coPopulation) {
-        generationsToMigration ++;
+        generationsToMigration++;
         if (generationsToMigration == migrateEvery) {
             doMigration(coPopulation);
             generationsToMigration = 0;
@@ -28,8 +28,8 @@ public abstract class MigrationManager {
     }
 
     public void reset() {
-    	generationsToMigration = 0;
+        generationsToMigration = 0;
     }
-    
+
     protected abstract void doMigration(CoPopulation coPopulation);
 }

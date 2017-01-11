@@ -5,18 +5,18 @@ public class ContentExtractor implements CParserVisitor {
     public StringBuilder content = new StringBuilder();
 
     public static String getContent(SimpleNode node) {
-    	ContentExtractor contentExtractor = new ContentExtractor();
-    	contentExtractor.append(node);
-    	return contentExtractor.content.toString();
+        ContentExtractor contentExtractor = new ContentExtractor();
+        contentExtractor.append(node);
+        return contentExtractor.content.toString();
     }
-    
+
     protected void append(SimpleNode node) {
         Token t1 = node.jjtGetFirstToken();
         Token t = new Token();
         t.next = t1;
 
         for (int i = 0; i < node.jjtGetNumChildren(); i++) {
-        	SimpleNode child = node.getChild(i);
+            SimpleNode child = node.getChild(i);
             while (true) {
                 t = t.next;
                 if (t == child.jjtGetFirstToken()) break;
@@ -227,10 +227,10 @@ public class ContentExtractor implements CParserVisitor {
     public void visit(ASTSwitchStatement node) {
         append(node);
     }
-    
+
     public void visit(ASTSwitchExpression node) {
         append(node);
-    }    
+    }
 
     public void visit(ASTWhileStatement node) {
         append(node);
@@ -263,7 +263,7 @@ public class ContentExtractor implements CParserVisitor {
     public void visit(ASTBranchingExpression node) {
         append(node);
     }
-        
+
     public void visit(ASTExpression node) {
         append(node);
     }
@@ -303,14 +303,14 @@ public class ContentExtractor implements CParserVisitor {
     public void visit(ASTANDExpression node) {
         append(node);
     }
-    
-    public void visit(ASTRelationalExpression node) {
-		append(node);
-	}
 
-	public void visit(ASTRelationalOperator node) {
-		append(node);
-	}    
+    public void visit(ASTRelationalExpression node) {
+        append(node);
+    }
+
+    public void visit(ASTRelationalOperator node) {
+        append(node);
+    }
 
     public void visit(ASTShiftExpression node) {
         append(node);
@@ -331,14 +331,14 @@ public class ContentExtractor implements CParserVisitor {
     public void visit(ASTUnaryExpression node) {
         append(node);
     }
-    
-	public void visit(ASTUnaryOperator node) {
-		append(node);
-	}    
-	
-	public void visit(ASTLogicalNOTExpression node) {
-		append(node);
-	}
+
+    public void visit(ASTUnaryOperator node) {
+        append(node);
+    }
+
+    public void visit(ASTLogicalNOTExpression node) {
+        append(node);
+    }
 
     public void visit(ASTPostfixExpression node) {
         append(node);

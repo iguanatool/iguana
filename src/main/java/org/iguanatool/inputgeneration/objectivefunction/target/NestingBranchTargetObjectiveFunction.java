@@ -10,38 +10,38 @@ import org.iguanatool.testobject.trace.TraceNode;
 import java.util.List;
 
 public class NestingBranchTargetObjectiveFunction extends BranchTargetObjectiveFunction {
-	
+
     public NestingBranchTargetObjectiveFunction(TestObject t) {
-    	super(t);
+        super(t);
     }
-    
+
     public InputGenerationObjectiveValue evaluateTarget(List<TraceNode> trace) {
         InputGenerationObjectiveValue objVal = new InputGenerationObjectiveValue(0, 0, 0, 0);
-    	ComputeNodeDependency cnd = new ComputeNodeDependency();
+        ComputeNodeDependency cnd = new ComputeNodeDependency();
         ConditionObjectiveFunction cof = new StdConditionObjectiveFunction();
-        
-        for (TraceNode traceNode: trace) {
-        	cnd.compute(branchStartNode, traceNode.getCFGNode());	
+
+        for (TraceNode traceNode : trace) {
+            cnd.compute(branchStartNode, traceNode.getCFGNode());
             if (cnd.getApproachLevel() != -1) {
                 traceNode.computeOutcome(cof);
-                
+
                 InputGenerationObjectiveValue traceNodeObjVal;
-                
+
                 if (cnd.getApproachLevel() == 0) {
-                	traceNodeObjVal = cof.getOutcome(branch);
+                    traceNodeObjVal = cof.getOutcome(branch);
                 } else {
-                	traceNodeObjVal = cof.getOutcome(cnd.getEdge());
+                    traceNodeObjVal = cof.getOutcome(cnd.getEdge());
                 }
-                
-                if (traceNodeObjVal.getDistance() > 0){
-                	objVal.setDistance(objVal.getDistance() + 
-                					   traceNodeObjVal.getDistance());
-                	
-                	objVal.setTotalConditions(objVal.getTotalConditions() + 
-                			                  traceNodeObjVal.getTotalConditions());
-                	
-                	objVal.setUnencounteredConditions(objVal.getUnencounteredConditions() + 
-                			                          traceNodeObjVal.getUnencounteredConditions());
+
+                if (traceNodeObjVal.getDistance() > 0) {
+                    objVal.setDistance(objVal.getDistance() +
+                            traceNodeObjVal.getDistance());
+
+                    objVal.setTotalConditions(objVal.getTotalConditions() +
+                            traceNodeObjVal.getTotalConditions());
+
+                    objVal.setUnencounteredConditions(objVal.getUnencounteredConditions() +
+                            traceNodeObjVal.getUnencounteredConditions());
                 }             
                 
                 
@@ -51,11 +51,11 @@ public class NestingBranchTargetObjectiveFunction extends BranchTargetObjectiveF
         			System.out.println(traceCondition);
         		}
         		System.out.println("T: "+traceNodeObjVal);
-        		System.out.println("O: "+objVal);*/ 
-        		
+        		System.out.println("O: "+objVal);*/
+
             }
-        }	
-        
+        }
+
         return objVal;
     }
 }

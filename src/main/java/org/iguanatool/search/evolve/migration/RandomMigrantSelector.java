@@ -24,11 +24,11 @@ public class RandomMigrantSelector implements MigrantSelector {
 
         Vector<Solution> selection = new Vector<Solution>();
 
-        for (int i=0; i < numIndividuals; i++) {
+        for (int i = 0; i < numIndividuals; i++) {
             int index = r.nextInt(p.getNumIndividuals());
             selection.add(p.removeIndividual(index));
         }
-        
+
         return selection;
     }
 }

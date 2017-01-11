@@ -7,92 +7,92 @@ import org.iguanatool.search.solution.NumericalSolutionType;
 import org.iguanatool.search.solution.Solution;
 
 public class PatternAcceleration extends NeighbourhoodSearch {
-	private int repeatBase;
+    private int repeatBase;
 
-	public PatternAcceleration() {
-		repeatBase = 2;
-	}
+    public PatternAcceleration() {
+        repeatBase = 2;
+    }
 
-	public PatternAcceleration(int repeatBase) {
-		this.repeatBase = repeatBase;
-	}
+    public PatternAcceleration(int repeatBase) {
+        this.repeatBase = repeatBase;
+    }
 
-	public Solution neighbourhoodSearch(Solution solution,
+    public Solution neighbourhoodSearch(Solution solution,
                                         ObjectiveFunction objectiveFunction,
                                         SearchMonitor monitor) {
-		
-		NumericalSolution currentSolution = (NumericalSolution) solution;
-		NumericalSolutionType type = (NumericalSolutionType) currentSolution.getType();
 
-		NumericalSolution newSolution;
-		int varNum = 0;
-		int direction = -1;
-		int lastImprovement = 0;
-		boolean completedCycle;
+        NumericalSolution currentSolution = (NumericalSolution) solution;
+        NumericalSolutionType type = (NumericalSolutionType) currentSolution.getType();
 
-		do {
-			newSolution = accelerate(currentSolution, type, objectiveFunction,
-									 monitor, varNum, direction);
+        NumericalSolution newSolution;
+        int varNum = 0;
+        int direction = -1;
+        int lastImprovement = 0;
+        boolean completedCycle;
 
-			if (newSolution.betterThan(currentSolution)) {
-				currentSolution = newSolution;
-				lastImprovement = 0;
-			} else {
-				lastImprovement++;
-			}
+        do {
+            newSolution = accelerate(currentSolution, type, objectiveFunction,
+                    monitor, varNum, direction);
 
-			// change direction
-			if (direction == -1) {
-				direction = 1;
-			} else {
-				direction = -1;
+            if (newSolution.betterThan(currentSolution)) {
+                currentSolution = newSolution;
+                lastImprovement = 0;
+            } else {
+                lastImprovement++;
+            }
 
-				// change variable
-				varNum++;
-				if (varNum == type.getVectorSize()) {
-					varNum = 0;
-				}
-			}
+            // change direction
+            if (direction == -1) {
+                direction = 1;
+            } else {
+                direction = -1;
 
-			completedCycle = lastImprovement >= (type.getVectorSize() * 2);
+                // change variable
+                varNum++;
+                if (varNum == type.getVectorSize()) {
+                    varNum = 0;
+                }
+            }
 
-		} while (!completedCycle && !monitor.terminate());
+            completedCycle = lastImprovement >= (type.getVectorSize() * 2);
 
-		return currentSolution;
-	}
+        } while (!completedCycle && !monitor.terminate());
 
-	private NumericalSolution accelerate(NumericalSolution currentSolution,
-										 NumericalSolutionType type, 
-										 ObjectiveFunction objectiveFunction,
-										 SearchMonitor monitor, 
-										 int varNum, int direction) {
-		NumericalSolution newSolution;
-		int iteration = 0;
+        return currentSolution;
+    }
 
-		while (!monitor.terminate()) {
-			newSolution = makeMove(currentSolution, type, varNum, direction, iteration);
-			newSolution.evaluateObjectiveValue(objectiveFunction);
-			iteration++;
+    private NumericalSolution accelerate(NumericalSolution currentSolution,
+                                         NumericalSolutionType type,
+                                         ObjectiveFunction objectiveFunction,
+                                         SearchMonitor monitor,
+                                         int varNum, int direction) {
+        NumericalSolution newSolution;
+        int iteration = 0;
 
-			if (newSolution.betterThan(currentSolution)) {
-				currentSolution = newSolution;
-			} else {
-				break;
-			}
-		}
+        while (!monitor.terminate()) {
+            newSolution = makeMove(currentSolution, type, varNum, direction, iteration);
+            newSolution.evaluateObjectiveValue(objectiveFunction);
+            iteration++;
 
-		return currentSolution;
-	}
+            if (newSolution.betterThan(currentSolution)) {
+                currentSolution = newSolution;
+            } else {
+                break;
+            }
+        }
 
-	private NumericalSolution makeMove(NumericalSolution solution,
-									   NumericalSolutionType type, 
-									   int varNum, int direction, int iteration) {
+        return currentSolution;
+    }
 
-		NumericalSolution newSolution = (NumericalSolution) solution.clone();
-		double var = newSolution.getElement(varNum);
-		int power = type.getAccuracy(varNum);
-		var += direction * Math.pow(10, -power) * Math.pow(repeatBase, iteration);
-		newSolution.setElement(varNum, var);
-		return newSolution;
-	}
+    private NumericalSolution makeMove(NumericalSolution solution,
+                                       NumericalSolutionType type,
+                                       int varNum, int direction, int iteration) {
+
+        NumericalSolution newSolution = (NumericalSolution) solution.clone();
+        double var = newSolution.getElement(varNum);
+        int power = type.getAccuracy(varNum);
+        var += direction * Math.pow(10, -power) * Math.pow(repeatBase, iteration);
+        newSolution.setElement(varNum, var);
+        return newSolution;
+    }
 }

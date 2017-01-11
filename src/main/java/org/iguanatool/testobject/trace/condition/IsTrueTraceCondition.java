@@ -19,8 +19,8 @@ public class IsTrueTraceCondition extends TraceCondition {
     }
 
     public String toString() {
-        return "IsTrue ("+id+") a="+a+
-               " T:"+distance(true)+
-               " F:"+distance(false);
+        return "IsTrue (" + id + ") a=" + a +
+                " T:" + distance(true) +
+                " F:" + distance(false);
     }
 }

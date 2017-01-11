@@ -32,10 +32,10 @@ public class RankingCompetitionManager extends CompetitionManager {
                                      int subpopulationMinimum,
                                      RandomNumberGenerator randomNumberGenerator) {
         super(competeEvery);
-        this.individualRanker      = individualRanker;
-        this.populationRanker      = populationRanker;
+        this.individualRanker = individualRanker;
+        this.populationRanker = populationRanker;
         this.percentageMaxTransfer = percentageMaxTransfer;
-        this.subpopulationMinimum  = subpopulationMinimum;
+        this.subpopulationMinimum = subpopulationMinimum;
         this.randomNumberGenerator = randomNumberGenerator;
     }
 
@@ -52,9 +52,9 @@ public class RankingCompetitionManager extends CompetitionManager {
         Vector<SubPopulation> rank = new Vector<SubPopulation>(populations);
         Collections.sort(rank, SubPopulation.FITNESS_COMPARATOR);
         i = 0;
-        for (SubPopulation p:rank) {
-            setProgress(p, rank.size()-i);
-            i ++;
+        for (SubPopulation p : rank) {
+            setProgress(p, rank.size() - i);
+            i++;
         }
     }
 
@@ -62,9 +62,9 @@ public class RankingCompetitionManager extends CompetitionManager {
         double[] populationFitness = populationFitness(populations);
 
         int i = 0;
-        for (SubPopulation p:populations) {
+        for (SubPopulation p : populations) {
             p.setFitness(populationFitness[i]);
-            i ++;
+            i++;
         }
     }
 
@@ -97,12 +97,12 @@ public class RankingCompetitionManager extends CompetitionManager {
         int[] indsPerPop = new int[numPopulations];
         double[] fitnessSum = new double[numPopulations];
         double[] populationFitness = new double[numPopulations];
-        for (int i=0; i < numIndividuals; i++) {
+        for (int i = 0; i < numIndividuals; i++) {
             PopulationCandidateSolution pInd = populationIndividuals.elementAt(i);
-            indsPerPop[pInd.populationID] ++;
+            indsPerPop[pInd.populationID]++;
             fitnessSum[pInd.populationID] += fitness[i];
         }
-        for (int i=0; i < numPopulations; i++) {
+        for (int i = 0; i < numPopulations; i++) {
             populationFitness[i] = fitnessSum[i] / indsPerPop[i];
         }
 
@@ -110,22 +110,22 @@ public class RankingCompetitionManager extends CompetitionManager {
     }
 
     private Vector<PopulationCandidateSolution>
-            getIndividuals(List<SubPopulation> populations) {
+    getIndividuals(List<SubPopulation> populations) {
 
         Vector<PopulationCandidateSolution> populationIndividuals
                 = new Vector<PopulationCandidateSolution>();
 
         int i = 0;
-        for (SubPopulation p:populations) {
+        for (SubPopulation p : populations) {
             Vector<Solution> individuals =
                     new Vector<Solution>(p.getIndividuals());
 
-            for (Solution ind:individuals) {
+            for (Solution ind : individuals) {
                 populationIndividuals.add(
                         new PopulationCandidateSolution(ind, i));
             }
 
-            i ++;
+            i++;
         }
 
         return populationIndividuals;
@@ -151,9 +151,9 @@ public class RankingCompetitionManager extends CompetitionManager {
                                     Vector<Solution> pool) {
 
         int i = 0;
-        for (SubPopulation p: populations) {
+        for (SubPopulation p : populations) {
             if (reallocation[i] > 0) {
-                for (int j=0; j < reallocation[i]; j++) {
+                for (int j = 0; j < reallocation[i]; j++) {
                     int index = randomNumberGenerator.nextInt(pool.size());
                     Solution ind = pool.elementAt(index);
                     pool.removeElementAt(index);
@@ -165,13 +165,13 @@ public class RankingCompetitionManager extends CompetitionManager {
     }
 
     private Vector<Solution> extractIndsFromWorst(Vector<SubPopulation> populations,
-                                                           int[] reallocation) {
+                                                  int[] reallocation) {
 
         Vector<Solution> pool = new Vector<Solution>();
         int i = 0;
-        for (SubPopulation p: populations) {
+        for (SubPopulation p : populations) {
             if (reallocation[i] < 0) {
-                for (int j=0; j < -reallocation[i]; j++) {
+                for (int j = 0; j < -reallocation[i]; j++) {
                     pool.addElement(p.removeIndividual(randomNumberGenerator.nextInt(p.getNumIndividuals())));
                 }
             }
@@ -184,30 +184,30 @@ public class RankingCompetitionManager extends CompetitionManager {
                                       double[] proportion) {
         // find out the potential investments of each population,
         // and the total resource
-        int numPopulations =  populations.size();
+        int numPopulations = populations.size();
         int[] invested = new int[numPopulations];
         int totalResource = 0;
         int i = 0;
-        for (SubPopulation p: populations) {
+        for (SubPopulation p : populations) {
             int resource = (int) Math.round(percentageMaxTransfer * p.getNumIndividuals());
             if (p.getNumIndividuals() - resource < subpopulationMinimum) {
                 resource = p.getNumIndividuals() - subpopulationMinimum;
             }
             invested[i] = resource;
             totalResource += resource;
-            i ++;
+            i++;
         }
 
         // compute the reallocation
         int[] reallocation = new int[numPopulations];
-        for (i=0; i < numPopulations; i++) {
+        for (i = 0; i < numPopulations; i++) {
             reallocation[i] = ((int) Math.round(proportion[i] * totalResource))
-                                    - invested[i];
+                    - invested[i];
         }
 
         // check reallocation adds up to 1 due to rounding errors :-(
         int sum = 0;
-        for (i=0; i < numPopulations; i++) {
+        for (i = 0; i < numPopulations; i++) {
             sum += reallocation[i];
         }
         if (sum != 0) {

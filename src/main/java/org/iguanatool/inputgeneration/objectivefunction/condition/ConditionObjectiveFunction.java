@@ -17,7 +17,7 @@ public abstract class ConditionObjectiveFunction {
     protected InputGenerationObjectiveValue falseOutcome;
 
     public abstract void compute(Condition condition,
-                         List<TraceCondition> traceConditions);
+                                 List<TraceCondition> traceConditions);
 
     public InputGenerationObjectiveValue getTrueOutcome() {
         return trueOutcome;

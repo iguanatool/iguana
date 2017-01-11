@@ -11,7 +11,7 @@ import org.iguanatool.search.objective.ObjectiveValue;
 public class InputGenerationObjectiveValue extends ObjectiveValue {
 
     public static final InputGenerationObjectiveValue IDEAL = new InputGenerationObjectiveValue(0, 0, 0, 0);
-    public static final InputGenerationObjectiveValue WORST = new InputGenerationObjectiveValue(1000, 0, 0, 0); 
+    public static final InputGenerationObjectiveValue WORST = new InputGenerationObjectiveValue(1000, 0, 0, 0);
     private int approachLevel;
     private int totalConditions;
     private int unencounteredConditions;
@@ -62,7 +62,7 @@ public class InputGenerationObjectiveValue extends ObjectiveValue {
 
     public boolean isIdeal() {
         return approachLevel == 0 &&
-               distance == 0;
+                distance == 0;
     }
 
     public int compareTo(ObjectiveValue objectiveValue) {
@@ -124,11 +124,11 @@ public class InputGenerationObjectiveValue extends ObjectiveValue {
 
     public double getNumericalValue() {
         double unencounteredDistance = unencounteredConditions / (double) totalConditions;
-        double conditionDistance     = normalizeDistance();
-        
+        double conditionDistance = normalizeDistance();
+
         double val = approachLevel +
-               		 unencounteredDistance +
-               		 conditionDistance / totalConditions;
+                unencounteredDistance +
+                conditionDistance / totalConditions;
 
         return val;
     }
@@ -139,15 +139,15 @@ public class InputGenerationObjectiveValue extends ObjectiveValue {
 
     public boolean equals(Object obj) {
         if (obj instanceof InputGenerationObjectiveValue) {
-            return compareTo((ObjectiveValue)obj) == 0;
+            return compareTo((ObjectiveValue) obj) == 0;
         } else {
             return false;
         }
     }
 
     public String toString() {
-        return  "A:"+approachLevel+
-               " U:"+unencounteredConditions+"/"+totalConditions+
-               " D:"+distance;
+        return "A:" + approachLevel +
+                " U:" + unencounteredConditions + "/" + totalConditions +
+                " D:" + distance;
     }
 }

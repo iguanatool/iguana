@@ -12,7 +12,7 @@ public abstract class RandomNumberGenerator {
     public abstract long getInitialSeed();
 
     public abstract void reset();
-    
+
     public abstract boolean nextBoolean();
 
     public abstract int nextInt();

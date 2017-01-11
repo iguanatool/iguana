@@ -11,32 +11,32 @@ import org.iguanatool.testobject.structure.CFGNode;
 
 public class BranchAim extends Aim {
 
-	private CFGNode branchingNode;
-	private boolean branch;
-	
-    public BranchAim(TestObject testObject,
-    				 VariableIncluder variableIncluder,
-    				 Search search, 
-    				 AimLog aimLog,
-    				 CFGNode branchingNode, 
-    				 boolean branch) {
+    private CFGNode branchingNode;
+    private boolean branch;
 
-    	super(testObject, variableIncluder, search, aimLog);
-    	this.branchingNode = branchingNode;
-    	this.branch = branch;    	
+    public BranchAim(TestObject testObject,
+                     VariableIncluder variableIncluder,
+                     Search search,
+                     AimLog aimLog,
+                     CFGNode branchingNode,
+                     boolean branch) {
+
+        super(testObject, variableIncluder, search, aimLog);
+        this.branchingNode = branchingNode;
+        this.branch = branch;
     }
-    
+
     public void attemptAim() {
-    	String branchName = branchingNode + (branch ? "T" : "F");
-    	
-    	boolean[] variableInclusion = variableIncluder.performAnalysis(branchName, testObject);
-    	InputVectorType inputVectorType = new InputVectorType(testObject, variableInclusion);
-    	
-    	BranchTargetObjectiveFunction objectiveFunction = new BranchTargetObjectiveFunction(testObject);
-    	objectiveFunction.setBranch(branchingNode, branch);
-    	
-    	SearchResult searchResult = generateTestData(inputVectorType, objectiveFunction);
-    	
-    	aimLog.logAim(branchName, searchResult);
+        String branchName = branchingNode + (branch ? "T" : "F");
+
+        boolean[] variableInclusion = variableIncluder.performAnalysis(branchName, testObject);
+        InputVectorType inputVectorType = new InputVectorType(testObject, variableInclusion);
+
+        BranchTargetObjectiveFunction objectiveFunction = new BranchTargetObjectiveFunction(testObject);
+        objectiveFunction.setBranch(branchingNode, branch);
+
+        SearchResult searchResult = generateTestData(inputVectorType, objectiveFunction);
+
+        aimLog.logAim(branchName, searchResult);
     }
 }

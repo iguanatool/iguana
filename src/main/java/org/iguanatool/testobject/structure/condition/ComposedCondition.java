@@ -6,9 +6,9 @@ import java.util.List;
 
 public abstract class ComposedCondition extends Condition {
 
-	private static final long serialVersionUID = -925529877113255765L;
+    private static final long serialVersionUID = -925529877113255765L;
 
-	protected List<Condition> subConditions = new ArrayList<Condition>();
+    protected List<Condition> subConditions = new ArrayList<Condition>();
 
     public abstract String operator();
 
@@ -20,15 +20,15 @@ public abstract class ComposedCondition extends Condition {
         return Collections.unmodifiableList(subConditions);
     }
 
-    public String toString () {
+    public String toString() {
         StringBuilder output = new StringBuilder();
         boolean first = true;
         output.append("(");
 
-        for (Condition subCondition: subConditions) {
+        for (Condition subCondition : subConditions) {
             output.append(subCondition);
             if (first) {
-                output.append(" "+operator()+" ");
+                output.append(" " + operator() + " ");
                 first = false;
             }
         }

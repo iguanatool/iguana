@@ -7,8 +7,8 @@ package org.iguanatool.testobject.trace.condition;
  */
 public abstract class TraceCondition {
 
-    protected int id;
     protected static final double K = 1.0;
+    protected int id;
 
     public TraceCondition(int id) {
         this.id = id;

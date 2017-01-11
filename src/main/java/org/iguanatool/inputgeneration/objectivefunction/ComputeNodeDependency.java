@@ -32,7 +32,7 @@ public class ComputeNodeDependency {
         }
 
         Set<ControlDependency> dependencies = fromNode.getControlDependencies();
-        for (ControlDependency c: dependencies) {
+        for (ControlDependency c : dependencies) {
             if (c.node == toNode) {
                 approachLevel = 1;
                 edge = c.edge;
@@ -41,7 +41,7 @@ public class ComputeNodeDependency {
         }
 
         ComputeNodeDependency cnd = new ComputeNodeDependency();
-        for (ControlDependency c: dependencies) {
+        for (ControlDependency c : dependencies) {
             if (!visited.contains(c.node)) {
                 visited.add(c.node);
                 cnd.compute(c.node, toNode, visited);

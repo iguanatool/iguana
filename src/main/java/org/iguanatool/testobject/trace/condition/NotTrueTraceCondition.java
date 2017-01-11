@@ -19,9 +19,9 @@ public class NotTrueTraceCondition extends TraceCondition {
     }
 
     public String toString() {
-        return "NotTrue ("+id+") a="+a+
-               " T:"+distance(true)+
-               " F:"+distance(false);
+        return "NotTrue (" + id + ") a=" + a +
+                " T:" + distance(true) +
+                " F:" + distance(false);
     }
 
 }

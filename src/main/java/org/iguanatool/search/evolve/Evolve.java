@@ -20,40 +20,40 @@ public class Evolve extends Search {
     private int generation;
 
     public Evolve(RandomNumberGenerator randomNumberGenerator, int maxEvaluations) {
-    	super(randomNumberGenerator, maxEvaluations);
+        super(randomNumberGenerator, maxEvaluations);
     }
-    
+
     public void setPopulation(Population population) {
         this.population = population;
     }
 
     public SearchResult search(SolutionType solutionType,
-			   				   ObjectiveFunction objectiveFunction) {
+                               ObjectiveFunction objectiveFunction) {
 
-    	if (population == null) {
-    		throw new SearchException("No population set");
-    	}
+        if (population == null) {
+            throw new SearchException("No population set");
+        }
 
-    	SearchMonitor monitor = new SearchMonitor(objectiveFunction, maxEvaluations);
-    	
-    	// generation '0'
+        SearchMonitor monitor = new SearchMonitor(objectiveFunction, maxEvaluations);
+
+        // generation '0'
         population.initialize(solutionType, objectiveFunction, monitor);
 
         // generation 1 onwards
         generation = 1;
-        
+
         //System.out.println(generation+": "+monitor.getBestSolution().getObjectiveValue().getNumericalValue()+";  "+monitor.getBestSolution());
-        
+
         while (!monitor.terminate()) {
-        	generation ++;
+            generation++;
 
             if (!monitor.terminate()) {
                 population.evolve();
             }
-            
+
             //System.out.println(generation+": "+monitor.getBestSolution().getObjectiveValue().getNumericalValue()+";  "+monitor.getBestSolution());
         }
-        
+
         return monitor.getSearchResult();
     }
 }

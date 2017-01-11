@@ -24,7 +24,7 @@ public abstract class NumericalMutation implements MutationOperator {
         int vectorSize = species.getVectorSize();
         double mutationProbability = 1.0 / vectorSize;
 
-        for (int i=0; i < vectorSize; i++) {
+        for (int i = 0; i < vectorSize; i++) {
             if (r.nextDouble() < mutationProbability) {
                 mutateGene(ind2, i);
             }
@@ -40,5 +40,5 @@ public abstract class NumericalMutation implements MutationOperator {
         return ind2;
     }
 
-     protected abstract void mutateGene(NumericalSolution ind, int locus);
+    protected abstract void mutateGene(NumericalSolution ind, int locus);
 }

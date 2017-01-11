@@ -33,7 +33,7 @@ public class OnePointCrossover implements RecombinationOperator {
         int vectorSize = parent1Type.getVectorSize();
         int crossoverPoint = r.nextInt(vectorSize);
 
-        for (int i=0; i < vectorSize; i++) {
+        for (int i = 0; i < vectorSize; i++) {
             if (i < crossoverPoint) {
                 child1.copyElement(parent1, i);
                 child2.copyElement(parent2, i);

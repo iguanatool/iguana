@@ -9,14 +9,18 @@ import org.iguanatool.search.solution.SolutionType;
 
 public class Quadratic extends Example {
 
-	private final static double A = 3;
-	private final static double B = 2;
-	private final static double C = -1;
-	
-    public String getObjectiveDescription() {
-    	return "Find a root of a quadratic equation";
+    private final static double A = 3;
+    private final static double B = 2;
+    private final static double C = -1;
+
+    public static void main(String[] args) {
+        Example.run(new Quadratic(), args);
     }
-    
+
+    public String getObjectiveDescription() {
+        return "Find a root of a quadratic equation";
+    }
+
     protected ObjectiveValue computeObjectiveValue(Solution soln) {
         NumericalSolution soln2 = (NumericalSolution) soln;
         double x = soln2.getElement(0);
@@ -25,10 +29,6 @@ public class Quadratic extends Example {
     }
 
     protected SolutionType makeCandidateSolutionType() {
-    	return new NumericalSolutionType(1, -2000, 2000, 3);
+        return new NumericalSolutionType(1, -2000, 2000, 3);
     }
-       
-    public static void main(String[] args) {
-    	Example.run(new Quadratic(), args);
-    }	
 }

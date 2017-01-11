@@ -20,7 +20,7 @@ public class IncludeVariablesFromFile implements VariableIncluder {
         try {
             String className = testObject.getClass().toString().substring("class iguana.expt.".length());
             String[] parts = className.split("\\.");
-            String dir = Config.getInstance().getIguanaPath()+"/ctestobj/src/"+parts[0]+"/vada/"+parts[1]+"/";
+            String dir = Config.getInstance().getIguanaPath() + "/ctestobj/src/" + parts[0] + "/vada/" + parts[1] + "/";
             String file = dir + aimDescription + ".txt";
 
             Vector<Boolean> includedVarsVector = new Vector<Boolean>();
@@ -37,19 +37,19 @@ public class IncludeVariablesFromFile implements VariableIncluder {
             r.close();
 
             boolean[] includedVars = new boolean[includedVarsVector.size()];
-            for (int i=0; i < includedVars.length; i++) {
+            for (int i = 0; i < includedVars.length; i++) {
                 includedVars[i] = includedVarsVector.get(i);
             }
 
             return includedVars;
         } catch (IOException e) {
-        	// to stop expts crashing when no variable inclusion file is found - include none of the vars
+            // to stop expts crashing when no variable inclusion file is found - include none of the vars
             int numVars = testObject.getInputSpecification().getNumArgs();
             boolean[] vars = new boolean[numVars];
-            for (int i=0; i < numVars; i++) {
+            for (int i = 0; i < numVars; i++) {
                 vars[i] = false;
             }
-            return vars;        	
+            return vars;
         }
     }
 }

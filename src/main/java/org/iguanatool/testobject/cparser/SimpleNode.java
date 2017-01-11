@@ -9,130 +9,150 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public
-class SimpleNode implements Node {
-	
-	protected CFGNode cfgNode;
-	protected Condition condition;
-	protected boolean firstSwitchClause = false;
-	
-	public CFGNode getCFGNode() {
-	    return cfgNode;
-	}
-	
-	public void setCFGNode(CFGNode cfgNode) {
-	    this.cfgNode = cfgNode;
-	}
-	
-	public void setCondition(Condition condition) {
-	    this.condition = condition;
-	}
-	
-	public Condition getCondition() {
-	    return condition;
-	}
-	
-	public boolean isFirstSwitchClause() {
-	    return firstSwitchClause;
-	}
-	
-	public void setFirstSwitchClause(boolean firstSwitchClause) {
-	    this.firstSwitchClause = firstSwitchClause;
-	}
-	
-	public String getContent() {
-	    return ContentExtractor.getContent(this);
-	}
-	
-	public String getCode() {
-	    String content = getContent();
-	       
-	    // remove comments
-	    Pattern pattern = Pattern.compile("//.*?(\r\n?|\n)|/\\*.*?\\*/", Pattern.MULTILINE);
-	    Matcher matcher = pattern.matcher(content);
-	    String code = matcher.replaceAll("");
-	   
-	    // clear white space
-	    code = code.replaceAll("\\s+", " ");
-	    code = code.trim();
-	       
-	    return code;        
-	}
-	
-	public SimpleNode getChild(int index) {
-	    return (SimpleNode) jjtGetChild(index);
-	}
+public class SimpleNode implements Node {
 
+    protected CFGNode cfgNode;
+    protected Condition condition;
+    protected boolean firstSwitchClause = false;
+    protected Node parent;
+    protected Node[] children;
+    protected int id;
+    protected Object value;
+    protected CParser parser;
+    protected Token firstToken;
+    protected Token lastToken;
 
-  protected Node parent;
-  protected Node[] children;
-  protected int id;
-  protected Object value;
-  protected CParser parser;
-  protected Token firstToken;
-  protected Token lastToken;
-
-  public SimpleNode(int i) {
-    id = i;
-  }
-
-  public SimpleNode(CParser p, int i) {
-    this(i);
-    parser = p;
-  }
-
-  public void jjtOpen() {
-  }
-
-  public void jjtClose() {
-  }
-
-  public void jjtSetParent(Node n) { parent = n; }
-  public Node jjtGetParent() { return parent; }
-
-  public void jjtAddChild(Node n, int i) {
-    if (children == null) {
-      children = new Node[i + 1];
-    } else if (i >= children.length) {
-      Node c[] = new Node[i + 1];
-      System.arraycopy(children, 0, c, 0, children.length);
-      children = c;
+    public SimpleNode(int i) {
+        id = i;
     }
-    children[i] = n;
-  }
 
-  public Node jjtGetChild(int i) {
-    return children[i];
-  }
-
-  public int jjtGetNumChildren() {
-    return (children == null) ? 0 : children.length;
-  }
-
-  public void jjtSetValue(Object value) { this.value = value; }
-  public Object jjtGetValue() { return value; }
-
-  public Token jjtGetFirstToken() { return firstToken; }
-  public void jjtSetFirstToken(Token token) { this.firstToken = token; }
-  public Token jjtGetLastToken() { return lastToken; }
-  public void jjtSetLastToken(Token token) { this.lastToken = token; }
-
-  /** Accept the visitor. **/
-  public void jjtAccept(CParserVisitor visitor)
-{
-    visitor.visit(this);
-  }
-
-  /** Accept the visitor. **/
-  public void childrenAccept(CParserVisitor visitor)
-{
-    if (children != null) {
-      for (int i = 0; i < children.length; ++i) {
-        children[i].jjtAccept(visitor);
-      }
+    public SimpleNode(CParser p, int i) {
+        this(i);
+        parser = p;
     }
-    
-  }
+
+    public CFGNode getCFGNode() {
+        return cfgNode;
+    }
+
+    public void setCFGNode(CFGNode cfgNode) {
+        this.cfgNode = cfgNode;
+    }
+
+    public Condition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Condition condition) {
+        this.condition = condition;
+    }
+
+    public boolean isFirstSwitchClause() {
+        return firstSwitchClause;
+    }
+
+    public void setFirstSwitchClause(boolean firstSwitchClause) {
+        this.firstSwitchClause = firstSwitchClause;
+    }
+
+    public String getContent() {
+        return ContentExtractor.getContent(this);
+    }
+
+    public String getCode() {
+        String content = getContent();
+
+        // remove comments
+        Pattern pattern = Pattern.compile("//.*?(\r\n?|\n)|/\\*.*?\\*/", Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(content);
+        String code = matcher.replaceAll("");
+
+        // clear white space
+        code = code.replaceAll("\\s+", " ");
+        code = code.trim();
+
+        return code;
+    }
+
+    public SimpleNode getChild(int index) {
+        return (SimpleNode) jjtGetChild(index);
+    }
+
+    public void jjtOpen() {
+    }
+
+    public void jjtClose() {
+    }
+
+    public void jjtSetParent(Node n) {
+        parent = n;
+    }
+
+    public Node jjtGetParent() {
+        return parent;
+    }
+
+    public void jjtAddChild(Node n, int i) {
+        if (children == null) {
+            children = new Node[i + 1];
+        } else if (i >= children.length) {
+            Node c[] = new Node[i + 1];
+            System.arraycopy(children, 0, c, 0, children.length);
+            children = c;
+        }
+        children[i] = n;
+    }
+
+    public Node jjtGetChild(int i) {
+        return children[i];
+    }
+
+    public int jjtGetNumChildren() {
+        return (children == null) ? 0 : children.length;
+    }
+
+    public void jjtSetValue(Object value) {
+        this.value = value;
+    }
+
+    public Object jjtGetValue() {
+        return value;
+    }
+
+    public Token jjtGetFirstToken() {
+        return firstToken;
+    }
+
+    public void jjtSetFirstToken(Token token) {
+        this.firstToken = token;
+    }
+
+    public Token jjtGetLastToken() {
+        return lastToken;
+    }
+
+    public void jjtSetLastToken(Token token) {
+        this.lastToken = token;
+    }
+
+    /**
+     * Accept the visitor.
+     **/
+    public void jjtAccept(CParserVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    /**
+     * Accept the visitor.
+     **/
+    public void childrenAccept(CParserVisitor visitor) {
+        if (children != null) {
+            for (int i = 0; i < children.length; ++i) {
+                children[i].jjtAccept(visitor);
+            }
+        }
+
+    }
 
   /* You can override these two methods in subclasses of SimpleNode to
      customize the way the node appears when the tree is dumped.  If
@@ -140,23 +160,28 @@ class SimpleNode implements Node {
      toString(String), otherwise overriding toString() is probably all
      you need to do. */
 
-  public String toString() { return CParserTreeConstants.jjtNodeName[id]; }
-  public String toString(String prefix) { return prefix + toString(); }
+    public String toString() {
+        return CParserTreeConstants.jjtNodeName[id];
+    }
+
+    public String toString(String prefix) {
+        return prefix + toString();
+    }
 
   /* Override this method if you want to customize how the node dumps
      out its children. */
 
-  public void dump(String prefix) {
-    System.out.println(toString(prefix));
-    if (children != null) {
-      for (int i = 0; i < children.length; ++i) {
-        SimpleNode n = (SimpleNode)children[i];
-        if (n != null) {
-          n.dump(prefix + " ");
+    public void dump(String prefix) {
+        System.out.println(toString(prefix));
+        if (children != null) {
+            for (int i = 0; i < children.length; ++i) {
+                SimpleNode n = (SimpleNode) children[i];
+                if (n != null) {
+                    n.dump(prefix + " ");
+                }
+            }
         }
-      }
     }
-  }
 }
 
 /* JavaCC - OriginalChecksum=4c3e15a52bc245dbfe77ce729e8f3e1e (do not edit this line) */

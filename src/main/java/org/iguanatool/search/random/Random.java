@@ -15,21 +15,21 @@ import org.iguanatool.search.solution.SolutionType;
  */
 
 public class Random extends Search {
-	
-	public Random(RandomNumberGenerator randomNumberGenerator, int maxEvaluations) {
-    	super(randomNumberGenerator, maxEvaluations);
+
+    public Random(RandomNumberGenerator randomNumberGenerator, int maxEvaluations) {
+        super(randomNumberGenerator, maxEvaluations);
     }
-    
+
     public SearchResult search(SolutionType candidateSolutionType,
-    						   ObjectiveFunction objectiveFunction) {    	
-    	
-    	SearchMonitor monitor = new SearchMonitor(objectiveFunction, maxEvaluations);    	
-        
-    	while (!monitor.terminate()) {
+                               ObjectiveFunction objectiveFunction) {
+
+        SearchMonitor monitor = new SearchMonitor(objectiveFunction, maxEvaluations);
+
+        while (!monitor.terminate()) {
             Solution candidateSolution = candidateSolutionType.generateRandomSolution(randomNumberGenerator);
-            candidateSolution.evaluateObjectiveValue(objectiveFunction);        
+            candidateSolution.evaluateObjectiveValue(objectiveFunction);
         }
-    	
+
         return monitor.getSearchResult();
     }
 }

@@ -19,15 +19,15 @@ public abstract class CompetitionManager {
     public void competition(CoPopulation coPopulation) {
         monitor(coPopulation);
 
-        generationsToCompetition ++;
+        generationsToCompetition++;
         if (generationsToCompetition == competeEvery) {
             redistribute(coPopulation);
             generationsToCompetition = 0;
         }
     }
-    
+
     public void reset() {
-    	generationsToCompetition = 0;
+        generationsToCompetition = 0;
     }
 
     protected abstract void monitor(CoPopulation coPopulation);

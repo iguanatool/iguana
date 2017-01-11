@@ -25,8 +25,8 @@ public class EqualsTraceCondition extends TraceCondition {
     }
 
     public String toString() {
-        return "Equal ("+id+") a="+a+" b="+b+
-               " T:"+distance(true)+
-               " F:"+distance(false);
+        return "Equal (" + id + ") a=" + a + " b=" + b +
+                " T:" + distance(true) +
+                " F:" + distance(false);
     }
 }

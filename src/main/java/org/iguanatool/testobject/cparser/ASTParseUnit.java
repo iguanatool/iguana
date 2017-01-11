@@ -6,29 +6,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public
-class ASTParseUnit extends SimpleNode {
-	
-	public List<String> getFunctionNames() {
-		return new RecursiveVisitorAdapter() {
-			List<String> names = new ArrayList<String>();
-			List<String> extract(ASTParseUnit parseUnit)  { parseUnit.jjtAccept(this); return names; }
-			public void visit(ASTFunctionDefinition node) { names.add(node.getFunctionName()); }
-		}.extract(this);
-	}
+public class ASTParseUnit extends SimpleNode {
 
-  public ASTParseUnit(int id) {
-    super(id);
-  }
+    public ASTParseUnit(int id) {
+        super(id);
+    }
 
-  public ASTParseUnit(CParser p, int id) {
-    super(p, id);
-  }
+    public ASTParseUnit(CParser p, int id) {
+        super(p, id);
+    }
 
+    public List<String> getFunctionNames() {
+        return new RecursiveVisitorAdapter() {
+            List<String> names = new ArrayList<String>();
 
-  /** Accept the visitor. **/
-  public void jjtAccept(CParserVisitor visitor) {
-    visitor.visit(this);
-  }
+            List<String> extract(ASTParseUnit parseUnit) {
+                parseUnit.jjtAccept(this);
+                return names;
+            }
+
+            public void visit(ASTFunctionDefinition node) {
+                names.add(node.getFunctionName());
+            }
+        }.extract(this);
+    }
+
+    /**
+     * Accept the visitor.
+     **/
+    public void jjtAccept(CParserVisitor visitor) {
+        visitor.visit(this);
+    }
 }
 /* JavaCC - OriginalChecksum=0074b97b37e0e7f64cb65642bf0654a3 (do not edit this line) */

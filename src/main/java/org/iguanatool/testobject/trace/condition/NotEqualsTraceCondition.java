@@ -20,8 +20,8 @@ public class NotEqualsTraceCondition extends TraceCondition {
     }
 
     public String toString() {
-        return "NotEqual ("+id+") a="+a+" b="+b+
-               " T:"+distance(true)+
-               " F:"+distance(false);
+        return "NotEqual (" + id + ") a=" + a + " b=" + b +
+                " T:" + distance(true) +
+                " F:" + distance(false);
     }
 }

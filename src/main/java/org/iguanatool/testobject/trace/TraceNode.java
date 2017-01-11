@@ -17,24 +17,24 @@ public class TraceNode {
 
     private CFGNode cfgNode;
     private List<TraceCondition> traceConditions = new ArrayList<TraceCondition>();
-    
+
     private boolean conditionOutcome;
-    
+
     public TraceNode() {
     }
 
     public CFGNode getCFGNode() {
         return cfgNode;
     }
-    
+
     public void setCFGNode(CFGNode cfgNode) {
-    	this.cfgNode = cfgNode;
+        this.cfgNode = cfgNode;
     }
 
     public void computeOutcome(ConditionObjectiveFunction cof) {
-    	if (cfgNode.getCondition() == null) {
-    		System.out.println(cfgNode+"here");
-    	}
+        if (cfgNode.getCondition() == null) {
+            System.out.println(cfgNode + "here");
+        }
         cof.compute(cfgNode.getCondition(), traceConditions);
     }
 
@@ -46,15 +46,15 @@ public class TraceNode {
         return Collections.unmodifiableList(traceConditions);
     }
 
-    public void setConditionOutcome(boolean conditionOutcome) {
-    	this.conditionOutcome = conditionOutcome;
-    }
-    
     public boolean getConditionOutcome() {
-    	return conditionOutcome;
+        return conditionOutcome;
     }
-    
+
+    public void setConditionOutcome(boolean conditionOutcome) {
+        this.conditionOutcome = conditionOutcome;
+    }
+
     public String toString() {
-        return "Node "+cfgNode.getID()+", "+traceConditions.size()+" condition(s) read";
+        return "Node " + cfgNode.getID() + ", " + traceConditions.size() + " condition(s) read";
     }
 }

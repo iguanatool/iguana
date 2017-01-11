@@ -13,14 +13,14 @@ import java.util.Vector;
 public class ElitestSelection implements SelectionMethod {
 
     public Vector<Solution> select(Vector<Solution> pool,
-                                            int numParents) {
+                                   int numParents) {
         // sort from worst to best
         Collections.sort(pool);
 
         Vector<Solution> selected = new Vector<Solution>();
 
-        int poolIndex = pool.size()-1;
-        for (int i=0; i < numParents; i++, poolIndex--) {
+        int poolIndex = pool.size() - 1;
+        for (int i = 0; i < numParents; i++, poolIndex--) {
             Solution ind = pool.elementAt(poolIndex);
             selected.add(ind);
         }

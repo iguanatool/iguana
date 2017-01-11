@@ -25,13 +25,13 @@ public class InputVector extends NumericalSolution {
         int elementsPos = 0;
         int inputValuesPos = 0;
 
-        for (int i=0; i < variableInclusion.length; i++) {
+        for (int i = 0; i < variableInclusion.length; i++) {
             if (variableInclusion[i]) {
                 inputValues[i] = getElement(elementsPos);
-                elementsPos ++;
+                elementsPos++;
             } else {
                 inputValues[i] = excludedInputValues[inputValuesPos];
-                inputValuesPos ++;
+                inputValuesPos++;
             }
         }
 
@@ -40,7 +40,7 @@ public class InputVector extends NumericalSolution {
 
     public Object clone() {
         InputVector clone = new InputVector(inputVectorType);
-        for (int i=0; i < elements.length; i++) {
+        for (int i = 0; i < elements.length; i++) {
             clone.elements[i] = elements[i];
         }
         return clone;

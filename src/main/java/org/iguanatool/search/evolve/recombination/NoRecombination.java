@@ -25,7 +25,7 @@ public class NoRecombination implements RecombinationOperator {
 
         int vectorSize = parent1Type.getVectorSize();
 
-        for (int i=0; i < vectorSize; i++) {
+        for (int i = 0; i < vectorSize; i++) {
             child1.copyElement(parent1, i);
             child2.copyElement(parent2, i);
         }
