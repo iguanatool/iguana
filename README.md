@@ -27,7 +27,7 @@ To install a new case study you will need to perform the following steps:
 (replace `calendar` with your own case study name)
 3. Edit the input specification for each function to be tested that has been produced in casestudies/java/calendar/inputspecifications
 4. Compile IGUANA with `mvn package`
-5. Complete the call code for each function to be tested in casestudies/c/calendar/call
+5. Complete the call code for each C file for each function to be tested in the `casestudies/c/calendar/call` directory
 6. Perform step two assimilation, by again running `java org.iguanatool.Assimilate calendar`
 
 Your case study should be ready to go.
