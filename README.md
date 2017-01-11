@@ -11,6 +11,7 @@ To install IGUANA you need to check out the repository, and run the following co
 You'll then need to set the following environment variables. 
 
 * The `IGUANA_HOME` environment variable needs to be set to the root directory of this repository, where it is checked out on your system.
+* The `JAVA_HOME` environment variable needs to be set to the root directory of your JDK installation.
 * You need to update your `CLASSPATH` environment variable to the JAR file (that includes dependent libraries) produced by Maven. Typically this lives in the `target` directory and is called `iguanatool-1.0-jar-with-dependencies.jar`. So in Bash, you will need to use the command:
 
 `export CLASSPATH="$IGUANA_HOME/target/iguanatool-1.0-jar-with-dependencies.jar":$CLASSPATH`
@@ -26,7 +27,7 @@ To install a new case study you will need to perform the following steps:
 (replace `calendar` with your own case study name)
 3. Edit the input specification for each function to be tested that has been produced in casestudies/java/calendar/inputspecifications
 4. Compile IGUANA with `mvn package`
-5. Complete the call code for each function to be testsed in casestudies/c/calendar/call
+5. Complete the call code for each function to be tested in casestudies/c/calendar/call
 6. Perform step two assimilation, by again running `java org.iguanatool.Assimilate calendar`
 
 Your case study should be ready to go.
@@ -41,9 +42,3 @@ where calendar is the case study and nhc is the search. (Search names are derive
 Further configuration options can be set through the `iguana.config` file in IGUANA's root directory. Each of these can be overridden at the command line by preceeding the option with a dash. For example, to set the seed from the command line, use
 
 `java org.iguanatool.Run calendar nhc -seed=100`
-
-
-
-
-
-
