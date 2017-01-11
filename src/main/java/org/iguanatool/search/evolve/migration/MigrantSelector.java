@@ -12,6 +12,6 @@ import java.util.Vector;
  */
 public interface MigrantSelector {
 
-    public Vector<Solution> select(SubPopulation p,
-                                   int numIndividuals);
+    Vector<Solution> select(SubPopulation p,
+                            int numIndividuals);
 }

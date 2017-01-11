@@ -11,6 +11,6 @@ import java.util.Vector;
  */
 public interface ReinsertionMethod {
 
-    public Vector<Solution> reinsert(Vector<Solution> parents,
-                                     Vector<Solution> children);
+    Vector<Solution> reinsert(Vector<Solution> parents,
+                              Vector<Solution> children);
 }

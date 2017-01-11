@@ -54,19 +54,19 @@ public class TournamentSelectionTest extends TestCase {
         RandomNumberGenerator r = new NonRandomNumberGenerator(integers);
         TournamentSelection ts = new TournamentSelection(r, 2);
         Solution ind = ts.doTournament(pool);
-        assertEquals("Tourny1 winner", 10, ((NumericalMaximizingObjectiveValue) ind.getObjectiveValue()).getNumericalValue(), 0.1);
+        assertEquals("Tourny1 winner", 10, ind.getObjectiveValue().getNumericalValue(), 0.1);
 
         int[] integers2 = {1, 2};
         r = new NonRandomNumberGenerator(integers2);
         TournamentSelection ts2 = new TournamentSelection(r, 2);
         ind = ts2.doTournament(pool);
-        assertEquals("Tourny2 winner", 15, ((NumericalMaximizingObjectiveValue) ind.getObjectiveValue()).getNumericalValue(), 0.1);
+        assertEquals("Tourny2 winner", 15, ind.getObjectiveValue().getNumericalValue(), 0.1);
 
         int[] integers3 = {0, 1};
         r = new NonRandomNumberGenerator(integers3);
         TournamentSelection ts3 = new TournamentSelection(r, 2);
         ind = ts3.doTournament(pool);
-        assertEquals("Tourny3 winner", 15, ((NumericalMaximizingObjectiveValue) ind.getObjectiveValue()).getNumericalValue(), 0.1);
+        assertEquals("Tourny3 winner", 15, ind.getObjectiveValue().getNumericalValue(), 0.1);
     }
 
     public static Test suite() {

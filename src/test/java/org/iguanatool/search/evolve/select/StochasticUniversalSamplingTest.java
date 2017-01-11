@@ -74,16 +74,16 @@ public class StochasticUniversalSamplingTest extends TestCase {
 
         Vector<Solution> selected = s.select(pool, 4);
         assertEquals("selected 1", 10,
-                ((NumericalMaximizingObjectiveValue)selected.elementAt(0).getObjectiveValue()).getNumericalValue(), 0.1);
+                selected.elementAt(0).getObjectiveValue().getNumericalValue(), 0.1);
 
         assertEquals("selected 2", 24,
-                ((NumericalMaximizingObjectiveValue)selected.elementAt(1).getObjectiveValue()).getNumericalValue(), 0.1);
+                selected.elementAt(1).getObjectiveValue().getNumericalValue(), 0.1);
 
         assertEquals("selected 3", 31,
-                ((NumericalMaximizingObjectiveValue)selected.elementAt(2).getObjectiveValue()).getNumericalValue(), 0.1);
+                selected.elementAt(2).getObjectiveValue().getNumericalValue(), 0.1);
 
         assertEquals("selected 4", 43,
-                ((NumericalMaximizingObjectiveValue)selected.elementAt(3).getObjectiveValue()).getNumericalValue(), 0.1);
+                selected.elementAt(3).getObjectiveValue().getNumericalValue(), 0.1);
     }
 
     public void testSUS2() {
@@ -122,22 +122,22 @@ public class StochasticUniversalSamplingTest extends TestCase {
         Vector<Solution> selected = s.select(pool, 6);
 
         assertEquals("selected 1", 24,
-                ((NumericalMaximizingObjectiveValue)selected.elementAt(0).getObjectiveValue()).getNumericalValue(), 0.1);
+                selected.elementAt(0).getObjectiveValue().getNumericalValue(), 0.1);
 
         assertEquals("selected 2", 24,
-                ((NumericalMaximizingObjectiveValue)selected.elementAt(1).getObjectiveValue()).getNumericalValue(), 0.1);
+                selected.elementAt(1).getObjectiveValue().getNumericalValue(), 0.1);
 
         assertEquals("selected 3", 43,
-                ((NumericalMaximizingObjectiveValue)selected.elementAt(2).getObjectiveValue()).getNumericalValue(), 0.1);
+                selected.elementAt(2).getObjectiveValue().getNumericalValue(), 0.1);
 
         assertEquals("selected 4", 43,
-                ((NumericalMaximizingObjectiveValue)selected.elementAt(3).getObjectiveValue()).getNumericalValue(), 0.1);
+                selected.elementAt(3).getObjectiveValue().getNumericalValue(), 0.1);
 
         assertEquals("selected 5", 43,
-                 ((NumericalMaximizingObjectiveValue)selected.elementAt(4).getObjectiveValue()).getNumericalValue(), 0.1);
+                 selected.elementAt(4).getObjectiveValue().getNumericalValue(), 0.1);
 
         assertEquals("selected 6", 43,
-                 ((NumericalMaximizingObjectiveValue)selected.elementAt(5).getObjectiveValue()).getNumericalValue(), 0.1);
+                 selected.elementAt(5).getObjectiveValue().getNumericalValue(), 0.1);
 
 
     }

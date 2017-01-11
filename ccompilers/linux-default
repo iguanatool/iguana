@@ -1,1 +1,1 @@
-gcc -I"{JAVA_HOME}/include" -I"{JAVA_HOME}/include/linux" -I"{HANDLE_INCLUDE_PATH}" -o "{LIB_FILE}" -shared -fPIC "{HANDLE_SRC_FILE}" "{LIB_SRC_FILE}"
+gcc -I"{JAVA_HOME}/include" -I"{JAVA_HOME}/include/linux" -I"{HANDLE_INCLUDE_PATH}" -I"{CASE_STUDY_PATH}" -o "{LIB_FILE}" -shared -fPIC "{HANDLE_SRC_FILE}" "{LIB_SRC_FILE}"

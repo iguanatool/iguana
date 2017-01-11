@@ -9,5 +9,5 @@ import org.iguanatool.search.solution.Solution;
  */
 public interface MutationOperator {
 
-    public Solution mutate(Solution soln);
+    Solution mutate(Solution soln);
 }

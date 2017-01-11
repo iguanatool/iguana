@@ -11,6 +11,6 @@ import java.util.Vector;
  */
 public interface RankingMethod {
 
-    public void rank(Vector<Solution> solutions,
-                     double[] fitness);
+    void rank(Vector<Solution> solutions,
+              double[] fitness);
 }

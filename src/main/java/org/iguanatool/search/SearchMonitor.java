@@ -42,7 +42,7 @@ public class SearchMonitor {
 	}
 	
 	public boolean success() {
-		return (bestSolution == null) ? false : bestSolution.isIdeal();
+		return bestSolution != null && bestSolution.isIdeal();
 	}
 	
 	public Solution getBestSolution() {

@@ -11,7 +11,7 @@ import java.util.Vector;
  */
 public interface SelectionMethod {
 
-    public Vector<Solution> select(Vector<Solution> pool,
-                                     int numParents);
+    Vector<Solution> select(Vector<Solution> pool,
+                            int numParents);
 
 }

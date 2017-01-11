@@ -9,6 +9,6 @@ import org.iguanatool.testobject.TestObject;
  */
 public interface VariableIncluder {
 
-    public boolean[] performAnalysis(String aimDescription,
-                                     TestObject testObject);
+    boolean[] performAnalysis(String aimDescription,
+                              TestObject testObject);
 }

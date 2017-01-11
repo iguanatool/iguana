@@ -11,6 +11,6 @@ import java.util.Vector;
  */
 public interface PopulationRankingMethod {
 
-    public void rank(Vector<SubPopulation> populations,
-                     double[] fitness);
+    void rank(Vector<SubPopulation> populations,
+              double[] fitness);
 }

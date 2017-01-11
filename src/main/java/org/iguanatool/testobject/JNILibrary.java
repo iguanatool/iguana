@@ -14,15 +14,17 @@ import java.util.List;
 import java.util.Map;
 
 public class JNILibrary {
-		
+
+	private static final String C_SRC_EXTENSION            = ".c";
+	private static final String C_HEADER_EXTENSION         = ".h";
 	private static final String HANDLE_INCLUDE_DIR    	   = "include"; 
     private static final String LIBRARY_DIR			       = "lib";	
 	private static final String LIBRARY_SOURCE_DIR		   = LIBRARY_DIR + "/src";		
-	private static final String LIBRARY_TEMPLATE_FILE      = "lib.c";
+	private static final String LIBRARY_TEMPLATE_FILE      = "lib" + C_SRC_EXTENSION;
 	private static final String PERFORM_CALL_DIR		   = "call";
-	private static final String PERFORM_CALL_TEMPLATE_FILE = "perform_call.c";
+	private static final String PERFORM_CALL_TEMPLATE_FILE = "perform_call" + C_SRC_EXTENSION;
 	private static final String TEST_OBJECT_HANDLE    	   = "CTestObjectHandle";
-	
+
 	private CaseStudy caseStudy;
 	private String testObjectName;
 	
@@ -36,7 +38,7 @@ public class JNILibrary {
 	}
 	
 	private File getHandleSourceFile() {
-		return new File(getHandleIncludePath() + "/" + TEST_OBJECT_HANDLE + ".c");	
+		return new File(getHandleIncludePath() + "/" + TEST_OBJECT_HANDLE + C_SRC_EXTENSION);
 	}
 	
 	public File getLibraryFile() {
@@ -49,7 +51,7 @@ public class JNILibrary {
 	}
 	
 	private File getLibraryHeaderFile() {
-		return new File(getLibrarySourcePath() + "/" + testObjectName + ".h");
+		return new File(getLibrarySourcePath() + "/" + testObjectName + C_HEADER_EXTENSION);
 	}
 	
 	private File getLibrarySourcePath() {
@@ -61,11 +63,11 @@ public class JNILibrary {
 	}
 	
 	private File getPerformCallSrcFile() {
-		return new File(getPerformCallPath() + "/" + testObjectName + ".c");
+		return new File(getPerformCallPath() + "/" + testObjectName + C_SRC_EXTENSION);
 	}
 	
 	private File getLibrarySourceFile() {
-		return new File(getLibrarySourcePath() + "/" + testObjectName + ".c");
+		return new File(getLibrarySourcePath() + "/" + testObjectName + C_SRC_EXTENSION);
 	}
 	
 	private File getPerformCallTemplateFile() {
@@ -113,7 +115,7 @@ public class JNILibrary {
 		SimpleIO.ensureDirectoryExists(getLibraryPath());
 		SimpleIO.ensureDirectoryExists(getLibrarySourcePath());
 		
-    	Map<String, String> searchAndReplace = new HashMap<String, String>();
+    	Map<String, String> searchAndReplace = new HashMap<>();
     	searchAndReplace.put("{CASE_STUDY_NAME}",   caseStudy.getName());
     	searchAndReplace.put("{INSTRUMENTED_CODE}", caseStudy.getInstrumentedCode());
     	searchAndReplace.put("{JNI_FUNCTION_NAME}", getJNIFunctionName());
@@ -133,7 +135,7 @@ public class JNILibrary {
 		File templateFile = getPerformCallTemplateFile();
 		SimpleIO.ensureDirectoryExists(getPerformCallPath());
 		
-    	Map<String, String> searchAndReplace = new HashMap<String, String>();
+    	Map<String, String> searchAndReplace = new HashMap<>();
     	searchAndReplace.put("{TEST_OBJECT_NAME}", testObjectName);  	
     	
 		TextFile.searchAndReplace(templateFile, targetFile, searchAndReplace);
@@ -151,13 +153,14 @@ public class JNILibrary {
 		
 		SimpleIO.ensureDirectoryExists(getLibraryPath());
 		
-		Map<String, String> locations = new HashMap<String, String>();
+		Map<String, String> locations = new HashMap<>();
 		
-		// creating file objects and invoking getPath will convert paths so that they have OS-specific separators 
+		// creating file objects and invoking getPath will convert paths so that they have OS-specific separators
+        locations.put("{CASE_STUDY_PATH}",     caseStudy.getCaseStudyPath().toString());
 		locations.put("{JAVA_HOME}", 		   Config.getInstance().getJavaPath().toString());
-		locations.put("{LIB_FILE}", 		   libraryFile.getPath());
 		locations.put("{HANDLE_INCLUDE_PATH}", getHandleIncludePath().getPath());
 		locations.put("{HANDLE_SRC_FILE}",     getHandleSourceFile().getPath());
+        locations.put("{LIB_FILE}", 		   libraryFile.getPath());
 		locations.put("{LIB_PATH}", 		   getLibraryPath().getPath());
 		locations.put("{LIB_SRC_FILE}",        librarySourceFile.getPath());
 
