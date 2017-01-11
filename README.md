@@ -21,7 +21,7 @@ You will need to create a directory for your case studies (test objects/subjects
 
 To install a new case study you will need to perform the following steps:
 
-1. Create a new directory for your case study in the 'c' subdirectory of your casestudies directory, e.g. `calendar` and place the code (functions you want to test) in there in a file called `calendar.c`
+1. Create a new directory for your case study in the `c` subdirectory of your casestudies directory, e.g. `calendar` and place the code (functions you want to test) in there in a file called `calendar.c`
 2. Perform step one assimilation, by running the following command
 `java org.iguanatool.Assimilate calendar`
 (replace `calendar` with your own case study name)
