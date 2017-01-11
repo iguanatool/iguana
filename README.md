@@ -37,7 +37,7 @@ Running test data generation is then as simple as a command such as
 
 `java org.iguanatool.Run calendar nhc`
 
-where calendar is the case study and nhc is the search. (Search names are derived from the method names in the org.iguanatool.search.SearchFactory class.
+where `calendar` is the case study and `nhc` is the search. (Search names are derived from the method names in the org.iguanatool.search.SearchFactory class.)
 
 Further configuration options can be set through the `iguana.config` file in IGUANA's root directory. Each of these can be overridden at the command line by preceeding the option with a dash. For example, to set the seed from the command line, use
 
