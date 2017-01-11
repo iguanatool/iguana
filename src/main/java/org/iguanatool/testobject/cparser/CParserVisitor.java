@@ -2,160 +2,160 @@
 package org.iguanatool.testobject.cparser;
 
 public interface CParserVisitor {
-    public void visit(SimpleNode node);
+    void visit(SimpleNode node);
 
-    public void visit(ASTParseUnit node);
+    void visit(ASTParseUnit node);
 
-    public void visit(ASTExternalDeclaration node);
+    void visit(ASTExternalDeclaration node);
 
-    public void visit(ASTFunctionDefinition node);
+    void visit(ASTFunctionDefinition node);
 
-    public void visit(ASTDeclaration node);
+    void visit(ASTDeclaration node);
 
-    public void visit(ASTDeclarationList node);
+    void visit(ASTDeclarationList node);
 
-    public void visit(ASTDeclarationSpecifiers node);
+    void visit(ASTDeclarationSpecifiers node);
 
-    public void visit(ASTStorageClassSpecifier node);
+    void visit(ASTStorageClassSpecifier node);
 
-    public void visit(ASTTypeSpecifier node);
+    void visit(ASTTypeSpecifier node);
 
-    public void visit(ASTTypeQualifier node);
+    void visit(ASTTypeQualifier node);
 
-    public void visit(ASTStructOrUnionSpecifier node);
+    void visit(ASTStructOrUnionSpecifier node);
 
-    public void visit(ASTStructOrUnion node);
+    void visit(ASTStructOrUnion node);
 
-    public void visit(ASTStructDeclarationList node);
+    void visit(ASTStructDeclarationList node);
 
-    public void visit(ASTInitDeclaratorList node);
+    void visit(ASTInitDeclaratorList node);
 
-    public void visit(ASTInitDeclarator node);
+    void visit(ASTInitDeclarator node);
 
-    public void visit(ASTStructDeclaration node);
+    void visit(ASTStructDeclaration node);
 
-    public void visit(ASTSpecifierQualifierList node);
+    void visit(ASTSpecifierQualifierList node);
 
-    public void visit(ASTStructDeclaratorList node);
+    void visit(ASTStructDeclaratorList node);
 
-    public void visit(ASTStructDeclarator node);
+    void visit(ASTStructDeclarator node);
 
-    public void visit(ASTEnumSpecifier node);
+    void visit(ASTEnumSpecifier node);
 
-    public void visit(ASTEnumeratorList node);
+    void visit(ASTEnumeratorList node);
 
-    public void visit(ASTEnumerator node);
+    void visit(ASTEnumerator node);
 
-    public void visit(ASTDeclarator node);
+    void visit(ASTDeclarator node);
 
-    public void visit(ASTDirectDeclarator node);
+    void visit(ASTDirectDeclarator node);
 
-    public void visit(ASTPointer node);
+    void visit(ASTPointer node);
 
-    public void visit(ASTTypeQualifierList node);
+    void visit(ASTTypeQualifierList node);
 
-    public void visit(ASTParameterTypeList node);
+    void visit(ASTParameterTypeList node);
 
-    public void visit(ASTParameterList node);
+    void visit(ASTParameterList node);
 
-    public void visit(ASTParameterDeclaration node);
+    void visit(ASTParameterDeclaration node);
 
-    public void visit(ASTIdentifierList node);
+    void visit(ASTIdentifierList node);
 
-    public void visit(ASTInitializer node);
+    void visit(ASTInitializer node);
 
-    public void visit(ASTInitializerList node);
+    void visit(ASTInitializerList node);
 
-    public void visit(ASTTypeName node);
+    void visit(ASTTypeName node);
 
-    public void visit(ASTAbstractDeclarator node);
+    void visit(ASTAbstractDeclarator node);
 
-    public void visit(ASTDirectAbstractDeclarator node);
+    void visit(ASTDirectAbstractDeclarator node);
 
-    public void visit(ASTTypedefName node);
+    void visit(ASTTypedefName node);
 
-    public void visit(ASTStatement node);
+    void visit(ASTStatement node);
 
-    public void visit(ASTIdentifierStatement node);
+    void visit(ASTIdentifierStatement node);
 
-    public void visit(ASTCaseStatement node);
+    void visit(ASTCaseStatement node);
 
-    public void visit(ASTCaseExpression node);
+    void visit(ASTCaseExpression node);
 
-    public void visit(ASTDefaultStatement node);
+    void visit(ASTDefaultStatement node);
 
-    public void visit(ASTExpressionStatement node);
+    void visit(ASTExpressionStatement node);
 
-    public void visit(ASTCompoundStatement node);
+    void visit(ASTCompoundStatement node);
 
-    public void visit(ASTStatementList node);
+    void visit(ASTStatementList node);
 
-    public void visit(ASTIfStatement node);
+    void visit(ASTIfStatement node);
 
-    public void visit(ASTSwitchStatement node);
+    void visit(ASTSwitchStatement node);
 
-    public void visit(ASTSwitchExpression node);
+    void visit(ASTSwitchExpression node);
 
-    public void visit(ASTWhileStatement node);
+    void visit(ASTWhileStatement node);
 
-    public void visit(ASTDoStatement node);
+    void visit(ASTDoStatement node);
 
-    public void visit(ASTForStatement node);
+    void visit(ASTForStatement node);
 
-    public void visit(ASTGotoStatement node);
+    void visit(ASTGotoStatement node);
 
-    public void visit(ASTContinueStatement node);
+    void visit(ASTContinueStatement node);
 
-    public void visit(ASTBreakStatement node);
+    void visit(ASTBreakStatement node);
 
-    public void visit(ASTReturnStatement node);
+    void visit(ASTReturnStatement node);
 
-    public void visit(ASTBranchingExpression node);
+    void visit(ASTBranchingExpression node);
 
-    public void visit(ASTExpression node);
+    void visit(ASTExpression node);
 
-    public void visit(ASTAssignmentExpression node);
+    void visit(ASTAssignmentExpression node);
 
-    public void visit(ASTAssignmentOperator node);
+    void visit(ASTAssignmentOperator node);
 
-    public void visit(ASTConditionalExpression node);
+    void visit(ASTConditionalExpression node);
 
-    public void visit(ASTConstantExpression node);
+    void visit(ASTConstantExpression node);
 
-    public void visit(ASTLogicalORExpression node);
+    void visit(ASTLogicalORExpression node);
 
-    public void visit(ASTLogicalANDExpression node);
+    void visit(ASTLogicalANDExpression node);
 
-    public void visit(ASTInclusiveORExpression node);
+    void visit(ASTInclusiveORExpression node);
 
-    public void visit(ASTExclusiveORExpression node);
+    void visit(ASTExclusiveORExpression node);
 
-    public void visit(ASTANDExpression node);
+    void visit(ASTANDExpression node);
 
-    public void visit(ASTRelationalExpression node);
+    void visit(ASTRelationalExpression node);
 
-    public void visit(ASTRelationalOperator node);
+    void visit(ASTRelationalOperator node);
 
-    public void visit(ASTShiftExpression node);
+    void visit(ASTShiftExpression node);
 
-    public void visit(ASTAdditiveExpression node);
+    void visit(ASTAdditiveExpression node);
 
-    public void visit(ASTMultiplicativeExpression node);
+    void visit(ASTMultiplicativeExpression node);
 
-    public void visit(ASTCastExpression node);
+    void visit(ASTCastExpression node);
 
-    public void visit(ASTUnaryExpression node);
+    void visit(ASTUnaryExpression node);
 
-    public void visit(ASTUnaryOperator node);
+    void visit(ASTUnaryOperator node);
 
-    public void visit(ASTLogicalNOTExpression node);
+    void visit(ASTLogicalNOTExpression node);
 
-    public void visit(ASTPostfixExpression node);
+    void visit(ASTPostfixExpression node);
 
-    public void visit(ASTPrimaryExpression node);
+    void visit(ASTPrimaryExpression node);
 
-    public void visit(ASTArgumentExpressionList node);
+    void visit(ASTArgumentExpressionList node);
 
-    public void visit(ASTConstant node);
+    void visit(ASTConstant node);
 }
 /* JavaCC - OriginalChecksum=e7f7d225f0574848903f6644844f7cd8 (do not edit this line) */

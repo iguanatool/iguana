@@ -150,7 +150,7 @@ public class Config {
 
     public boolean getBooleanProperty(String name) {
         String value = config.get(name);
-        return (value == null) ? false : value.equals("true");
+        return value != null && value.equals("true");
     }
 
     public String getProperty(String name) {
