@@ -17,7 +17,7 @@ You'll then need to set the following environment variables.
 `export CLASSPATH="$IGUANA_HOME/target/iguanatool-1.0-jar-with-dependencies.jar":$CLASSPATH`
 
 ## Compiling Case Studies
-You will need to create a directory for your case studies (test objects/subjects). The easiest way to do this with the required structure is to clone the `casestudies` repository (https://github.com/iguanatool/casestudies).
+You will need to create a directory for your case studies (i.e., your test objects or experimental subjects). The easiest way to do this with the required structure is to clone the `casestudies` repository (https://github.com/iguanatool/casestudies).
 
 To install a new case study you will need to perform the following steps:
 
