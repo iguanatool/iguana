@@ -8,7 +8,7 @@ public class Array {
         Object[] arr = intVector.toArray();
         int[] intArray = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
-            intArray[i] = ((Integer) arr[i]).intValue();
+            intArray[i] = (Integer) arr[i];
         }
         return intArray;
     }
@@ -17,7 +17,7 @@ public class Array {
         Object[] arr = doubleVector.toArray();
         double[] doubleArray = new double[arr.length];
         for (int i = 0; i < arr.length; i++) {
-            doubleArray[i] = ((Double) arr[i]).doubleValue();
+            doubleArray[i] = (Double) arr[i];
         }
         return doubleArray;
     }

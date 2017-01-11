@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Trace {
 
-    protected List<TraceNode> path = new ArrayList<TraceNode>();
+    protected List<TraceNode> path = new ArrayList<>();
     protected TraceNode currentNode;
     protected CFG cfg;
 

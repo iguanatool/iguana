@@ -102,7 +102,7 @@ public class JavaWrapper {
             return false;
         }
 
-        Map<String, String> searchAndReplace = new HashMap<String, String>();
+        Map<String, String> searchAndReplace = new HashMap<>();
         searchAndReplace.put("{PACKAGE_NAME}", getTestObjectsPackageName());
         searchAndReplace.put("{CASE_STUDY_NAME}", caseStudy.getName());
         searchAndReplace.put("{TEST_OBJECT_NAME}", testObjectName);
@@ -123,7 +123,7 @@ public class JavaWrapper {
         ensureWrapperDirectoriesExist();
         SimpleIO.ensureDirectoryExists(getInputSpecificationsSourcePath());
 
-        Map<String, String> searchAndReplace = new HashMap<String, String>();
+        Map<String, String> searchAndReplace = new HashMap<>();
 
         searchAndReplace.put("{PACKAGE_NAME}", getInputSpecificationsPackageName());
         searchAndReplace.put("{INPUT_SPECIFICATION_NAME}", testObjectName);

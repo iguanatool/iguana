@@ -17,9 +17,9 @@ public class InputSpecification {
     }
 
     public void clear() {
-        min = new ArrayList<Double>();
-        max = new ArrayList<Double>();
-        accuracy = new ArrayList<Integer>();
+        min = new ArrayList<>();
+        max = new ArrayList<>();
+        accuracy = new ArrayList<>();
     }
 
     public void addDouble(int quantity, double minVal, double maxVal, int precVal) {
@@ -36,8 +36,8 @@ public class InputSpecification {
 
     public void addInt(int quantity, int minVal, int maxVal) {
         for (int i = 0; i < quantity; i++) {
-            min.add(new Double(minVal));
-            max.add(new Double(maxVal));
+            min.add((double) minVal);
+            max.add((double) maxVal);
             accuracy.add(0);
         }
     }

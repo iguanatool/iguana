@@ -8,7 +8,7 @@ import java.util.*;
 
 public class CParser/*@bgen(jjtree)*/ implements CParserTreeConstants, CParserConstants {/*@bgen(jjtree)*/
     // Set for storing typedef types
-    private static Set<String> types = new HashSet<String>();
+    private static Set<String> types = new HashSet<>();
     static private int[] jj_la1_0;
     static private int[] jj_la1_1;
     static private int[] jj_la1_2;
@@ -49,7 +49,7 @@ public class CParser/*@bgen(jjtree)*/ implements CParserTreeConstants, CParserCo
     SimpleCharStream jj_input_stream;
     // Stack for determining when the parser
     // is parsing a typdef definition.
-    private Deque<Boolean> typedefParsingStack = new ArrayDeque<Boolean>();
+    private Deque<Boolean> typedefParsingStack = new ArrayDeque<>();
     private int jj_ntk;
     private Token jj_scanpos, jj_lastpos;
     private int jj_la;
@@ -61,7 +61,7 @@ public class CParser/*@bgen(jjtree)*/ implements CParserTreeConstants, CParserCo
     private int jj_gen;
     private boolean jj_rescan = false;
     private int jj_gc = 0;
-    private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+    private java.util.List<int[]> jj_expentries = new java.util.ArrayList<>();
     private int[] jj_expentry;
     private int jj_kind = -1;
     private int[] jj_lasttokens = new int[100];

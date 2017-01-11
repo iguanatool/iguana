@@ -22,7 +22,7 @@ public class RandomMigrantSelector implements MigrantSelector {
     public Vector<Solution> select(SubPopulation p,
                                    int numIndividuals) {
 
-        Vector<Solution> selection = new Vector<Solution>();
+        Vector<Solution> selection = new Vector<>();
 
         for (int i = 0; i < numIndividuals; i++) {
             int index = r.nextInt(p.getNumIndividuals());

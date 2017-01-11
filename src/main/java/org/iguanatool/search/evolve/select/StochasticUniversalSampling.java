@@ -26,7 +26,7 @@ public class StochasticUniversalSampling implements SelectionMethod {
     public Vector<Solution> select(Vector<Solution> pool,
                                    int numParents) {
 
-        Vector<Solution> parents = new Vector<Solution>();
+        Vector<Solution> parents = new Vector<>();
 
         // get ranking
         double[] fitness = new double[pool.size()];

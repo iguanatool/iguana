@@ -22,7 +22,7 @@ public class CFGExtractor {
     public static Map<String, CFG> extractCFGs(ASTParseUnit parseUnit, Collection<String> functionNames) {
         class CFGCollator extends RecursiveVisitorAdapter {
             FunctionCFGExtractor extractor = new FunctionCFGExtractor();
-            Map<String, CFG> cfgs = new TreeMap<String, CFG>();
+            Map<String, CFG> cfgs = new TreeMap<>();
             Collection<String> functionNames;
 
             CFGCollator(ASTParseUnit parseUnit, Collection<String> functionNames) {
@@ -54,8 +54,8 @@ public class CFGExtractor {
             cfg = new CFG();
             currentPredecessors = new Predecessors();
             exitPredecessors = new Predecessors();
-            identifiers = new TreeMap<String, CFGNode>();
-            gotos = new TreeMap<String, Set<CFGNode>>();
+            identifiers = new TreeMap<>();
+            gotos = new TreeMap<>();
 
             // descend through the AST
             currentPredecessors.add(cfg.getStartNode());
@@ -165,7 +165,7 @@ public class CFGExtractor {
 
             Set<CFGNode> gotoCFGNodes = gotos.get(label);
             if (gotoCFGNodes == null) {
-                gotoCFGNodes = new HashSet<CFGNode>();
+                gotoCFGNodes = new HashSet<>();
                 gotos.put(label, gotoCFGNodes);
             }
             gotoCFGNodes.add(gotoCFGNode);
@@ -242,7 +242,7 @@ public class CFGExtractor {
             }
 
             class SwitchClauseCFGNodeCollator extends RecursiveVisitorAdapter {
-                List<CFGNode> caseCFGNodes = new ArrayList<CFGNode>();
+                List<CFGNode> caseCFGNodes = new ArrayList<>();
                 CFGNode defaultCFGNode;
 
                 SwitchClauseCFGNodeCollator(ASTSwitchStatement switchStatement) {
@@ -292,7 +292,7 @@ public class CFGExtractor {
 
         private void addBreaksToPriorNodes(SimpleNode SimpleNode) {
             class BreakCFGNodeCollator extends RecursiveVisitorAdapter {
-                Set<CFGNode> breakCFGNodes = new HashSet<CFGNode>();
+                Set<CFGNode> breakCFGNodes = new HashSet<>();
 
                 BreakCFGNodeCollator(SimpleNode node) {
                     node.childrenAccept(this);
@@ -320,7 +320,7 @@ public class CFGExtractor {
 
         private void addContinueArcs(SimpleNode SimpleNode, CFGNode continueToCFGNode) {
             class ContinueCFGNodeCollator extends RecursiveVisitorAdapter {
-                Set<CFGNode> continueCFGNodes = new HashSet<CFGNode>();
+                Set<CFGNode> continueCFGNodes = new HashSet<>();
 
                 ContinueCFGNodeCollator(SimpleNode node) {
                     node.childrenAccept(this);
@@ -460,7 +460,7 @@ public class CFGExtractor {
             private Set<ConnectedNode> predecessors;
 
             Predecessors() {
-                predecessors = new TreeSet<ConnectedNode>();
+                predecessors = new TreeSet<>();
             }
 
             void add(CFGNode cfgNode) {

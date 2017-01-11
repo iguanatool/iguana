@@ -17,7 +17,7 @@ public class ElitestSelection implements SelectionMethod {
         // sort from worst to best
         Collections.sort(pool);
 
-        Vector<Solution> selected = new Vector<Solution>();
+        Vector<Solution> selected = new Vector<>();
 
         int poolIndex = pool.size() - 1;
         for (int i = 0; i < numParents; i++, poolIndex--) {

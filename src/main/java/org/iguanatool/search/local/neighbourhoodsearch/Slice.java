@@ -24,7 +24,7 @@ public class Slice extends NeighbourhoodSearch {
     public Solution neighbourhoodSearch(Solution solution,
                                         ObjectiveFunction objectiveFunction, SearchMonitor monitor) {
 
-        Map<Double, Integer> map = new HashMap<Double, Integer>();
+        Map<Double, Integer> map = new HashMap<>();
 
         NumericalSolutionType type = (NumericalSolutionType) solution.getType();
 

@@ -68,7 +68,7 @@ public class BreedingPopulation extends SubPopulation {
     }
 
     private void createInitialGeneration(SolutionType candidateSolutionType, int size) {
-        currentGeneration = new Vector<Solution>();
+        currentGeneration = new Vector<>();
         for (int i = 0; i < size; i++) {
             Solution ind = candidateSolutionType.generateRandomSolution(randomNumberGenerator);
             currentGeneration.add(ind);
@@ -110,7 +110,7 @@ public class BreedingPopulation extends SubPopulation {
 
         int numChildren = calcNoOfNewIndiviudals();
 
-        Vector<Solution> children = new Vector<Solution>();
+        Vector<Solution> children = new Vector<>();
         int i = 0;
         int numParents = parents.size();
 
@@ -137,7 +137,7 @@ public class BreedingPopulation extends SubPopulation {
     }
 
     private Vector<Solution> mutate(Vector<Solution> individuals) {
-        Vector<Solution> mutatedOffspring = new Vector<Solution>();
+        Vector<Solution> mutatedOffspring = new Vector<>();
 
         for (Solution ind : individuals) {
             mutatedOffspring.add(mutator.mutate(ind));

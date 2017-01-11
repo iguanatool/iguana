@@ -21,7 +21,7 @@ public class TournamentSelectionTest extends TestCase {
 
     NumericalSolutionType nvs;
     NumericalSolution competitor1, competitor2, competitor3;
-    Vector<Solution> pool = new Vector<Solution>();
+    Vector<Solution> pool = new Vector<>();
 
     public void setUp() {
         double[] min = {0, 0, 0, 0, 0};

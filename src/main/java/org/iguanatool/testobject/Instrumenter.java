@@ -35,7 +35,7 @@ public class Instrumenter {
             private static final String BOOLEAN_CONDITION_INSTRUMENTATION_FUNCTION = "is_true";
             private static final String EARLY_EXIT_CALL = "early_exit();";
             private static final String SWITCH_TEMPORARY_VARIABLE = "__ins_switch_temp";
-            private static Map<String, String> instrumentationFunctions = new TreeMap<String, String>();
+            private static Map<String, String> instrumentationFunctions = new TreeMap<>();
 
             static {
                 instrumentationFunctions.put("==", "equals");
@@ -49,7 +49,7 @@ public class Instrumenter {
             private Deque<SimpleNode> branchingNodes;
 
             BranchingNodeInstrumenter(SimpleNode SimpleNode) {
-                branchingNodes = new ArrayDeque<SimpleNode>();
+                branchingNodes = new ArrayDeque<>();
                 SimpleNode.childrenAccept(this);
             }
 
@@ -122,7 +122,7 @@ public class Instrumenter {
                 }.getContents(switchStatement);
 
                 List<ASTCaseStatement> caseStatements = new RecursiveVisitorAdapter() {
-                    List<ASTCaseStatement> caseStatements = new ArrayList<ASTCaseStatement>();
+                    List<ASTCaseStatement> caseStatements = new ArrayList<>();
 
                     List<ASTCaseStatement> getCaseStatements(ASTSwitchStatement switchStatement) {
                         switchStatement.childrenAccept(this);

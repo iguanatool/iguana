@@ -15,7 +15,7 @@ public class CFG implements Serializable {
     public CFG() {
         startNode = new StartNode();
         endNode = new EndNode();
-        nodes = new ArrayList<CFGNode>();
+        nodes = new ArrayList<>();
     }
 
     public CFGNode getStartNode() {
@@ -45,7 +45,7 @@ public class CFG implements Serializable {
     }
 
     public SortedSet<CFGNode> getNodes() {
-        SortedSet<CFGNode> nodeSet = new TreeSet<CFGNode>();
+        SortedSet<CFGNode> nodeSet = new TreeSet<>();
         nodeSet.add(startNode);
         nodeSet.add(endNode);
         nodeSet.addAll(nodes);
@@ -53,7 +53,7 @@ public class CFG implements Serializable {
     }
 
     public SortedSet<CFGNode> getBranchingNodes() {
-        SortedSet<CFGNode> branchingNodes = new TreeSet<CFGNode>();
+        SortedSet<CFGNode> branchingNodes = new TreeSet<>();
         for (CFGNode node : nodes) {
             if (node.isBranching()) {
                 branchingNodes.add(node);

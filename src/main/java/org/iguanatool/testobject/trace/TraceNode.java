@@ -16,7 +16,7 @@ import java.util.List;
 public class TraceNode {
 
     private CFGNode cfgNode;
-    private List<TraceCondition> traceConditions = new ArrayList<TraceCondition>();
+    private List<TraceCondition> traceConditions = new ArrayList<>();
 
     private boolean conditionOutcome;
 

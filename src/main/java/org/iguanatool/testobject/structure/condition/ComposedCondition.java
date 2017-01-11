@@ -8,7 +8,7 @@ public abstract class ComposedCondition extends Condition {
 
     private static final long serialVersionUID = -925529877113255765L;
 
-    protected List<Condition> subConditions = new ArrayList<Condition>();
+    protected List<Condition> subConditions = new ArrayList<>();
 
     public abstract String operator();
 

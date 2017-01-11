@@ -20,8 +20,8 @@ class ComputePostDominators {
     void compute(CFG graph) {
         // initialize
         endNode = graph.getEndNode();
-        nodes = new LinkedList<CFGNode>();
-        reversePostOrder = new TreeMap<CFGNode, Integer>();
+        nodes = new LinkedList<>();
+        reversePostOrder = new TreeMap<>();
 
         // sort nodes into reverse post-order
         sortNodes();
@@ -115,7 +115,7 @@ class ComputePostDominators {
             Set<CFGNode> traversed;
 
             void traverse() {
-                traversed = new TreeSet<CFGNode>();
+                traversed = new TreeSet<>();
                 add(endNode);
             }
 

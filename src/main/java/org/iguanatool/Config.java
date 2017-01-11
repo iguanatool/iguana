@@ -44,7 +44,7 @@ public class Config {
     }
 
     public Config(String[] specifiedProperties) {
-        config = new HashMap<String, String>();
+        config = new HashMap<>();
         findIguanaPath();
         findJavaPath();
         findOS();
@@ -194,7 +194,7 @@ public class Config {
 
     private void printConfig() {
         System.out.println("Configuration:");
-        SortedSet<String> propertyNames = new TreeSet<String>(config.keySet());
+        SortedSet<String> propertyNames = new TreeSet<>(config.keySet());
         for (String name : propertyNames) {
             String value = getProperty(name);
             System.out.println(name + "=" + value);

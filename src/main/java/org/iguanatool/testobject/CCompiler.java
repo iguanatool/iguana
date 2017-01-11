@@ -37,7 +37,7 @@ public class CCompiler {
     }
 
     public List<String> getCleanupExtensions() {
-        List<String> extensionsList = new ArrayList<String>();
+        List<String> extensionsList = new ArrayList<>();
         String cleanup = Config.getInstance().getProperty(C_COMPILER_CLEANUP_EXTS_PROPERTY);
 
         if (cleanup != null) {
@@ -59,7 +59,7 @@ public class CCompiler {
         TextFile t = new TextFile(templateFile);
         String commandsString = t.searchAndReplace(locations);
         String[] rawCommands = commandsString.split("\n");
-        List<String> commands = new ArrayList<String>();
+        List<String> commands = new ArrayList<>();
 
         for (String command : rawCommands) {
             if (!command.startsWith("#") && !command.equals("")) {

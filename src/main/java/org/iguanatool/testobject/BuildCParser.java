@@ -64,7 +64,7 @@ public class BuildCParser {
     }
 
     private static void modifyCParser() throws IOException {
-        Map<String, String> sr = new LinkedHashMap<String, String>();
+        Map<String, String> sr = new LinkedHashMap<>();
 
         suppressWarnings(sr, "static private final class LookaheadSuccess extends java.lang.Error { }", "serial");
         replace(sr, "throw new Error(\"Missing return statement in function\");", "return jjtn000;");
@@ -74,7 +74,7 @@ public class BuildCParser {
     }
 
     private static void modifyCParserTokenManager() throws IOException {
-        Map<String, String> sr = new LinkedHashMap<String, String>();
+        Map<String, String> sr = new LinkedHashMap<>();
 
         delete(sr, "import java.util.ArrayDeque;");
         delete(sr, "import java.util.Collections;");
@@ -91,13 +91,13 @@ public class BuildCParser {
     }
 
     private static void modifyCParserVisitor() throws IOException {
-        Map<String, String> sr = new LinkedHashMap<String, String>();
+        Map<String, String> sr = new LinkedHashMap<>();
         delete(sr, ", Object data");
         performModifications("CParserVisitor.java", sr);
     }
 
     private static void modifySimpleNode() throws IOException {
-        Map<String, String> sr = new LinkedHashMap<String, String>();
+        Map<String, String> sr = new LinkedHashMap<>();
         delete(sr, ", Object data");
         delete(sr, "return data;");
         replace(sr, "visitor.visit(this, data);", "visitor.visit(this);");
@@ -107,13 +107,13 @@ public class BuildCParser {
     }
 
     private static void modifyNode() throws IOException {
-        Map<String, String> sr = new LinkedHashMap<String, String>();
+        Map<String, String> sr = new LinkedHashMap<>();
         replace(sr, "public void jjtAccept(CParserVisitor visitor, Object data)", "public void jjtAccept(CParserVisitor visitor)");
         performModifications("Node.java", sr);
     }
 
     private static void modifyASTFiles() throws IOException {
-        Map<String, String> sr = new LinkedHashMap<String, String>();
+        Map<String, String> sr = new LinkedHashMap<>();
         replace(sr, "public void jjtAccept(CParserVisitor visitor, Object data) {", "public void jjtAccept(CParserVisitor visitor) {");
         replace(sr, "visitor.visit(this, data);", "visitor.visit(this);");
 

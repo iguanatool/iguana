@@ -61,7 +61,7 @@ public class SimpleIO {
     }
 
     public static List<String> readTextLines(Reader r, boolean trimLines) throws IOException {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         BufferedReader br = new BufferedReader(r);
         String line = br.readLine();
         while (line != null) {

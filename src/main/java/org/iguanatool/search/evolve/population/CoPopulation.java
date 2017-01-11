@@ -21,7 +21,7 @@ import java.util.Vector;
 
 public class CoPopulation extends SubPopulation {
 
-    private Vector<SubPopulation> subPopulations = new Vector<SubPopulation>();
+    private Vector<SubPopulation> subPopulations = new Vector<>();
 
     private MigrationManager migrationManager;
     private CompetitionManager competitionManager;
@@ -134,7 +134,7 @@ public class CoPopulation extends SubPopulation {
     }
 
     public List<Solution> getIndividuals() {
-        Vector<Solution> individuals = new Vector<Solution>();
+        Vector<Solution> individuals = new Vector<>();
 
         for (SubPopulation p : subPopulations) {
             individuals.addAll(p.getIndividuals());

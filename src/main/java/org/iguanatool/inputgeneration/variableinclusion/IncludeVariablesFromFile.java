@@ -23,7 +23,7 @@ public class IncludeVariablesFromFile implements VariableIncluder {
             String dir = Config.getInstance().getIguanaPath() + "/ctestobj/src/" + parts[0] + "/vada/" + parts[1] + "/";
             String file = dir + aimDescription + ".txt";
 
-            Vector<Boolean> includedVarsVector = new Vector<Boolean>();
+            Vector<Boolean> includedVarsVector = new Vector<>();
             BufferedReader r = new BufferedReader(new FileReader(file));
             String line = r.readLine();
             while (line != null) {

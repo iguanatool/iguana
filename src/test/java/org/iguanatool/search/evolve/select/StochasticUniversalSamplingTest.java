@@ -29,7 +29,7 @@ public class StochasticUniversalSamplingTest extends TestCase {
     }
 
     public void testSUS1() {
-        Vector<Solution> pool = new Vector<Solution>();
+        Vector<Solution> pool = new Vector<>();
 
         Solution i1 = new NumericalSolution(nvs);
         i1.setObjectiveValue(new NumericalMaximizingObjectiveValue(2, 0));
@@ -87,7 +87,7 @@ public class StochasticUniversalSamplingTest extends TestCase {
     }
 
     public void testSUS2() {
-        Vector<Solution> pool = new Vector<Solution>();
+        Vector<Solution> pool = new Vector<>();
 
         Solution i1 = new NumericalSolution(nvs);
         i1.setObjectiveValue(new NumericalMaximizingObjectiveValue(2, 0));

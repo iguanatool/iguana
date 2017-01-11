@@ -13,7 +13,7 @@ public class TestObjectFactory {
             String testObjectName = name.substring(separatorPos + 1, name.length());
             TestObject testObject = instantiateTestObject(caseStudyName, testObjectName);
 
-            List<TestObject> testObjects = new ArrayList<TestObject>();
+            List<TestObject> testObjects = new ArrayList<>();
             testObjects.add(testObject);
             return testObjects;
         }
@@ -40,7 +40,7 @@ public class TestObjectFactory {
             CaseStudy caseStudy = new CaseStudy(caseStudyName);
             caseStudy.loadTestObjectsFile();
             List<String> testObjectNames = caseStudy.getTestObjectNames();
-            List<TestObject> testObjects = new ArrayList<TestObject>();
+            List<TestObject> testObjects = new ArrayList<>();
 
             for (String testObjectName : testObjectNames) {
                 testObjects.add(instantiateTestObject(caseStudyName, testObjectName));

@@ -83,7 +83,7 @@ public class SystemCommand {
     }
 
     private List<String> tokenizeCommand() {
-        List<String> tokens = new ArrayList<String>();
+        List<String> tokens = new ArrayList<>();
 
         boolean lookingForSpace = true;
         int lastSpace = 0;

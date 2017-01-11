@@ -18,7 +18,7 @@ public class ASTParseUnit extends SimpleNode {
 
     public List<String> getFunctionNames() {
         return new RecursiveVisitorAdapter() {
-            List<String> names = new ArrayList<String>();
+            List<String> names = new ArrayList<>();
 
             List<String> extract(ASTParseUnit parseUnit) {
                 parseUnit.jjtAccept(this);

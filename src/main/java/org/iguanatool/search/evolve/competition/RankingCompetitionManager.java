@@ -49,7 +49,7 @@ public class RankingCompetitionManager extends CompetitionManager {
 
     private void computeProgress(List<SubPopulation> populations) {
         int i;
-        Vector<SubPopulation> rank = new Vector<SubPopulation>(populations);
+        Vector<SubPopulation> rank = new Vector<>(populations);
         Collections.sort(rank, SubPopulation.FITNESS_COMPARATOR);
         i = 0;
         for (SubPopulation p : rank) {
@@ -86,7 +86,7 @@ public class RankingCompetitionManager extends CompetitionManager {
         Collections.sort(populationIndividuals);
 
         // get ranking
-        Vector<Solution> individuals = new Vector<Solution>();
+        Vector<Solution> individuals = new Vector<>();
         for (PopulationCandidateSolution pInd : populationIndividuals) {
             individuals.add(pInd.candidateSolution);
         }
@@ -113,12 +113,12 @@ public class RankingCompetitionManager extends CompetitionManager {
     getIndividuals(List<SubPopulation> populations) {
 
         Vector<PopulationCandidateSolution> populationIndividuals
-                = new Vector<PopulationCandidateSolution>();
+                = new Vector<>();
 
         int i = 0;
         for (SubPopulation p : populations) {
             Vector<Solution> individuals =
-                    new Vector<Solution>(p.getIndividuals());
+                    new Vector<>(p.getIndividuals());
 
             for (Solution ind : individuals) {
                 populationIndividuals.add(
@@ -132,7 +132,7 @@ public class RankingCompetitionManager extends CompetitionManager {
     }
 
     protected void redistribute(CoPopulation coPopulation) {
-        Vector<SubPopulation> populations = new Vector<SubPopulation>(coPopulation.getSubPopulations());
+        Vector<SubPopulation> populations = new Vector<>(coPopulation.getSubPopulations());
         double[] proportion = computeProportionateFitness(populations);
         int[] reallocation = computeReallocation(populations, proportion);
         Vector<Solution> pool = extractIndsFromWorst(populations, reallocation);
@@ -167,7 +167,7 @@ public class RankingCompetitionManager extends CompetitionManager {
     private Vector<Solution> extractIndsFromWorst(Vector<SubPopulation> populations,
                                                   int[] reallocation) {
 
-        Vector<Solution> pool = new Vector<Solution>();
+        Vector<Solution> pool = new Vector<>();
         int i = 0;
         for (SubPopulation p : populations) {
             if (reallocation[i] < 0) {

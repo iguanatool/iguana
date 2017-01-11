@@ -121,7 +121,7 @@ public class CompleteNetMigrationManager extends MigrationManager {
     }
 
     private Vector<Vector<Solution>> getIndividuals(CoPopulation coPopulation) {
-        Vector<Vector<Solution>> selected = new Vector<Vector<Solution>>();
+        Vector<Vector<Solution>> selected = new Vector<>();
 
         List<SubPopulation> populations = coPopulation.getSubPopulations();
         int i = 0;

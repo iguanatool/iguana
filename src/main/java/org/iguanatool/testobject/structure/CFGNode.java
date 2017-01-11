@@ -24,9 +24,9 @@ public class CFGNode implements Comparable<CFGNode>, Serializable {
 
     public CFGNode(int id) {
         this.id = id;
-        predecessors = new TreeSet<ConnectedNode>();
-        successors = new TreeSet<ConnectedNode>();
-        controlDependencies = new TreeSet<ControlDependency>();
+        predecessors = new TreeSet<>();
+        successors = new TreeSet<>();
+        controlDependencies = new TreeSet<>();
     }
 
     public boolean isStartNode() {
@@ -79,7 +79,7 @@ public class CFGNode implements Comparable<CFGNode>, Serializable {
     }
 
     public SortedSet<CFGNode> getPredecessorNodes() {
-        SortedSet<CFGNode> nodes = new TreeSet<CFGNode>();
+        SortedSet<CFGNode> nodes = new TreeSet<>();
         for (ConnectedNode connectedNode : predecessors) {
             nodes.add(connectedNode.node);
         }
@@ -91,7 +91,7 @@ public class CFGNode implements Comparable<CFGNode>, Serializable {
     }
 
     public SortedSet<CFGNode> getSuccessorNodes() {
-        SortedSet<CFGNode> nodes = new TreeSet<CFGNode>();
+        SortedSet<CFGNode> nodes = new TreeSet<>();
         for (ConnectedNode connectedNode : successors) {
             nodes.add(connectedNode.node);
         }

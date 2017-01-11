@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Log {
 
-    protected List<PrintWriter> outputs = new ArrayList<PrintWriter>();
+    protected List<PrintWriter> outputs = new ArrayList<>();
 
     public void attachSysOut() {
         outputs.add(new PrintWriter(System.out));

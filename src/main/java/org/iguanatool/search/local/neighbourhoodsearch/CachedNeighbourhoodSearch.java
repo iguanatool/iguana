@@ -23,7 +23,7 @@ public abstract class CachedNeighbourhoodSearch extends NeighbourhoodSearch {
 
     protected List<Integer> indicies; // order to cycle through variables
 
-    protected Map<NumericalSolution, ObjectiveValue> cache = new HashMap<NumericalSolution, ObjectiveValue>();
+    protected Map<NumericalSolution, ObjectiveValue> cache = new HashMap<>();
 
     protected CachedNeighbourhoodSearch(RandomNumberGenerator rng) {
         this.rng = rng;
@@ -31,7 +31,7 @@ public abstract class CachedNeighbourhoodSearch extends NeighbourhoodSearch {
 
     // configure the number of variables and the order which to cycle through variables. MUST BE CALLED ONCE AT THE START OF A SEARCH
     protected void initialize(Solution solution) {
-        indicies = new ArrayList<Integer>(nVariables = solution.getNumElements());
+        indicies = new ArrayList<>(nVariables = solution.getNumElements());
         for (int index = 0; index < nVariables; ++index) {
             indicies.add(index);
         }

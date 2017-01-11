@@ -21,7 +21,7 @@ public class RandomSelection implements SelectionMethod {
     public Vector<Solution> select(Vector<Solution> pool,
                                    int numParents) {
 
-        Vector<Solution> selection = new Vector<Solution>();
+        Vector<Solution> selection = new Vector<>();
 
         for (int i = 0; i < numParents; i++) {
             selection.add(pool.elementAt(r.nextInt(pool.size())));
