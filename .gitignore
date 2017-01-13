@@ -4,4 +4,5 @@ iguanatool.iml
 target/
 casestudies
 src/main/java/org/iguana/casestudies
+src/main/java/org/iguana/ext
 *--results.tsv
