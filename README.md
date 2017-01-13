@@ -17,17 +17,17 @@ You'll then need to set the following environment variables.
 `export CLASSPATH="$IGUANA_HOME/target/iguanatool-1.0-jar-with-dependencies.jar":$CLASSPATH`
 
 ## Compiling Case Studies
-You will need to create a directory for your case studies (test objects/subjects). The easiest way to do this with the required structure is to clone the `casestudies` repository (https://github.com/iguanatool/casestudies).
+You will need to create a directory for your case studies (i.e., your test objects or experimental subjects). The easiest way to do this with the required structure is to clone the `casestudies` repository (https://github.com/iguanatool/casestudies).
 
 To install a new case study you will need to perform the following steps:
 
-1. Create a new directory for your case study in the 'c' subdirectory of your casestudies directory, e.g. `calendar` and place the code (functions you want to test) in there in a file called `calendar.c`
+1. Create a new directory for your case study in the `c` subdirectory of your casestudies directory, e.g. `calendar` and place the code (functions you want to test) in there in a file called `calendar.c`
 2. Perform step one assimilation, by running the following command
 `java org.iguanatool.Assimilate calendar`
 (replace `calendar` with your own case study name)
-3. Edit the input specification for each function to be tested that has been produced in casestudies/java/calendar/inputspecifications
-4. Compile IGUANA with `mvn package`
-5. Complete the call code for each function to be tested in casestudies/c/calendar/call
+3. Edit the input specification Java code for the `.java` class generated for each C function to be tested. The source code for each class resides in the `casestudies/java/calendar/inputspecifications` directory
+4. Each case study becomes a part of the IGUANA code, so you'll now need to compile IGUANA again, using `mvn package`
+5. Complete the call code for each C file for each function to be tested in the `casestudies/c/calendar/call` directory
 6. Perform step two assimilation, by again running `java org.iguanatool.Assimilate calendar`
 
 Your case study should be ready to go.
@@ -37,7 +37,7 @@ Running test data generation is then as simple as a command such as
 
 `java org.iguanatool.Run calendar nhc`
 
-where calendar is the case study and nhc is the search. (Search names are derived from the method names in the org.iguanatool.search.SearchFactory class.
+where `calendar` is the case study and `nhc` is the search. (Search names are derived from the method names in the org.iguanatool.search.SearchFactory class.)
 
 Further configuration options can be set through the `iguana.config` file in IGUANA's root directory. Each of these can be overridden at the command line by preceeding the option with a dash. For example, to set the seed from the command line, use
 
