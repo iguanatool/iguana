@@ -1,7 +1,7 @@
 #IGUANA
 
 ## Requirements
-IGUANA requires the Maven build automation tool, and JDK 7 (or more recent) installed.
+IGUANA requires the [Maven build automation tool](https://maven.apache.org/), and JDK 7 (or more recent) installed (see http://www.oracle.com/technetwork/java/javase/downloads/.
 
 ## Installation
 To install IGUANA you need to check out the repository, and run the following command to produce a JAR file (or run the equivalent command in your IDE):
