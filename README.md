@@ -38,9 +38,9 @@ Your case study should be ready to go.
 
 If you experience C compiler errors this could be due to a few reasons:
 
-a) your C code contains errors (check, by trying to compile it separately, and remove the errors)
-b) your C code cannot be parsed by the IGUANA C parser (you could try to reformat your C code so that it can be handled by the parser)
-c) there is a problem with your compiler. Check the compiler file for the OS you're using in the `ccompilers` directory and check if any part of the command to compile your code needs to be changed.
+- your C code contains errors (check, by trying to compile it separately, and remove the errors)
+- your C code cannot be parsed by the IGUANA C parser (you could try to reformat your C code so that it can be handled by the parser)
+- there is a problem with your compiler. Check the compiler file for the OS you're using in the `ccompilers` directory and check if any part of the command to compile your code needs to be changed.
 
 ## Setting up the input specification Java code and the C code in the test object's `call` directory
 At its core, IGUANA optimizes a fixed vector of double variables. Java code needs to be written to specify this vector, and C code needs to be written to map it to the input arguments that each function under test expects.
