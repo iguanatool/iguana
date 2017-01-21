@@ -25,12 +25,19 @@ To install a new case study you will need to perform the following steps:
 2. Perform step one assimilation, by running the following command
 `java org.iguanatool.Assimilate calendar`
 (replace `calendar` with your own case study name)
-3. Edit the input specification Java code for the `.java` class generated for each C function to be tested. The source code for each class resides in the `casestudies/java/calendar/inputspecifications` directory
+3. Edit the input specification Java code for the `.java` class generated for each C function to be tested. The source code for each class resides in the `casestudies/java/calendar/inputspecifications` directory (see the next section if you need help with this).
 4. Each case study becomes a part of the IGUANA code, so you'll now need to compile IGUANA again, using `mvn package`
-5. Complete the call code for each C file for each function to be tested in the `casestudies/c/calendar/call` directory
+5. Complete the call code for each C file for each function to be tested in the `casestudies/c/calendar/call` directory (see the next section if you need help with this).
 6. Perform step two assimilation, by again running `java org.iguanatool.Assimilate calendar`
 
 Your case study should be ready to go.
+
+## Setting up the input specification Java code and the C code in the test object's `call` directory
+At its core, IGUANA optimizes a fixed vector of double variables. Code must be written to specify the vector of double variables to be optimized for each test object concerned. This is the Java code that lives in the `inputspecifications` package for your case study. Each test object will have its own Java class generated as part of step one assimilation detailed above. You need to complete the code in the `defaultSetup` method of this class to set the bounds of each variable to be optimized by IGUANA. For example, if the C function under test involves three integer inputs, in the range 0-255, the code to specify this would be `addInt(3, 0, 255);`. For more information on the method calls that can be used to specify the input to the C function, see the code for the `org.iguanatool.testobject.InputSpecification` class.
+
+
+
+
 
 ## Running Test Data Generation
 Running test data generation is then as simple as a command such as
