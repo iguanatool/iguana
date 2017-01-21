@@ -3,7 +3,7 @@
 IGUANA is a tool for generating branch coverage test data for C functions.
 
 ## Requirements
-IGUANA requires the [Maven build automation tool](https://maven.apache.org/), and [JDK 7 (or more recent)](http://www.oracle.com/technetwork/java/javase/downloads/) installed.
+IGUANA requires the [Maven build automation tool](https://maven.apache.org/), [JDK 7 (or more recent)](http://www.oracle.com/technetwork/java/javase/downloads/) installed, and a C compiler (e.g., gcc).
 
 ## Installation
 To install IGUANA you need to check out the repository, and run the following command to produce a JAR file (or run the equivalent command in your IDE):
@@ -34,7 +34,13 @@ To install a new case study you will need to perform the following steps:
 5. Complete the call code for each C file for each test object (C function to be tested) in the `casestudies/c/my_example/call` directory (see the next section if you need help with this).
 6. Perform step two assimilation, by again running `java org.iguanatool.Assimilate my_example`
 
-Your case study should be ready to go.
+Your case study should be ready to go. 
+
+If you experience C compiler errors this could be due to a few reasons:
+
+a) your C code contains errors (check, by trying to compile it separately, and remove the errors)
+b) your C code cannot be parsed by the IGUANA C parser (you could try to reformat your C code so that it can be handled by the parser)
+c) there is a problem with your compiler. Check the compiler file for the OS you're using in the `ccompilers` directory and check if any part of the command to compile your code needs to be changed.
 
 ## Setting up the input specification Java code and the C code in the test object's `call` directory
 At its core, IGUANA optimizes a fixed vector of double variables. Java code needs to be written to specify this vector, and C code needs to be written to map it to the input arguments that each function under test expects.
