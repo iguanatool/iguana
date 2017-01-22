@@ -80,9 +80,14 @@ public class JNILibrary {
 
     private String getJNIFunctionName() {
         JavaWrapper javaWrapper = new JavaWrapper(caseStudy, testObjectName);
-        String packageName = javaWrapper.getTestObjectsPackageName().replace(".", "_");
-        String safeClassName = testObjectName.replace("_", "_1");
-        return "Java_" + packageName + "_" + safeClassName + "_call";
+        // make the underscores safe
+        String packageName = javaWrapper.getTestObjectsPackageName().replace("_", "_1");
+        packageName = packageName.replace(".", "_");
+
+        // make the underscores safe
+        String className = testObjectName.replace("_", "_1");
+
+        return "Java_" + packageName + "_" + className + "_call";
     }
 
     public boolean makeLibraryHeaderFile() throws IOException, SystemCommandException {
