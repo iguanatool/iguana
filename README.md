@@ -1,4 +1,4 @@
-# IGUANA
+# IGUANA (Input Generation Using Automated Novel Algorithms) Test Data Generation Tool for C 
 
 IGUANA is a tool for generating branch coverage test data for C functions. 
 
