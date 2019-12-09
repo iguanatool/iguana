@@ -80,7 +80,12 @@ public class NumericalSolution extends Solution {
     }
 
     public void setElementAtRandom(RandomNumberGenerator r, int index) {
-        setElement(index, Math.floor(r.nextDouble(type.getMin(index), type.getMax(index) + 1)));
+        double multiplier = Math.pow(10, type.getAccuracy(index));
+        double min = type.getMin(index);
+        double max = type.getMax(index);
+        double rawValue = Math.floor(r.nextDouble(min * multiplier, (max * multiplier) + 1));
+        double value = rawValue / multiplier;
+        setElement(index, value);
     }
 
     public void setElementsAtRandom(RandomNumberGenerator r) {
