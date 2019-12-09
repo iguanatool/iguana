@@ -3,7 +3,9 @@
 IGUANA is a tool for generating branch coverage test data for C functions. 
 
 ## Requirements
-IGUANA requires the [Maven build automation tool](https://maven.apache.org/), [JDK 7 (or more recent)](http://www.oracle.com/technetwork/java/javase/downloads/) installed, and a C compiler (e.g., gcc).
+IGUANA requires the Java Development Kit to be installed. It was originally written in Java 7, and has not been thoroughly tested in later versions. Therefore, it is recommended you use JDK v7. You can install this by downloading the [Java SE 7 Archive from Oracle](https://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html). 
+
+IGUANA also requires the [Maven build automation tool](https://maven.apache.org/), and a C compiler (e.g., gcc).
 
 The Bash shell is also recommended – the instructions provided here assume its use and the script needed to install the accompanying [casestudies](https://github.com/iguanatool/casestudies) repository requires it/has only been tested using it.
 
